@@ -1,3 +1,8 @@
 add more walls over time to increase difficulty(?!)
+- consider: moving walls
+- consider: labyrinth
 pacman
 add timer(?)
+multiplayer?
+might want to make a theme for this, but we'll see
+- minotaur???? greek mythology/labyrinth themed????

@@ -1,0 +1,3 @@
+add more walls over time to increase difficulty(?!)
+pacman
+add timer(?)

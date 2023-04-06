@@ -1,15 +1,25 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 int main(){
-  string a;
-  cout << "Welcome to PACMAN Alpha Edition!" << endl << "Enter a number for options, or Press Enter to exit" << endl; 
-  getline (cin,a);
-  if (a=="1")
-    cout << "play" << endl;
-  if (a=="2")
-    cout << "stats" << endl;
-  cout << "bye" << endl;
-  return 0;
+	cout << "    ***********************************" << endl;
+	cout << "      Welcome to Pac-Man Alpha Edition " << endl;
+	cout << "    ***********************************" << endl;
+	cout << "	" << endl;
+	cout << "		Please input your option :" << endl;
+	cout << "	1. Play The Pac-Man Game !" << endl;
+	cout << "	2. View The Game Statistics" << endl;
+	cout << "	3. View The Staff Credits" << endl;
+	cout << "	4. Exit The Main Menu" << endl;
+	cout << "	" << endl;
+	cout << "* Expand your terminal for a better game experience!" << endl;
+	cout << "	" << endl;
+	cout << " Input your option (1/2/3/4) :";
+	int option;
+	cin >> option;
+	if ((option>=1) and (option<=4))
+		cout << "Valid input, " << option << endl;
+	else
+		cout << "Invalid input, " << option << endl;
+	return 0;
 }

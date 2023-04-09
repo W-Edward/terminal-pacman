@@ -17,7 +17,7 @@ int main(){
 	cout << " Input your option (1/2/3/4) :";
 	int option;
 	cin >> option;
-	if ((option>=1) and (option<=4))
+	if ((option>=1) && (option<=4))
 		cout << "Valid input, " << option << endl;
 	else
 		cout << "Invalid input, " << option << endl;

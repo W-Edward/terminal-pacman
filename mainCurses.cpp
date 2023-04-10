@@ -12,7 +12,7 @@ using namespace std;
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x,int last_y,int last_x, string map[15][15]){
+void display(int y,int x,int last_y,int last_x,int face, string map[15][15]){
     int xMax,yMax;
     int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
@@ -22,16 +22,31 @@ void display(int y,int x,int last_y,int last_x, string map[15][15]){
     move(yCursor, xCursor);
 
     map[last_y][last_x] = "  ";//erase the old Pac-Man
-    map[y][x]="(<"; //Mr. Pac-Man xD
-    
+    //Mr Pac Man XD
+    if (face == 1) {
+        map[y][x]="(<";
+    } else {
+        map[y][x]=">)";
+    }
+
+    attron(COLOR_PAIR(1));
     for (int i = 0; i < 15; i++) 
     {
             for (int j = 0; j < 15; j++) {
-                    addch(map[i][j][0]);
-                    addch(map[i][j][1]);
+                    if (i == y && j == x) {
+                        attron(COLOR_PAIR(2));
+                        addch(map[i][j][0]);
+                        addch(map[i][j][1]);
+                        attron(COLOR_PAIR(1));
+                    } else {
+                        addch(map[i][j][0]);
+                        addch(map[i][j][1]);
+                    }
+                    
             }
             move(++yCursor, xCursor); //Moves the cursor position to a new line!
     }
+    attroff(COLOR_PAIR(1));
     refresh(); //Print output to window "stdscr"
 }
 
@@ -62,6 +77,12 @@ int main()
 {
     //Screen Settings
     initscr();
+    start_color();
+    if(can_change_color()) {
+        init_color(COLOR_BLACK,0,0,0);
+    }
+    init_pair(1,COLOR_CYAN,COLOR_BLACK);
+    init_pair(2,COLOR_YELLOW,COLOR_BLACK);
     noecho();
     cbreak();
     keypad(stdscr, TRUE);
@@ -73,6 +94,7 @@ int main()
     int last_y = 13;
     int last_x = 2;
     int direction = 4;
+    int face = 1;
     string map[15][15] = {
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
         {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
@@ -96,7 +118,7 @@ int main()
 
     //Game Flow
     while (!quit) {
-        display(y,x,last_y,last_x,map);
+        display(y,x,last_y,last_x,face,map);
         input(direction);
         last_y = y;
         last_x = x;
@@ -106,12 +128,14 @@ int main()
                 break;
             case 2:
                 if (x > 1 && map[y][x-1]!="##") x--;
+                face = 0;
                 break;
             case 3:
                 if (y < 13 && map[y+1][x]!="##") y++;
                 break;
             case 4:
                 if (x < 13 && map[y][x+1]!="##") x++;
+                face = 1;
                 break;
             case 5:
                 quit = true;

@@ -3,6 +3,7 @@
 #include <windows.h>
 // #include <unistd.h> ,replace windows.h for linux
 #include <stdio.h>
+#include "entities.h"
 using namespace std;
 
 //Notes:

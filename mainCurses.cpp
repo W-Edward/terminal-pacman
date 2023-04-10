@@ -80,6 +80,7 @@ int main()
     start_color();
     if(can_change_color()) {
         init_color(COLOR_BLACK,0,0,0);
+        init_color(COLOR_CYAN,0,0,888);
     }
     init_pair(1,COLOR_CYAN,COLOR_BLACK);
     init_pair(2,COLOR_YELLOW,COLOR_BLACK);

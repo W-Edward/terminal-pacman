@@ -1,3 +1,4 @@
+#include <iostream>
 #include <ncurses.h>
 #include <curses.h>
 #include <string>
@@ -12,13 +13,18 @@ using namespace std;
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
 void display(int y,int x,int last_y,int last_x, string map[15][15]){
+    int xMax,yMax;
+    int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
-    int xCursor = 0, yCursor = 0; //Placement of cursor in "stdscr" window
+    getmaxyx(stdscr,yMax,xMax);
+    xCursor = (xMax/2)-15;
+    yCursor = (yMax/2)-15;
+    move(yCursor, xCursor);
 
     map[last_y][last_x] = "  ";//erase the old Pac-Man
     map[y][x]="(<"; //Mr. Pac-Man xD
-
-    for (int i = 0; i < 14; i++) 
+    
+    for (int i = 0; i < 15; i++) 
     {
             for (int j = 0; j < 15; j++) {
                     addch(map[i][j][0]);
@@ -85,6 +91,8 @@ int main()
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
+
+    
 
     //Game Flow
     while (!quit) {

@@ -1,7 +1,7 @@
 #include <curses.h>
 #include <string>
-#include <windows.h>
-// #include <unistd.h> ,replace windows.h for linux
+//#include <windows.h>
+ #include <unistd.h> //,replace windows.h for linux
 #include <stdio.h>
 using namespace std;
 
@@ -60,6 +60,9 @@ void input(int& direction){
             case 'd':
             direction = 4;
             break;
+	    case 'q':
+	    direction = 5;
+	    break;
     }
 }
 
@@ -115,8 +118,11 @@ int main()
                 case 4:
                     if (x < 13 && a[y][x+1]!="##") x++;
                     break;
+		case 5:
+		    quit = true;
+		    break;
             }
-            Sleep(150); //use usleep(150000); in linux
+            usleep(150000); //use usleep(150000); in linux
         }
     }
 

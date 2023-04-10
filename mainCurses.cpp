@@ -1,7 +1,8 @@
 #include <ncurses.h>
+#include <curses.h>
 #include <string>
 //#include <windows.h>
- #include <unistd.h> //,replace windows.h for linux
+#include <unistd.h> //,replace windows.h for linux
 #include <stdio.h>
 using namespace std;
 
@@ -10,35 +11,18 @@ using namespace std;
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x){
+void display(int y,int x,int last_y,int last_x, string map[15][15]){
 
     int xCursor = 0, yCursor = 0; //Placement of cursor in "stdscr" window
 
-    string tempa[15][15] = {
-    {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
-    {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
-    {"##","  ","##","##","  ","##","  ","##","  ","##","  ","##","##","  ","##"},
-    {"##","  ","##","##","  ","##","  ","##","  ","##","  ","##","##","  ","##"},
-    {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
-    {"##","  ","##","##","  ","  ","  ","  ","  ","  ","  ","##","##","  ","##"},
-    {"##","  ","  ","##","  ","##","  ","  ","  ","##","  ","  ","  ","  ","##"},
-    {"##","##","##","##","  ","##","  ","  ","  ","##","  ","##","##","##","##"},
-    {"##","  ","  ","  ","  ","##","  ","  ","  ","##","  ","##","  ","  ","##"},
-    {"##","  ","##","##","  ","##","##","##","##","##","  ","##","##","  ","##"},
-    {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
-    {"##","  ","##","##","  ","##","  ","##","  ","##","  ","##","##","  ","##"},
-    {"##","  ","##","##","  ","##","  ","##","  ","##","  ","##","##","  ","##"},
-    {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
-    {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
-    };
-
-    tempa[y][x]="(<"; //Mr. Pac-Man xD
+    map[last_y][last_x] = "  ";//erase the old Pac-Man
+    map[y][x]="(<"; //Mr. Pac-Man xD
 
     for (int i = 0; i < 14; i++) 
     {
             for (int j = 0; j < 15; j++) {
-                    addch(tempa[i][j][0]);
-                    addch(tempa[i][j][1]);
+                    addch(map[i][j][0]);
+                    addch(map[i][j][1]);
             }
             move(++yCursor, xCursor); //Moves the cursor position to a new line!
     }
@@ -60,9 +44,9 @@ void input(int& direction){
             case 'd':
             direction = 4;
             break;
-	    case 'q':
-	    direction = 5;
-	    break;
+            case 'q':
+            direction = 5;
+            break;
     }
 }
 
@@ -80,8 +64,10 @@ int main()
     //Game Startup
     int y=13;
     int x=2;
+    int last_y = 13;
+    int last_x = 2;
     int direction = 4;
-    string a[15][15] = {
+    string map[15][15] = {
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
         {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
         {"##","  ","##","##","  ","##","  ","##","  ","##","  ","##","##","  ","##"},
@@ -102,28 +88,28 @@ int main()
 
     //Game Flow
     while (!quit) {
-        for (int i = 0; i < 10; i++) { 
-            display(y,x);
-            input(direction);
-            switch (direction) {
-                case 1:
-                    if (y > 1 && a[y-1][x]!="##") y--;
-                    break;
-                case 2:
-                    if (x > 1 && a[y][x-1]!="##") x--;
-                    break;
-                case 3:
-                    if (y < 13 && a[y+1][x]!="##") y++;
-                    break;
-                case 4:
-                    if (x < 13 && a[y][x+1]!="##") x++;
-                    break;
-		case 5:
-		    quit = true;
-		    break;
-            }
-            usleep(150000); //use usleep(150000); in linux
+        display(y,x,last_y,last_x,map);
+        input(direction);
+        last_y = y;
+        last_x = x;
+        switch (direction) {
+            case 1:
+                if (y > 1 && map[y-1][x]!="##") y--;
+                break;
+            case 2:
+                if (x > 1 && map[y][x-1]!="##") x--;
+                break;
+            case 3:
+                if (y < 13 && map[y+1][x]!="##") y++;
+                break;
+            case 4:
+                if (x < 13 && map[y][x+1]!="##") x++;
+                break;
+            case 5:
+                quit = true;
+                break;
         }
+        usleep(150000); //use usleep(150000); in linux
     }
 
     getch();

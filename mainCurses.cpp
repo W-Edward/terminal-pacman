@@ -7,11 +7,11 @@
 using namespace std;
 
 //Notes:
-//Compile with "g++ -pedantic-errors -std=c++11 mainCurses.cpp -lncurses -o mainCurses", any method of compilation is allowed for this project 
+//Compile with "g++ -pedantic-errors -std=c++11 mainCurses.cpp ghost.cpp -lncurses -o mainCurses", any method of compilation is allowed for this project 
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x){
+void display(int y,int x, Ghost Blinky){
 
     int xCursor = 0, yCursor = 0; //Placement of cursor in "stdscr" window
 
@@ -34,6 +34,7 @@ void display(int y,int x){
     };
 
     tempa[y][x]="(<"; //Mr. Pac-Man xD
+    tempa[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky
 
     for (int i = 0; i < 14; i++) 
     {
@@ -97,29 +98,39 @@ int main()
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
+    //Instantiate Ghosts here!
+    Ghost Blinky(4, 5, "Blinky"); //Instantiates Blinky
 
     //Game Flow
     while (!quit) {
-        for (int i = 0; i < 10; i++) { 
-            display(y,x);
+        for (int i; i < 10; i++)
+        {
+            display(y,x,Blinky);
             input(direction);
+            //Updates Ghosts Positions
+            //Updates Pac-Man's Position
             switch (direction) {
                 case 1:
                     if (y > 1 && a[y-1][x]!="##") y--;
+                    Blinky.chase(x, y);
                     break;
                 case 2:
                     if (x > 1 && a[y][x-1]!="##") x--;
+                    Blinky.chase(x, y);
                     break;
                 case 3:
                     if (y < 13 && a[y+1][x]!="##") y++;
+                    Blinky.chase(x, y);
                     break;
                 case 4:
                     if (x < 13 && a[y][x+1]!="##") x++;
+                    Blinky.chase(x, y);
                     break;
-            }
-            Sleep(150); //use usleep(150000); in linux
+        }
+        Sleep(150); //use usleep(150000); in linux
         }
     }
+    
 
     getch();
     endwin();

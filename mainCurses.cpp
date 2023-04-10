@@ -1,4 +1,4 @@
-#include <curses.h>
+#include <ncurses.h>
 #include <string>
 //#include <windows.h>
  #include <unistd.h> //,replace windows.h for linux

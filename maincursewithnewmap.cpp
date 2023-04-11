@@ -13,7 +13,7 @@ using namespace std;
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x,int last_y,int last_x,int face, string map[20][20], Ghost &Blinky){
+void display(int y,int x,int last_y,int last_x,int face, string map[19][20], Ghost &Blinky){
     int xMax,yMax;
     int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
@@ -36,7 +36,7 @@ void display(int y,int x,int last_y,int last_x,int face, string map[20][20], Gho
     map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky
     attron(COLOR_PAIR(1));
 
-    for (int i = 0; i < 20; i++) 
+    for (int i = 0; i < 19; i++) 
     {
             for (int j = 0; j < 20; j++) {
                     if (i == y && j == x) {
@@ -102,7 +102,7 @@ int main()
     int last_x = 2;
     int direction = 4;
     int face = 1;
-    string map[20][20] = {
+    string map[19][20] = {
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
         {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
         {"##","  ","  ","##","  ","  ","  ","##","##","  ","  ","##","##","  ","  ","  ","##","  ","  ","##"},
@@ -144,7 +144,7 @@ int main()
                 face = 0;
                 break;
             case 3:
-                if (y < 18 && map[y+1][x]!="##") y++;
+                if (y < 17 && map[y+1][x]!="##") y++;
                 break;
             case 4:
                 if (x < 18 && map[y][x+1]!="##") x++;

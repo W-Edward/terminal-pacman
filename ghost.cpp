@@ -47,8 +47,73 @@ Ghost::Ghost(int posX, int posY, string ghostName)
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
 }
 
+int Ghost::chaseTargetTile(int targetX, int targetY)
+{
+    int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
+
+    double shortestDistance = 1e5;
+    double distance = 0;
+    int originalDirection = currentDirection;
+    for (int i = 0; i < 4; i++)
+    {
+        int tempX = x, tempY = y;
+        if (availableDirections[i] == 1 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[--tempY][tempX] != "##")
+        {
+            distance = sqrt( pow( (tempX-targetX) , 2 ) + pow( (tempY-targetY) , 2 )); //Linear Distance formula
+            if (distance <= shortestDistance) 
+            {
+                shortestDistance = distance;
+                currentDirection = availableDirections[i];
+            }
+        }
+        else if (availableDirections[i] == 2 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][--tempX] != "##")
+        {
+            distance = sqrt( pow( (tempX-targetX) , 2 ) + pow( (tempY-targetY) , 2 )); //Linear Distance formula
+            if (distance <= shortestDistance) 
+            {
+                shortestDistance = distance;
+                currentDirection = availableDirections[i];
+            }
+        }
+        else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##")
+        {
+            distance = sqrt( pow( (tempX-targetX) , 2 ) + pow( (tempY-targetY) , 2 )); //Linear Distance formula
+            if (distance <= shortestDistance) 
+            {
+                shortestDistance = distance;
+                currentDirection = availableDirections[i];
+            }
+        }
+        else if (availableDirections[i] == 4 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][++tempX] != "##")
+        {
+            distance = sqrt( pow( (tempX-targetX) , 2 ) + pow( (tempY-targetY) , 2 )); //Linear Distance formula
+            if (distance <= shortestDistance) 
+            {
+                shortestDistance = distance;
+                currentDirection = availableDirections[i];
+            }
+        }
+    }
+
+    switch (currentDirection)
+    {
+        case 1:
+            y--;
+            break;
+        case 2:
+            x--;
+            break;
+        case 3:
+            y++;
+            break;
+        case 4:
+            x++;
+            break;
+    }
+}
+
 void Ghost::chase(int playerPosX, int playerPosY, int blinkyPosX, int blinkyPosY, int direction) 
-/*playerPosX and Y are Pac-Man's X and Y Coordinates, direction is Pac-Man's current direction
+/*playerPosX and Y are Pac-Man's X and Y Coordinates, direction is Pac-Man's current direction, blinkyPosX and blinkyPosY are x and y positions of Blinky.
 This function updates x and y coordinates + currentDirection of ghosts in chase mode */
 {
     //Implementation to update posX and posY every frame to chase Pac-Man
@@ -56,67 +121,7 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
     if (name == "Blinky")
     //Blinky chases Pac-Man directly (linearly)
     {
-        int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
-
-        double shortestDistance = 1e5;
-        double distance = 0;
-        int originalDirection = currentDirection;
-        for (int i = 0; i < 4; i++)
-        {
-            int tempX = x, tempY = y;
-            if (availableDirections[i] == 1 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[--tempY][tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 2 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][--tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 4 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][++tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-        }
-
-        switch (currentDirection)
-        {
-            case 1:
-                y--;
-                break;
-            case 2:
-                x--;
-                break;
-            case 3:
-                y++;
-                break;
-            case 4:
-                x++;
-                break;
-        }
+        chaseTargetTile(playerPosX, playerPosY);
     }
 
     else if (name == "Pinky") 
@@ -153,67 +158,7 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
             target[1] = playerPosY;
         }
         
-        int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
-        double shortestDistance = 1e5;
-        double distance = 0;
-        int originalDirection = currentDirection;
-
-        for (int i = 0; i < 4; i++)
-        {
-            int tempX = x, tempY = y;
-            if (availableDirections[i] == 1 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[--tempY][tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 2 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][--tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 4 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][++tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-        }
-
-        switch (currentDirection)
-        {
-            case 1:
-                y--;
-                break;
-            case 2:
-                x--;
-                break;
-            case 3:
-                y++;
-                break;
-            case 4:
-                x++;
-                break;
-        }    
+        chaseTargetTile(target[0], target[1]);   
     }
     
     else if (name == "Inky")
@@ -253,73 +198,20 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
         pointC[0] = -(blinkyPosX - pointA[0]) + pointA[0];
         pointC[1] = -(blinkyPosY - pointA[1]) + pointA[1];
 
-        int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
-        double shortestDistance = 1e5;
-        double distance = 0;
-        int originalDirection = currentDirection;
-
-        for (int i = 0; i < 4; i++)
-        {
-            int tempX = x, tempY = y;
-            if (availableDirections[i] == 1 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[--tempY][tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 2 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][--tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-            else if (availableDirections[i] == 4 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][++tempX] != "##")
-            {
-                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
-                if (distance <= shortestDistance) 
-                {
-                    shortestDistance = distance;
-                    currentDirection = availableDirections[i];
-                }
-            }
-        }
-
-        switch (currentDirection)
-        {
-            case 1:
-                y--;
-                break;
-            case 2:
-                x--;
-                break;
-            case 3:
-                y++;
-                break;
-            case 4:
-                x++;
-                break;
-        } 
-
-
+        chaseTargetTile(pointC[0], pointC[1]);
     }
     else if (name == "Clyde")
+    //Clyde behaves similarly to Blinky but if Clyde is 8 tiles or closer to Pac-Man, he will turn to scatter mode.
     {
-   
+        if (sqrt( pow( (x-playerPosX) , 2 ) + pow( (y-playerPosY) , 2 )) <= 8)
+        {
+            //algo for scatter mode (bottomleft)
+            chaseTargetTile(0, 20);
+        } 
+        else
+        {
+            chaseTargetTile(playerPosX, playerPosY);
+        }
     }
 }
 

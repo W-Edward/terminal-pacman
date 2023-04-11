@@ -41,6 +41,7 @@ void display(int y,int x,int last_y,int last_x,int face, int direction, string m
     map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky, he likes to squirt from behind.
     map[Pinky.getY()][Pinky.getX()] = "()"; //Ms.Pinky, she loves doing it from the front.
     map[Inky.getY()][Inky.getX()] = "{}"; //Mr.Inky, he is a third wheel helping out Blinky squirt.
+    //Mr.Clyde, the innocent one
     attron(COLOR_PAIR(1));
 
     for (int i = 0; i < 19; i++) 

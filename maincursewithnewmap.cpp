@@ -3,6 +3,7 @@
 #include <curses.h>
 #include <string>
 #include <unistd.h>
+#include <windows.h>
 // #include <unistd.h> //,replace windows.h for linux
 #include <stdio.h>
 #include "entities.h"
@@ -154,7 +155,7 @@ int main()
                 quit = true;
                 break;
         }
-        usleep(250000); //use usleep(150000); in linux
+        Sleep(250); //use usleep(150000); in linux
     }
 
     getch();

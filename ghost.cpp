@@ -48,6 +48,8 @@ Ghost::Ghost(int posX, int posY, string ghostName)
 }
 
 int Ghost::chaseTargetTile(int targetX, int targetY)
+/*this function will update ghosts' position linearly towards the target tile. Ghosts cannot move backwards unless when changing modes and follows the following
+    move priority if more than one options are available (same linear distance to target tile): up, left, down, right. */
 {
     int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
 
@@ -110,6 +112,34 @@ int Ghost::chaseTargetTile(int targetX, int targetY)
             x++;
             break;
     }
+}
+
+void Ghost::scatter()
+{
+    if (name == "Blinky")
+    //Goes to top right direction
+    {
+        chaseTargetTile(18, 21);
+    }
+
+    else if (name == "Pinky")
+    {
+    //Goes to top left direction
+        chaseTargetTile(1, 21);
+    }
+
+    else if (name == "Inky")
+    {
+    //Goes to bottom right direction
+        chaseTargetTile(19, 20);
+    }
+
+    else if (name == "Clyde")
+    {
+    //Goes to bottom left direction
+        chaseTargetTile(0, 20);
+    }
+
 }
 
 void Ghost::chase(int playerPosX, int playerPosY, int blinkyPosX, int blinkyPosY, int direction) 
@@ -206,13 +236,23 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
         if (sqrt( pow( (x-playerPosX) , 2 ) + pow( (y-playerPosY) , 2 )) <= 8)
         {
             //algo for scatter mode (bottomleft)
-            chaseTargetTile(0, 20);
+            scatter();
         } 
         else
         {
             chaseTargetTile(playerPosX, playerPosY);
         }
     }
+}
+
+void Ghost::frightened()
+{
+    //To be implemented
+}
+
+void Ghost::eaten()
+{
+    //To be implemented
 }
 
 int Ghost::getX()

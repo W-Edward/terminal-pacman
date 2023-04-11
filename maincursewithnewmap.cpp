@@ -14,7 +14,7 @@ using namespace std;
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x,int last_y,int last_x,int face, int direction, string map[19][20], Ghost &Blinky, Ghost &Pinky, Ghost &Inky){
+void display(int y,int x,int last_y,int last_x,int face, int direction, string map[19][20], Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Clyde){
     int xMax,yMax;
     int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
@@ -27,11 +27,13 @@ void display(int y,int x,int last_y,int last_x,int face, int direction, string m
     map[Blinky.getY()][Blinky.getX()] = "  "; //erase old Blinky
     map[Pinky.getY()][Pinky.getX()] = "  "; //erase old Pinky
     map[Inky.getY()][Inky.getX()] = "  "; //erase old Inky
+    map[Clyde.getY()][Clyde.getX()] = "  "; //erase old Clyde
 
     //Update ghost positions here!
-    Blinky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
+    Blinky.chase(x, y, Blinky.getX(), Blinky.getY(), direction); //Third and fourth arguments must be BLINKY!!!!!
     Pinky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
     Inky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
+    Clyde.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
     //Mr Pac Man XD
     if (face == 1) {
         map[y][x]="(<";
@@ -41,7 +43,7 @@ void display(int y,int x,int last_y,int last_x,int face, int direction, string m
     map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky, he likes to squirt from behind.
     map[Pinky.getY()][Pinky.getX()] = "()"; //Ms.Pinky, she loves doing it from the front.
     map[Inky.getY()][Inky.getX()] = "{}"; //Mr.Inky, he is a third wheel helping out Blinky squirt.
-    //Mr.Clyde, the innocent one
+    map[Clyde.getY()][Clyde.getX()] = "<>";//Mr.Clyde, the innocent one
     attron(COLOR_PAIR(1));
 
     for (int i = 0; i < 19; i++) 
@@ -110,7 +112,7 @@ int main()
     int last_x = 2;
     int direction = 4;
     int face = 1;
-    string map[19][20] = {
+    string map[19][20] = { //y max = 18, x max = 19
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
         {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
         {"##","  ","  ","##","  ","  ","  ","##","##","  ","  ","##","##","  ","  ","  ","##","  ","  ","##"},
@@ -136,11 +138,12 @@ int main()
     Ghost Blinky(4, 5, "Blinky"); //x = 4, y =5
     Ghost Pinky(18, 6, "Pinky");
     Ghost Inky(1, 8, "Inky");
+    Ghost Clyde(18, 17, "Clyde");
 
     
     //Game Flow
     while (!quit) {
-        display(y,x,last_y,last_x,face,direction,map,Blinky, Pinky, Inky);
+        display(y,x,last_y,last_x,face,direction,map,Blinky, Pinky, Inky, Clyde);
         input(direction);
         last_y = y;
         last_x = x;

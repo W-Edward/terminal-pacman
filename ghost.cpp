@@ -47,7 +47,7 @@ Ghost::Ghost(int posX, int posY, string ghostName)
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
 }
 
-void Ghost::chase(int playerPosX, int playerPosY, int direction) 
+void Ghost::chase(int playerPosX, int playerPosY, int blinkyPosX, int blinkyPosY, int direction) 
 /*playerPosX and Y are Pac-Man's X and Y Coordinates, direction is Pac-Man's current direction
 This function updates x and y coordinates + currentDirection of ghosts in chase mode */
 {
@@ -217,7 +217,103 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
     }
     
     else if (name == "Inky")
+    /*Inky chases the tile that is rotated 180 degrees from Blinky's tile position around
+    Point A: tile that is 2 tiles ahead of Pac-Man except 'up' direction, which is 2 tiles ahead and 2 tiles left.
+    Let's call Blinky's position Point B and target tile Point C.*/
     {
+        int pointA[2];
+        if (direction == 1)
+        {
+            pointA[0] = playerPosX - 2;
+            pointA[1] = playerPosY + 2;
+        }
+        else if (direction == 2)
+        {
+            pointA[0] = playerPosX - 2;
+            pointA[1] = playerPosY;
+        }
+        else if (direction == 3)
+        {
+            pointA[0] = playerPosX;
+            pointA[1] = playerPosY - 2;
+        }
+        else if (direction == 4)
+        {
+            pointA[0] = playerPosX + 2;
+            pointA[1] = playerPosY;
+        }
+        else //just in case there is undefined behaviour
+        {
+            pointA[0] = playerPosX;
+            pointA[1] = playerPosY;
+        }
+
+        int pointC[2];
+        //rotate point B around point A 180 degrees to get point C
+        pointC[0] = -(blinkyPosX - pointA[0]) + pointA[0];
+        pointC[1] = -(blinkyPosY - pointA[1]) + pointA[1];
+
+        int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
+        double shortestDistance = 1e5;
+        double distance = 0;
+        int originalDirection = currentDirection;
+
+        for (int i = 0; i < 4; i++)
+        {
+            int tempX = x, tempY = y;
+            if (availableDirections[i] == 1 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[--tempY][tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+            else if (availableDirections[i] == 2 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][--tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+            else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+            else if (availableDirections[i] == 4 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][++tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-pointC[0]) , 2 ) + pow( (tempY-pointC[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+        }
+
+        switch (currentDirection)
+        {
+            case 1:
+                y--;
+                break;
+            case 2:
+                x--;
+                break;
+            case 3:
+                y++;
+                break;
+            case 4:
+                x++;
+                break;
+        } 
 
 
     }

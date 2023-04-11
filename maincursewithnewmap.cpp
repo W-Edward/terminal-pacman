@@ -14,7 +14,7 @@ using namespace std;
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x,int last_y,int last_x,int face, int direction, string map[19][20], Ghost &Blinky, Ghost &Pinky){
+void display(int y,int x,int last_y,int last_x,int face, int direction, string map[19][20], Ghost &Blinky, Ghost &Pinky, Ghost &Inky){
     int xMax,yMax;
     int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
@@ -26,18 +26,21 @@ void display(int y,int x,int last_y,int last_x,int face, int direction, string m
     map[last_y][last_x] = "  ";//erase the old Pac-Man
     map[Blinky.getY()][Blinky.getX()] = "  "; //erase old Blinky
     map[Pinky.getY()][Pinky.getX()] = "  "; //erase old Pinky
+    map[Inky.getY()][Inky.getX()] = "  "; //erase old Inky
 
     //Update ghost positions here!
-    Blinky.chase(x, y, direction);
-    Pinky.chase(x, y, direction);
+    Blinky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
+    Pinky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
+    Inky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
     //Mr Pac Man XD
     if (face == 1) {
         map[y][x]="(<";
     } else {
         map[y][x]=">)";
     }
-    map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky
-    map[Pinky.getY()][Pinky.getX()] = "()"; //Ms.Pinky
+    map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky, he likes to squirt from behind.
+    map[Pinky.getY()][Pinky.getX()] = "()"; //Ms.Pinky, she loves doing it from the front.
+    map[Inky.getY()][Inky.getX()] = "{}"; //Mr.Inky, he is a third wheel helping out Blinky squirt.
     attron(COLOR_PAIR(1));
 
     for (int i = 0; i < 19; i++) 
@@ -131,11 +134,12 @@ int main()
     //Instantiate Ghosts here!
     Ghost Blinky(4, 5, "Blinky"); //x = 4, y =5
     Ghost Pinky(18, 6, "Pinky");
+    Ghost Inky(1, 8, "Inky");
 
     
     //Game Flow
     while (!quit) {
-        display(y,x,last_y,last_x,face,direction,map,Blinky, Pinky);
+        display(y,x,last_y,last_x,face,direction,map,Blinky, Pinky, Inky);
         input(direction);
         last_y = y;
         last_x = x;

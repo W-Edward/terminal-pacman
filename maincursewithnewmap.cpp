@@ -1,18 +1,19 @@
 #include <iostream>
-#include <ncurses.h>
+// #include <ncurses.h>
 #include <curses.h>
 #include <string>
-//#include <windows.h>
-#include <unistd.h> //,replace windows.h for linux
+#include <unistd.h>
+// #include <unistd.h> //,replace windows.h for linux
 #include <stdio.h>
+#include "entities.h"
 using namespace std;
 
 //Notes:
-//Compile with "g++ -pedantic-errors -std=c++11 mainCurses.cpp -lncurses -o mainCurses", any method of compilation is allowed for this project 
+//Compile with "g++ -pedantic-errors -std=c++11 maincursewithnewmap.cpp ghost.cpp -lncurses -o mainCurses", any method of compilation is allowed for this project 
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x,int last_y,int last_x,int face, string map[20][20]){
+void display(int y,int x,int last_y,int last_x,int face, string map[20][20], Ghost &Blinky){
     int xMax,yMax;
     int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
@@ -22,14 +23,19 @@ void display(int y,int x,int last_y,int last_x,int face, string map[20][20]){
     move(yCursor, xCursor);
 
     map[last_y][last_x] = "  ";//erase the old Pac-Man
+    map[Blinky.getY()][Blinky.getX()] = "  "; //erase old Blinky
+
+    //Update ghost positions here!
+    Blinky.chase(x, y);
     //Mr Pac Man XD
     if (face == 1) {
         map[y][x]="(<";
     } else {
         map[y][x]=">)";
     }
-
+    map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky
     attron(COLOR_PAIR(1));
+
     for (int i = 0; i < 20; i++) 
     {
             for (int j = 0; j < 20; j++) {
@@ -118,12 +124,14 @@ int main()
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
+    //Instantiate Ghosts here!
+    Ghost Blinky(4, 5, "Blinky");
 
     
 
     //Game Flow
     while (!quit) {
-        display(y,x,last_y,last_x,face,map);
+        display(y,x,last_y,last_x,face,map,Blinky);
         input(direction);
         last_y = y;
         last_x = x;
@@ -136,17 +144,17 @@ int main()
                 face = 0;
                 break;
             case 3:
-                if (y < 13 && map[y+1][x]!="##") y++;
+                if (y < 18 && map[y+1][x]!="##") y++;
                 break;
             case 4:
-                if (x < 13 && map[y][x+1]!="##") x++;
+                if (x < 18 && map[y][x+1]!="##") x++;
                 face = 1;
                 break;
             case 5:
                 quit = true;
                 break;
         }
-        usleep(150000); //use usleep(150000); in linux
+        usleep(250000); //use usleep(150000); in linux
     }
 
     getch();

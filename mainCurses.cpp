@@ -2,8 +2,7 @@
 // #include <ncurses.h>
 #include <curses.h>
 #include <string>
-#include <windows.h>
-// #include <unistd.h> //,replace windows.h for linux
+#include <unistd.h>
 #include <stdio.h>
 #include "entities.h"
 using namespace std;
@@ -153,7 +152,7 @@ int main()
                     quit = true;
                     break;
         }
-        Sleep(150); //use usleep(150000); in linux
+        usleep(150); //use usleep(150000); in linux
     }
     
 

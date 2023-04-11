@@ -1,35 +1,43 @@
 #include <iostream>
-#include <ncurses.h>
+// #include <ncurses.h>
 #include <curses.h>
 #include <string>
 //#include <windows.h>
 #include <unistd.h> //,replace windows.h for linux
 #include <stdio.h>
+#include "entities.h"
 using namespace std;
 
 //Notes:
-//Compile with "g++ -pedantic-errors -std=c++11 mainCurses.cpp -lncurses -o mainCurses", any method of compilation is allowed for this project 
+//Compile with "g++ -pedantic-errors -std=c++11 mainCurses.cpp ghost.cpp -lncurses -o mainCurses", any method of compilation is allowed for this project 
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x,int last_y,int last_x,int face, string map[15][15]){
-    int xMax,yMax;
-    int xCursor, yCursor; //Placement of cursor in "stdscr" window
+void display(int y,int x, int last_y, int last_x, int face, string map[15][15], Ghost &Blinky){
+    int xMax, yMax;
+    int xCursor, yCursor;
 
     getmaxyx(stdscr,yMax,xMax);
     xCursor = (xMax/2)-15;
     yCursor = (yMax/2)-15;
     move(yCursor, xCursor);
 
+    //NOTE: PLACEMENT IS (Y,X), NOT (X,Y), RESULTS ARE STILL NORMAL CARTESIAN COORDINATES
+
     map[last_y][last_x] = "  ";//erase the old Pac-Man
+    map[Blinky.getY()][Blinky.getX()] = "  "; //erase old Blinky
+
+    //Update ghost positions here!
+    Blinky.chase(x, y);
     //Mr Pac Man XD
     if (face == 1) {
         map[y][x]="(<";
     } else {
         map[y][x]=">)";
     }
-
+    map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky
     attron(COLOR_PAIR(1));
+
     for (int i = 0; i < 15; i++) 
     {
             for (int j = 0; j < 15; j++) {
@@ -114,36 +122,40 @@ int main()
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
+    //Instantiate Ghosts here!
+    Ghost Blinky(4, 5, "Blinky"); //Instantiates Blinky
 
     
 
     //Game Flow
     while (!quit) {
-        display(y,x,last_y,last_x,face,map);
-        input(direction);
-        last_y = y;
-        last_x = x;
-        switch (direction) {
-            case 1:
-                if (y > 1 && map[y-1][x]!="##") y--;
-                break;
-            case 2:
-                if (x > 1 && map[y][x-1]!="##") x--;
-                face = 0;
-                break;
-            case 3:
-                if (y < 13 && map[y+1][x]!="##") y++;
-                break;
-            case 4:
-                if (x < 13 && map[y][x+1]!="##") x++;
-                face = 1;
-                break;
-            case 5:
-                quit = true;
-                break;
+            display(y,x,last_y,last_x,face,map,Blinky);
+            input(direction);
+            last_y = y;
+            last_x = x;
+            //Updates Pac-Man's Position
+            switch (direction) {
+                case 1:
+                    if (y > 1 && map[y-1][x]!="##") y--;
+                    break;
+                case 2:
+                    if (x > 1 && map[y][x-1]!="##") x--;
+                    face = 0;
+                    break;
+                case 3:
+                    if (y < 13 && map[y+1][x]!="##") y++;
+                    break;
+                case 4:
+                    if (x < 13 && map[y][x+1]!="##") x++;
+                    face = 1;
+                    break;
+                case 5:
+                    quit = true;
+                    break;
         }
         usleep(150000); //use usleep(150000); in linux
     }
+    
 
     getch();
     endwin();

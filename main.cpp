@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-#include <windows.h>
+//#include <windows.h>
+#include <unistd.h> //,replace windows.h for linux
 #include <time.h>
 #include <conio.h>
 using namespace std;
@@ -93,7 +94,7 @@ int main() {
                     if (x < 13 && a[y][x+1]!="##") x++;
                     break;
             }
-            Sleep(150);
+            usleep(150000);
         }
     }
     return 0;

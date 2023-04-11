@@ -48,25 +48,14 @@ void Ghost::chase(int playerPosX, int playerPosY) //playerPosX and Y are Pac-Man
     //Implementation to update posX and posY every frame to chase Pac-Man
     if (name == "Blinky") //Blinky chases Pac-Man directly
     {
-        int availableDirections[3];
-        int direction = 4; //directions to be inputted into availableDirections, decreasing from 4 because the movement priority is up left down right
-
-        for (int i = 0; i < 3; i++)
-        {
-            if (direction == findOppositeDirection(currentDirection))
-            {
-                --direction;
-            }
-            availableDirections[i] = direction;
-            --direction;
-        }       
+        int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
 
         double shortestDistance = 1e5;
         double distance = 0;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             int tempX = x, tempY = y;
-            if (availableDirections[i] == 1 && tempa[--tempY][tempX] != "##")
+            if (availableDirections[i] == 1 && availableDirections[i] != findOppositeDirection(currentDirection) && tempa[--tempY][tempX] != "##")
             {
                 distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
                 if (distance <= shortestDistance) 
@@ -75,7 +64,7 @@ void Ghost::chase(int playerPosX, int playerPosY) //playerPosX and Y are Pac-Man
                     currentDirection = availableDirections[i];
                 }
             }
-            else if (availableDirections[i] == 2 && tempa[tempY][--tempX] != "##")
+            else if (availableDirections[i] == 2 && availableDirections[i] != findOppositeDirection(currentDirection) && tempa[tempY][--tempX] != "##")
             {
                 distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
                 if (distance <= shortestDistance) 
@@ -84,7 +73,7 @@ void Ghost::chase(int playerPosX, int playerPosY) //playerPosX and Y are Pac-Man
                     currentDirection = availableDirections[i];
                 }
             }
-            else if (availableDirections[i] == 3 && tempa[++tempY][tempX] != "##")
+            else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(currentDirection) && tempa[++tempY][tempX] != "##")
             {
                 distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
                 if (distance <= shortestDistance) 
@@ -93,7 +82,7 @@ void Ghost::chase(int playerPosX, int playerPosY) //playerPosX and Y are Pac-Man
                     currentDirection = availableDirections[i];
                 }
             }
-            else if (availableDirections[i] == 4 && tempa[tempY][++tempX] != "##")
+            else if (availableDirections[i] == 4 && availableDirections[i] != findOppositeDirection(currentDirection) && tempa[tempY][++tempX] != "##")
             {
                 distance = sqrt( pow( (tempX-playerPosX) , 2 ) + pow( (tempY-playerPosY) , 2 )); //Linear Distance formula
                 if (distance <= shortestDistance) 
@@ -123,6 +112,7 @@ void Ghost::chase(int playerPosX, int playerPosY) //playerPosX and Y are Pac-Man
 
     else if (name == "Pinky")
     {
+
         
     }
     else if (name == "Inky")

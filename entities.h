@@ -5,7 +5,7 @@ class Ghost
 {
     public:
         Ghost(int posX, int posY, string ghostName);
-        void chase(int playerPosX, int playerPosY);
+        void chase(int playerPosX, int playerPosY, int direction);
         void scatter();
         void frightened();
         void eaten();

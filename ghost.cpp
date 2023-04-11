@@ -47,10 +47,14 @@ Ghost::Ghost(int posX, int posY, string ghostName)
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
 }
 
-void Ghost::chase(int playerPosX, int playerPosY) //playerPosX and Y are Pac-Man's X and Y Coordinates, updates x and y coordinates + currentDirection of ghosts in chase mode
+void Ghost::chase(int playerPosX, int playerPosY, int direction) 
+/*playerPosX and Y are Pac-Man's X and Y Coordinates, direction is Pac-Man's current direction
+This function updates x and y coordinates + currentDirection of ghosts in chase mode */
 {
     //Implementation to update posX and posY every frame to chase Pac-Man
-    if (name == "Blinky") //Blinky chases Pac-Man directly
+
+    if (name == "Blinky")
+    //Blinky chases Pac-Man directly (linearly)
     {
         int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
 
@@ -115,11 +119,103 @@ void Ghost::chase(int playerPosX, int playerPosY) //playerPosX and Y are Pac-Man
         }
     }
 
-    else if (name == "Pinky")
+    else if (name == "Pinky") 
+    /*Pinky chases the tile that is 4 tiles in front of Pac-Man's direction (exception when Pac-Man is facing 'up', in that case pinky chases 4 tiles in front +
+    4 tiles to the left of Pac-Man )*/
     {
+        int target[2];
 
+        //Pinky determines target tile here
+
+        if (direction == 1)
+        {
+            target[0] = playerPosX - 4;
+            target[1] = playerPosY + 4;
+        }
+        else if (direction == 2)
+        {
+            target[0] = playerPosX - 4;
+            target[1] = playerPosY;
+        }
+        else if (direction == 3)
+        {
+            target[0] = playerPosX;
+            target[1] = playerPosY - 4;
+        }
+        else if (direction == 4)
+        {
+            target[0] = playerPosX + 4;
+            target[1] = playerPosY;
+        }
+        else //just in case there is undefined behaviour
+        {
+            target[0] = playerPosX;
+            target[1] = playerPosY;
+        }
         
+        int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
+        double shortestDistance = 1e5;
+        double distance = 0;
+        int originalDirection = currentDirection;
+
+        for (int i = 0; i < 4; i++)
+        {
+            int tempX = x, tempY = y;
+            if (availableDirections[i] == 1 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[--tempY][tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+            else if (availableDirections[i] == 2 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][--tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+            else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+            else if (availableDirections[i] == 4 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[tempY][++tempX] != "##")
+            {
+                distance = sqrt( pow( (tempX-target[0]) , 2 ) + pow( (tempY-target[1]) , 2 )); //Linear Distance formula
+                if (distance <= shortestDistance) 
+                {
+                    shortestDistance = distance;
+                    currentDirection = availableDirections[i];
+                }
+            }
+        }
+
+        switch (currentDirection)
+        {
+            case 1:
+                y--;
+                break;
+            case 2:
+                x--;
+                break;
+            case 3:
+                y++;
+                break;
+            case 4:
+                x++;
+                break;
+        }    
     }
+    
     else if (name == "Inky")
     {
 

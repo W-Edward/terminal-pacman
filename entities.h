@@ -9,6 +9,7 @@ class Ghost
         void scatter();
         void frightened();
         void eaten();
+        void escape();
         int getX();
         int getY();
     private:

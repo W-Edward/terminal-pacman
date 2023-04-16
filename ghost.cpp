@@ -16,7 +16,7 @@ string tempa[19][20] = {
     {"##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##"},
     {"##","  ","  ","  ","  ","  ","  ","##","##","  ","  ","##","##","  ","  ","  ","  ","  ","  ","##"},
     {"##","##","  ","##","##","##","  ","  ","  ","  ","  ","  ","  ","  ","##","##","##","  ","##","##"},
-    {"  ","  ","  ","  ","  ","  ","  ","##","##","  ","  ","##","##","  ","  ","  ","  ","  ","  ","  "},
+    {"  ","  ","  ","  ","  ","  ","  ","##","##","==","==","##","##","  ","  ","  ","  ","  ","  ","  "},
     {"##","  ","##","  ","##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##","  ","##","  ","##"},
     {"##","  ","##","  ","##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##","  ","##","  ","##"},
     {"##","  ","##","  ","##","  ","  ","##","##","##","##","##","##","  ","  ","##","  ","##","  ","##"},
@@ -77,7 +77,7 @@ int Ghost::chaseTargetTile(int targetX, int targetY)
                 currentDirection = availableDirections[i];
             }
         }
-        else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##")
+        else if (availableDirections[i] == 3 && availableDirections[i] != findOppositeDirection(originalDirection) && tempa[++tempY][tempX] != "##" && tempa[tempY][tempX] != "==")
         {
             distance = sqrt( pow( (tempX-targetX) , 2 ) + pow( (tempY-targetY) , 2 )); //Linear Distance formula
             if (distance <= shortestDistance) 
@@ -261,6 +261,11 @@ void Ghost::frightened()
 }
 
 void Ghost::eaten()
+{
+    //To be implemented
+}
+
+void Ghost::escape()
 {
     //To be implemented
 }

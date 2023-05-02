@@ -1,6 +1,6 @@
 # makes an executable file called main
 GENERAL_FLAGS = -pedantic-errors -std=c++11
-POSTFILE_FLAG = -lncurses
+POSTFILE_FLAGS = -lncurses
 STARTINGSEQ = StartingSequence
 GHOST = ghost
 GHOST_HEADER = entities

@@ -47,7 +47,7 @@ Ghost::Ghost(int posX, int posY, string ghostName)
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
 }
 
-int Ghost::chaseTargetTile(int targetX, int targetY)
+void Ghost::chaseTargetTile(int targetX, int targetY)
 /*this function will update ghosts' position linearly towards the target tile. Ghosts cannot move backwards unless when changing modes and follows the following
     move priority if more than one options are available (same linear distance to target tile): up, left, down, right. */
 {

@@ -16,5 +16,5 @@ class Ghost
         int x,y,currentDirection;
         string name;
         int findOppositeDirection(int currentDir);
-        int chaseTargetTile(int targetX, int targetY);
+        void chaseTargetTile(int targetX, int targetY);
 };

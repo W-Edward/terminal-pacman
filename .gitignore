@@ -1,3 +1,4 @@
 .DS_Store
 
 gin_notes.txt
+*.o

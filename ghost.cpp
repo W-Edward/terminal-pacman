@@ -207,6 +207,7 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
     Let's call Blinky's position Point B and target tile Point C.*/
     {
         int pointA[2];
+
         if (direction == 1)
         {
             pointA[0] = playerPosX - 2;
@@ -270,12 +271,12 @@ void Ghost::escape()
     //To be implemented
 }
 
-int Ghost::getX()
+int Ghost::getX() // return X coord of ghost
 {
     return x;
 }
 
-int Ghost::getY()
+int Ghost::getY() // return Y coord of ghost
 {
     return y;
 }

@@ -21,4 +21,7 @@ main: $(MAIN).o $(GHOST).o # might need to link StartingSeq's object file to thi
 clean:
 	rm -f *.o
 
-.PHONY: clean
+clean_all:
+	rm -f *.o main
+
+.PHONY: clean clean_all

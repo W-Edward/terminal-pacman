@@ -1,10 +1,9 @@
-#include <iostream>
 // #include <ncurses.h>
 #include <curses.h>
-#include <string>
-#include <unistd.h>
 // #include <windows.h>
-#include <unistd.h> //,replace windows.h for linux
+#include <unistd.h> //replace w windows.h for linux
+#include <iostream>
+#include <string>
 #include <stdio.h>
 #include "entities.h"
 using namespace std;

@@ -1,10 +1,10 @@
-#include <iostream>
-#include <fstream>
 #include <ncurses.h>
 #include <curses.h>
+// #include <windows.h>
+#include <unistd.h> //replace w windows.h for linux
+#include <iostream>
+#include <fstream>
 #include <string>
-//#include <windows.h>
-#include <unistd.h> //,replace windows.h for linux
 #include <stdio.h>
 using namespace std;
 

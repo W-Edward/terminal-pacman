@@ -108,10 +108,18 @@ int main(){
 				// exit the game
 				break;
 			}
-		} else if (cinput == KEY_DOWN && selection < 3) {
-			selection++;
-		} else if (cinput== KEY_UP && selection > 0) {
-			selection--;
+		} else if (cinput == KEY_DOWN) {
+			if (selection < 3) {
+				selection++;
+			} else { // loop back to the first option
+				selection = 0;
+			}
+		} else if (cinput== KEY_UP) {
+			if (selection > 0) {
+				selection--;
+			} else { // loop back to the last option
+				selection = 3;
+			}
 		}
 		usleep(150000);
 	}

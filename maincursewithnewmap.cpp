@@ -6,6 +6,7 @@
 #include <string>
 #include <stdio.h>
 #include "entities.h"
+#include "StartnEndSequence.h"
 using namespace std;
 
 //Notes:
@@ -113,6 +114,7 @@ int main()
     int last_x = 2;
     int direction = 4;
     int face = 1;
+    int xMax, yMax;
     string map[19][20] = { //y max = 18, x max = 19
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
         {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
@@ -135,6 +137,7 @@ int main()
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
+    int startgame = 0;
     //Instantiate Ghosts here!
     Ghost Blinky(4, 5, "Blinky"); //x = 4, y =5
     Ghost Pinky(18, 6, "Pinky");
@@ -142,51 +145,61 @@ int main()
     Ghost Clyde(18, 17, "Clyde");
 
     
+    startgame = StartingSequence();
+    clear();
+
     //Game Flow
-    while (!quit) {
-        display(y,x,last_y,last_x,face,direction,map,Blinky, Pinky, Inky, Clyde);
-        input(direction);
-        last_y = y;
-        last_x = x;
-        switch (direction) {
-            case 1:
-                if (y > 1 && map[y-1][x]!="##") {y--;}
-                break;
-            case 2:
-                if (x > 1 && map[y][x-1]!="##") {x--;}
-                else if ( x <= 1 && y == 8) //used for Pac-Man Looping
-                {
-                    x--;
-                    if (x == -1)
+    if (startgame == 1 || startgame == 2) {
+        while (!quit) {
+            display(y,x,last_y,last_x,face,direction,map,Blinky, Pinky, Inky, Clyde);
+            input(direction);
+            last_y = y;
+            last_x = x;
+            switch (direction) {
+                case 1:
+                    if (y > 1 && map[y-1][x]!="##") {y--;}
+                    break;
+                case 2:
+                    if (x > 1 && map[y][x-1]!="##") {x--;}
+                    else if ( x <= 1 && y == 8) //used for Pac-Man Looping
                     {
-                        x = 19;
-                    }
-                } 
-                face = 0;
-                break;
-            case 3:
-                if (y < 17 && map[y+1][x]!="##" && map[y+1][x]!="==") {y++;}
-                break;
-            case 4:
-                if (x < 18 && map[y][x+1]!="##") {x++;}
-                else if (x >= 18 && y == 8) //used for Pac-Man Looping
-                {
-                    x++;
-                    if (x == 20)
+                        x--;
+                        if (x == -1)
+                        {
+                            x = 19;
+                        }
+                    } 
+                    face = 0;
+                    break;
+                case 3:
+                    if (y < 17 && map[y+1][x]!="##" && map[y+1][x]!="==") {y++;}
+                    break;
+                case 4:
+                    if (x < 18 && map[y][x+1]!="##") {x++;}
+                    else if (x >= 18 && y == 8) //used for Pac-Man Looping
                     {
-                        x = 0;
-                    }
-                } 
-                face = 1;
-                break;
-            case 5:
-                quit = true;
-                break;
+                        x++;
+                        if (x == 20)
+                        {
+                            x = 0;
+                        }
+                    } 
+                    face = 1;
+                    break;
+                case 5:
+                    quit = true;
+            }
+            // Sleep(250); //use usleep(150000); in linux
+            usleep(150000);
         }
-        // Sleep(250); //use usleep(150000); in linux
-        usleep(150000);
+    } else if (startgame == 3) {
+        //creadit screen 
     }
 
+    clear();
+
+    EndingSequence();
+    
     getch();
     endwin();
 

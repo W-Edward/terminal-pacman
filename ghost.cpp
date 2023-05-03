@@ -45,7 +45,8 @@ Ghost::Ghost(int posX, int posY, string ghostName) // initializes the ghosts' in
     y = posY;
     name = ghostName;
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
-    isFrightened = false;
+    isFrightened = false; // checks if ghost is in frightened state
+    isEaten = false; // checks if ghost is in eaten state
 }
 
 void Ghost::chaseTargetTile(int targetX, int targetY)
@@ -261,6 +262,7 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
 
 void Ghost::frightened() // frightened mode movement and pathfinding
 {
+    isFrightened = true;
     // add these codes when pacman touches power pellet, outside this function
     // isFrightened = true;
     // currentDirection = findOppositeDirection(currentDirection);
@@ -308,7 +310,22 @@ void Ghost::frightened() // frightened mode movement and pathfinding
 
 void Ghost::eaten()
 {
-    //To be implemented
+    // Remember to isEaten = true; after pacman touches the ghost
+    // then if (isEaten){eaten();}
+
+    // notes: If when debugging, ghosts always go back to uneaten after one time frame, check line 49 of ghost.cpp
+    // ghosts cannot interact with pacman in this state. Remember to check the eaten flag every time upon interaction
+    // Implement eaten visual
+
+    if ((x == 7 && y == 9) || (x == 8 && y == 9)){ // ghost should enter ghost house here
+        chaseTargetTile(9, 9);
+    } else if (x == 9 && y == 9){ // ghost is inside ghost house; exit frightened mode and go back to chase mode here
+        isFrightened = false;
+        isEaten = false;
+        // should be able to return to chase mode after this
+    } else {
+        chaseTargetTile(7, 9); // chase the tile directly in front of the ghost gate
+    }
 }
 
 void Ghost::escape()
@@ -328,4 +345,8 @@ int Ghost::getY() // returns Y coord of ghost
 
 bool Ghost::getFrightened() { // returns the frightened state of ghost
     return isFrightened;
+}
+
+bool Ghost::getEaten() { // returns the eaten state of the ghost
+    return isEaten;
 }

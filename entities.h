@@ -13,10 +13,11 @@ class Ghost
         int getX();
         int getY();
         bool getFrightened();
+        bool getEaten();
     private:
         int x,y,currentDirection;
         string name;
-        bool isFrightened; // flag for whether or not it is frightened
+        bool isFrightened, isEaten; // flag for whether or not it is frightened/eaten
         int findOppositeDirection(int currentDir);
         void chaseTargetTile(int targetX, int targetY);
 };

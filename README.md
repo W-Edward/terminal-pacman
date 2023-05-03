@@ -3,10 +3,11 @@ ENGG1340 Final Group Project
 
 ![](https://img.shields.io/badge/Exam%20Preparation-low-red) ![](https://img.shields.io/badge/Stress%20level-High-critical) ![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
 
+![alt text](https://m.media-amazon.com/images/S/aplus-media-library-service-media/aab7335f-9acf-46b6-bd3b-ee09c407e7ca.__CR0,0,970,300_PT0_SX970_V1___.jpg)
+
 **Table of contents**
 
 - [Group 68 - "Pacman"](#group-68---pacman)
-  - [Team Member](#team-member)
   - [About the Game](#about-the-game)
     - [game discription](#game-discription)
     - [game rules](#game-rules)
@@ -21,7 +22,6 @@ ENGG1340 Final Group Project
   - [Instruction for Compilation and Execution](#instruction-for-compilation-and-execution)
 
 
-##  Team Member
 | Name  | UID  |
 | :------------: | :------------: |
 |  **Fong Ting Hin** | 3036067652 |

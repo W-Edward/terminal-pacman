@@ -31,9 +31,9 @@ void mainmenu_display (int select) {
 	// ifstream art;
 	// string logo;
 	string menuitem[10] = {
-		"**********************************", 
-		" Welcome to Pac-Man Alpha Edition ", 
-		"**********************************",
+		"***********************************", 
+		" Welcome to Pac-Man: Alpha Edition ", 
+		"***********************************",
 		"",
 		"Play The Pac-Man Game !",
 		"Load Save",

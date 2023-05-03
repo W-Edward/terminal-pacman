@@ -1,16 +1,16 @@
-# Group 68 - "Pacman"
-ENGG1340 Final Group Project
+# Pac-Man: Alpha Edition
+ENGG1340 Final Group Project - Group 68
 
-![](https://img.shields.io/badge/Exam%20Preparation-low-red) ![](https://img.shields.io/badge/Stress%20level-High-critical) ![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
+![](https://img.shields.io/badge/Exam%20Preparation-Low-red) ![](https://img.shields.io/badge/Stress%20level-High-critical) ![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
 
 ![alt text](https://m.media-amazon.com/images/S/aplus-media-library-service-media/aab7335f-9acf-46b6-bd3b-ee09c407e7ca.__CR0,0,970,300_PT0_SX970_V1___.jpg)
 
-**Table of contents**
+**Table of Contents**
 
 - [Group 68 - "Pacman"](#group-68---pacman)
   - [Team Member](#team-member)
   - [About the Game](#about-the-game)
-    - [game discription](#game-discription)
+    - [game description](#game-discription)
     - [game rules](#game-rules)
   - [Features implemented](#features-implemented)
     - [Generation of random game sets or events](#generation-of-random-game-sets-or-events)
@@ -22,31 +22,31 @@ ENGG1340 Final Group Project
     - [Ncurses](#ncurses)
   - [Instruction for Compilation and Execution](#instruction-for-compilation-and-execution)
 
-## Team Member
+## Group Members
 
-| Name  | UID  |
-| :------------: | :------------: |
-|  **Fong Ting Hin** | 3036067652 |
-|  **Lok Wang Yi** |  xxxxxxxxxx |
-|  **Lui Yik Hang** |  xxxxxxxxxx |
-|  **Widjaja Edward Aryaguna** |  xxxxxxxxxx |
-|  **Wong Hoi Lei** | xxxxxxxxxx |
+|  Name  |  UID  |
+| :------------:  |  :------------: |
+|  **Fong Ting Hin**  |  xxxxxxxxxx  |
+|  **Lok Wang Yi**  |  xxxxxxxxxx  |
+|  **Lui Yik Hang**  |  3036067652  |
+|  **Widjaja Edward Aryaguna**  |  xxxxxxxxxx  |
+|  **Wong Hoi Lei**  |  3036063917  |
 
 
 ##  About the Game
 
 welcome to the game of pacman ... (not yet write, lazy :) )
 
-###  game discription 
+###  Game Description
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat.
+
+###  Game Rules
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
 
-###  game rules
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
-
-
-##  Features implemented 
+##  Features Implemented
 ### Generation of random game sets or events
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
@@ -70,10 +70,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris n
 
 
 
-##  Non-standard library included
-###  Ncurses
+## Non-Standard Libraries Used
+### Ncurses
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat.
 
-## Instruction for Compilation and Execution
+## Compilation and Execution Instructions
 
 1. Lorem ipsum dolor sit amet
 2. Lorem ipsum dolor sit amet

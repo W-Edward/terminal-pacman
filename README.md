@@ -9,6 +9,11 @@ ENGG1340 Final Group Project
     - [game discription](#game-discription)
     - [game rules](#game-rules)
   - [Features implemented](#features-implemented)
+    - [Generation of random game sets or events](#generation-of-random-game-sets-or-events)
+    - [Data structures for storing game status](#data-structures-for-storing-game-status)
+    - [Dynamic memory management](#dynamic-memory-management)
+    - [File input/output](#file-inputoutput)
+    - [Program codes in multiple files](#program-codes-in-multiple-files)
   - [Non-standard library included](#non-standard-library-included)
     - [Ncurses](#ncurses)
   - [Instruction for Compilation and Execution](#instruction-for-compilation-and-execution)
@@ -38,6 +43,26 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris n
 
 
 ##  Features implemented 
+### Generation of random game sets or events
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+
+
+### Data structures for storing game status
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+
+### Dynamic memory management
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+
+### File input/output
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+
+### Program codes in multiple files
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
 
 
 

@@ -273,6 +273,7 @@ void Ghost::frightened() // frightened mode movement and pathfinding
     // isFrightened = false;
 
     // notes: If when debugging, ghosts always go back to unfrightened after one time frame, check line 48 of ghost.cpp
+    // also consider adding a visual of whenever ghosts are in frightened mode, and a pre-exist frightened mode visual thign
 
     // check directions that are "  "
     int availableDirections[4] = {1, 2, 3, 4}; // = up, left, down, right

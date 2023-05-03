@@ -7,7 +7,7 @@ using namespace std;
 //Notes:
 //Ghost should never turn around unless when changing states
 
-string tempa[19][20] = { // ref of map
+string tempa[19][20] = { // ref of map; 19 rows, 20 columnns; y refers to the row it is on, x refers to the column it is on
     {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
     {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
     {"##","  ","  ","##","  ","  ","  ","##","##","  ","  ","##","##","  ","  ","  ","##","  ","  ","##"},
@@ -29,7 +29,7 @@ string tempa[19][20] = { // ref of map
     {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };  
 
-int Ghost::findOppositeDirection(int currentDir)
+int Ghost::findOppositeDirection(int currentDir) // finds the opposite direction of the direction the ghost is facing
 {
     int direction = (currentDir+2)%4;
     if (direction == 0)
@@ -39,16 +39,17 @@ int Ghost::findOppositeDirection(int currentDir)
     return direction;
 }
 
-Ghost::Ghost(int posX, int posY, string ghostName)
+Ghost::Ghost(int posX, int posY, string ghostName) // initializes the ghosts' information
 {
     x = posX;
     y = posY;
     name = ghostName;
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
+    isFrightened = false;
 }
 
 void Ghost::chaseTargetTile(int targetX, int targetY)
-/*this function will update ghosts' position linearly towards the target tile. Ghosts cannot move backwards unless when changing modes and follows the following
+/*  this function will update ghosts' position linearly towards the target tile. Ghosts cannot move backwards unless when changing modes and follows the following
     move priority if more than one options are available (same linear distance to target tile): up, left, down, right. */
 {
     int availableDirections[4] = {4, 3, 2, 1}; //According to the priority list for ghost movement! 
@@ -125,6 +126,8 @@ void Ghost::chaseTargetTile(int targetX, int targetY)
 }
 
 void Ghost::scatter()
+/*  scatter state pathfinding (crucial such that ghosts arent hunting pacman 24/7)
+    This function updates the ghost so they target their respective corner tiles of the map while in this state */
 {
     if (name == "Blinky")
     //Goes to top right direction
@@ -256,9 +259,50 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
     }
 }
 
-void Ghost::frightened()
+void Ghost::frightened() // frightened mode movement and pathfinding
 {
-    //To be implemented
+    // add these codes when pacman touches power pellet, outside this function
+    // isFrightened = true;
+    // currentDirection = findOppositeDirection(currentDirection);
+    // frightened();
+
+    // always have this between:
+    // if (Ghost::isFrightened){Ghost::frightened();}
+
+    // add these codes when power pellet is used up
+    // isFrightened = false;
+
+    // notes: If when debugging, ghosts always go back to unfrightened after one time frame, check line 48 of ghost.cpp
+
+    // check directions that are "  "
+    int availableDirections[4] = {1, 2, 3, 4}; // = up, left, down, right
+    if (tempa[x-1][y] != "  "){availableDirections[0] = -1;} // up
+    if (tempa[x][y-1] != "  "){availableDirections[0] = -1;} // left
+    if (tempa[x+1][y] != "  "){availableDirections[0] = -1;} // down
+    if (tempa[x][y+1] != "  "){availableDirections[0] = -1;} // right
+
+    // block off opposite direction since ghosts cant walk backwards
+    int oppDirection = findOppositeDirection(currentDirection);
+    availableDirections[oppDirection-1] = -1;
+
+    // roll a random direction that isn't blocked off
+    int roll = rand() % 4;
+    while (availableDirections[roll] == -1){roll = rand() % 4;}
+    
+    switch (availableDirections[roll]){
+        case 1:
+            x--;
+            break;
+        case 2:
+            y--;
+            break;
+        case 3:
+            x++;
+            break;
+        case 4:
+            y++;
+            break;
+    }
 }
 
 void Ghost::eaten()
@@ -271,13 +315,16 @@ void Ghost::escape()
     //To be implemented
 }
 
-int Ghost::getX() // return X coord of ghost
+int Ghost::getX() // returns X coord of ghost
 {
     return x;
 }
 
-int Ghost::getY() // return Y coord of ghost
+int Ghost::getY() // returns Y coord of ghost
 {
     return y;
 }
 
+bool Ghost::getFrightened() { // returns the frightened state of ghost
+    return isFrightened;
+}

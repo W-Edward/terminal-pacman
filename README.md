@@ -1,6 +1,8 @@
 # Group 68 - "Pacman"
 ENGG1340 Final Group Project
 
+![](https://img.shields.io/badge/Exam%20Preparation-low-red) ![](https://img.shields.io/badge/Stress%20level-High-critical) ![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
+
 **Table of contents**
 
 - [Group 68 - "Pacman"](#group-68---pacman)

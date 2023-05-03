@@ -8,6 +8,7 @@ ENGG1340 Final Group Project
 **Table of contents**
 
 - [Group 68 - "Pacman"](#group-68---pacman)
+  - [Team Member](#team-member)
   - [About the Game](#about-the-game)
     - [game discription](#game-discription)
     - [game rules](#game-rules)
@@ -21,6 +22,7 @@ ENGG1340 Final Group Project
     - [Ncurses](#ncurses)
   - [Instruction for Compilation and Execution](#instruction-for-compilation-and-execution)
 
+## Team Member
 
 | Name  | UID  |
 | :------------: | :------------: |

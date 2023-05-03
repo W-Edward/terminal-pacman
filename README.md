@@ -5,25 +5,27 @@ ENGG1340 Final Group Project - Group 68
 
 ![alt text](https://m.media-amazon.com/images/S/aplus-media-library-service-media/aab7335f-9acf-46b6-bd3b-ee09c407e7ca.__CR0,0,970,300_PT0_SX970_V1___.jpg)
 
-**Table of Contents**
+<br>
 
-- [Group 68 - "Pacman"](#group-68---pacman)
-  - [Team Member](#team-member)
-  - [About the Game](#about-the-game)
-    - [game description](#game-discription)
-    - [game rules](#game-rules)
-  - [Features implemented](#features-implemented)
-    - [Generation of random game sets or events](#generation-of-random-game-sets-or-events)
-    - [Data structures for storing game status](#data-structures-for-storing-game-status)
-    - [Dynamic memory management](#dynamic-memory-management)
-    - [File input/output](#file-inputoutput)
-    - [Program codes in multiple files](#program-codes-in-multiple-files)
-  - [Non-standard library included](#non-standard-library-included)
-    - [Ncurses](#ncurses)
-  - [Instruction for Compilation and Execution](#instruction-for-compilation-and-execution)
+***Table of Contents***
+
+- [Group Members](#group-members)
+- [About the Game](#about-the-game)
+  - [Game Description](#game-description)
+  - [Game Rules](#game-rules)
+- [Features Implemented](#features-implemented)
+  - [Generation of random game sets or events](#generation-of-random-game-sets-or-events)
+  - [Data structures for storing game status](#data-structures-for-storing-game-status)
+  - [Dynamic memory management](#dynamic-memory-management)
+  - [File input/output](#file-inputoutput)
+  - [Program codes in multiple files](#program-codes-in-multiple-files)
+- [Non-Standard Libraries Used](#non-standard-libraries-used)
+  - [Ncurses](#ncurses)
+- [Compilation and Execution Instructions](#compilation-and-execution-instructions)
+
+<br>
 
 ## Group Members
-
 |  Name  |  UID  |
 | :------------:  |  :------------: |
 |  **Fong Ting Hin**  |  xxxxxxxxxx  |
@@ -32,9 +34,9 @@ ENGG1340 Final Group Project - Group 68
 |  **Widjaja Edward Aryaguna**  |  xxxxxxxxxx  |
 |  **Wong Hoi Lei**  |  3036063917  |
 
+<br>
 
 ##  About the Game
-
 welcome to the game of pacman ... (not yet write, lazy :) )
 
 ###  Game Description
@@ -45,12 +47,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris n
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
 
+<br>
 
 ##  Features Implemented
 ### Generation of random game sets or events
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
-
 
 ### Data structures for storing game status
 
@@ -68,11 +70,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris n
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
 
-
+<br>
 
 ## Non-Standard Libraries Used
 ### Ncurses
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat.
+
+<br>
 
 ## Compilation and Execution Instructions
 

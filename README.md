@@ -5,8 +5,6 @@ ENGG1340 Final Group Project - Group 68
 
 ![alt text](https://m.media-amazon.com/images/S/aplus-media-library-service-media/aab7335f-9acf-46b6-bd3b-ee09c407e7ca.__CR0,0,970,300_PT0_SX970_V1___.jpg)
 
-<br>
-
 ***Table of Contents***
 
 - [Group Members](#group-members)

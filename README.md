@@ -3,9 +3,18 @@ ENGG1340 Final Group Project
 
 **Table of contents**
 
-[TOC]
+- [Group 68 - "Pacman"](#group-68---pacman)
+  - [Team Member](#team-member)
+  - [About the Game](#about-the-game)
+    - [game discription](#game-discription)
+    - [game rules](#game-rules)
+  - [Features implemented](#features-implemented)
+  - [Non-standard library included](#non-standard-library-included)
+    - [Ncurses](#ncurses)
+  - [Instruction for Compilation and Execution](#instruction-for-compilation-and-execution)
 
-## Team Member
+
+##  Team Member
 | Name  | UID  |
 | :------------: | :------------: |
 |  **Fong Ting Hin** | 3036067652 |
@@ -15,25 +24,25 @@ ENGG1340 Final Group Project
 |  **Wong Hoi Lei** | xxxxxxxxxx |
 
 
-## About the Game
+##  About the Game
 
 welcome to the game of pacman ... (not yet write, lazy :) )
 
-### game discription 
+###  game discription 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
 
-### game rules
+###  game rules
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
 
 
-## Features implemented 
+##  Features implemented 
 
 
 
-## Non-standard library included
-### Ncurses
+##  Non-standard library included
+###  Ncurses
 
 ## Instruction for Compilation and Execution
 

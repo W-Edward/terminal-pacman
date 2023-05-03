@@ -35,9 +35,9 @@ void mainmenu_display (int select) {
 		"**********************************",
 		"",
 		"Play The Pac-Man Game !",
-		"View The Game Statistics",
+		"Load Save",
 		"View The Staff Credits",
-		"Exit The Main Menu",
+		"Exit The Game",
 		"",
 		"Please expand your terminal for a better game experience!",
 	};

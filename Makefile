@@ -1,6 +1,10 @@
-# makes the game an executable file called pacman
+# makes an executable file called main
 GENERAL_FLAGS = -pedantic-errors -std=c++11
-LINKER_FLAGS = -lncurses
+POSTFILE_FLAGS = -lncurses
+STARTINGSEQ = StartnEndSequence
+GHOST = ghost
+GHOST_HEADER = entities
+MAIN = main
 
 # starting and end sequence
 STARTINGSEQ_OBJ = StartnEndSequence.o
@@ -30,6 +34,6 @@ clean:
 	rm -f *.o
 
 clean_all:
-	rm -f *.o pacman
+	rm -f *.o pacman *.h.gch
 
-.PHONY: clean clean_all
+.PHONY: clean clean_all 

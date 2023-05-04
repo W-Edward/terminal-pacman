@@ -7,6 +7,7 @@ using namespace std;
 //Notes:
 //Ghost should never turn around unless when changing states
 
+// tempa[y][x]
 string tempa[19][20] = { // ref of map; 19 rows, 20 columnns; y refers to the row it is on, x refers to the column it is on
     {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
     {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
@@ -277,12 +278,23 @@ void Ghost::frightened() // frightened mode movement and pathfinding
     // notes: If when debugging, ghosts always go back to unfrightened after one time frame, check line 48 of ghost.cpp
     // also consider adding a visual of whenever ghosts are in frightened mode, and a pre-exist frightened mode visual thign
 
+
     // check directions that are "  "
     int availableDirections[4] = {1, 2, 3, 4}; // = up, left, down, right
-    if (tempa[x-1][y] != "  "){availableDirections[0] = -1;} // up
-    if (tempa[x][y-1] != "  "){availableDirections[0] = -1;} // left
-    if (tempa[x+1][y] != "  "){availableDirections[0] = -1;} // down
-    if (tempa[x][y+1] != "  "){availableDirections[0] = -1;} // right
+    if (tempa[y-1][x] != "  "){availableDirections[0] = -1;} // up
+    if (tempa[y+1][x] != "  "){availableDirections[0] = -1;} // down
+    
+    // checks if ghost is on the edge of the map and handles looping for direction checking
+    if (x==0){
+        if (tempa[y][19] != "  "){availableDirections[0] = -1;} // left
+        if (tempa[y][x+1] != "  "){availableDirections[0] = -1;} // right
+    } else if (x==19){
+        if (tempa[y][x-1] != "  "){availableDirections[0] = -1;} // left
+        if (tempa[y][0] != "  "){availableDirections[0] = -1;} // right
+    } else {
+        if (tempa[y][x-1] != "  "){availableDirections[0] = -1;} // left
+        if (tempa[y][x+1] != "  "){availableDirections[0] = -1;} // right
+    }
 
     // block off opposite direction since ghosts cant walk backwards
     int oppDirection = findOppositeDirection(currentDirection);

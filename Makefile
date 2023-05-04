@@ -1,22 +1,30 @@
 # makes the game an executable file called pacman
 GENERAL_FLAGS = -pedantic-errors -std=c++11
-POSTFILE_FLAGS = -lncurses
-STARTINGSEQ = StartnEndSequence
-GHOST = ghost
-GHOST_HEADER = entities
-MAIN = main # originally maincursewithnewmap
+LINKER_FLAGS = -lncurses
 
-$(STARTINGSEQ).o: $(STARTINGSEQ).cpp $(STARTINGSEQ).h
-	g++ $(GENERAL_FLAGS) -c $^ $(POSTFILE_FLAGS)
+# starting and end sequence
+STARTINGSEQ_OBJ = StartnEndSequence.o
+STARTINGSEQ_SRC = StartnEndSequence.cpp
+STARTINGSEQ_HEADER = StartnEndSequence.h
+# ghost
+GHOST_OBJ = ghost.o
+GHOST_SRC = ghost.cpp
+GHOST_HEADER = entities.h
+# main program
+MAIN_OBJ = main.o
+MAIN_SRC = main.cpp
 
-$(GHOST).o: $(GHOST).cpp $(GHOST_HEADER).h
-	g++ $(GENERAL_FLAGS) -c $(GHOST).cpp $(POSTFILE_FLAGS)
+$(STARTINGSEQ_OBJ): $(STARTINGSEQ_SRC) $(STARTINGSEQ_HEADER)
+	g++ $(GENERAL_FLAGS) -c $(STARTINGSEQ_SRC)
 
-$(MAIN).o: $(MAIN).cpp $(GHOST_HEADER).h $(STARTINGSEQ).h # might need to link StartingSeq's header file to this eventually
-	g++ $(GENERAL_FLAGS) -c $(MAIN).cpp $(POSTFILE_FLAGS)
+$(GHOST_OBJ): $(GHOST_SRC) $(GHOST_HEADER)
+	g++ $(GENERAL_FLAGS) -c $(GHOST_SRC)
 
-pacman: $(MAIN).o $(GHOST).o $(STARTINGSEQ).o # might need to link StartingSeq's object file to this eventually
-	g++ $(GENERAL_FLAGS) $^ $(POSTFILE_FLAGS) -o $@
+$(MAIN_OBJ): $(MAIN_SRC) $(GHOST_HEADER) $(STARTINGSEQ_HEADER)
+	g++ $(GENERAL_FLAGS) -c $(MAIN_SRC)
+
+pacman: $(STARTINGSEQ_OBJ) $(GHOST_OBJ) $(MAIN_OBJ)
+	g++ $(GENERAL_FLAGS) $^ $(LINKER_FLAGS) -o $@
 
 clean:
 	rm -f *.o

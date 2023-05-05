@@ -208,6 +208,8 @@ int main()
         init_color(COLOR_BLACK,0,0,0);
         init_color(COLOR_CYAN,0,0,888);
     }
+
+    // colour init
     //background colur
     init_pair(1,COLOR_CYAN,COLOR_BLACK);
     //pacman colour
@@ -222,6 +224,8 @@ int main()
     init_pair(7,COLOR_GREEN,COLOR_BLACK);
     //Ghost frighten mode colour
     init_pair(8,COLOR_WHITE,COLOR_BLACK);
+
+
     noecho();
     cbreak();
     keypad(stdscr, TRUE);

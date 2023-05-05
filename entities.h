@@ -38,3 +38,12 @@ class Pacman
     private:
         int x, y, last_x, last_y, faceDirection; // faceDirection is the direction the face of pacman is facing (i.e. 0 for left, 1 for right)
 };
+
+class PrintASCII 
+{
+    public:
+        void txtprint(int deviationFromMidX, int deviationFromMidY, string filename);
+    private:
+        int pictureHeight(string filename);
+        int pictureWidth(string filename);
+};

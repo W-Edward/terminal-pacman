@@ -2,7 +2,7 @@
 #define STARTNENDSEQUENCE
 
 int StartingSequence();
-int EndingSequence();
+int EndingSequence(int score);
 void howToPlay();
 void loadStatistics();
 int GameOver(int score);

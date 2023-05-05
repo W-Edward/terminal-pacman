@@ -182,7 +182,7 @@ int EndingSequence(int score) {
 
 void howToPlay(){
 	int yMax, xMax;
-	string instructions[8] = { // 44 spaces across
+	string instructions[19] = { // 44 spaces across
 		"                How to Play!                ",
 		"    ------------------------------------    ",
 		"",
@@ -190,12 +190,23 @@ void howToPlay(){
 		"highest score before being eaten by ghosts. ",
 		"",
 		"   Control pacman to evade the ghosts and   ",
-		"     capture as many fruits as you can!     "
+		"     capture as many fruits as you can!     ",
+		"",
+		" Ghosts have different colours to represent ",
+		"  the states they are in, aside from their  ",
+		"               normal colour.               ",
+		"",
+		"       (colour) for Frightened Mode:        ",
+		" Pac-man can consume ghosts in this state.  ",
+		"",
+		"          (colour) for Eaten Mode:          ",
+		"Pac-man cannot interact with ghosts in this ",
+		"                   state.                   "
 	};
 
 	getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
-    for (int i = 0; i<8; i++) {
+    for (int i = 0; i<19; i++) {
         move((yMax/2) - instructions->length()/2 + i,(xMax/2) - instructions[i].length()/2);
         addstr(instructions[i].c_str());
     }

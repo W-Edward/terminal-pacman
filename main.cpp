@@ -277,7 +277,11 @@ int gameplay(){
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
-    int eatenghosts = 0, score = 0;
+    int eatenghosts = 0, powerPelletTime = 0, internalTimer = 0, scatterTimer = 0, roll = 0, score = 0;
+    // powerPelletTime is the timer for power pellets to control how long they last for
+    // internalTimer is the timer for how long the game has been running for
+    // scatterTimer is the timer to track how long scatter state is
+    // roll is for random roll for scatter() implementation
     
     // Character Startup
     int x = 2, y = 13; // initial pos of pacman; keeps track of pacman's x and y
@@ -353,9 +357,35 @@ int gameplay(){
             break;
         }
 
+        // scatter mode implementation
+        if (scatterTimer == 30){
+            scatterTimer = 0;
+            Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+        }
+        if ((internalTimer % 90) == 0){
+            roll = rand() % 4;
+            if (roll == 0){
+                Blinky.scatter();
+            } else if (roll == 1){
+                Pinky.scatter();
+            } else if (roll == 2){
+                Inky.scatter();
+            } else if (roll == 3){
+                Clyde.scatter();
+            }
+        }
+        scatterTimer++;
+
+        // some sort of condition to make powerPelletTime++
+        if (/*powerPelletConsumed*/ false){
+            powerPelletTime++;
+        }
+
         // handle if power pellet consumed (handle entering and staying in frightened mode)
-        int powerPelletConsumed = 0; // temp variable to be replaced
-        if (powerPelletConsumed){ // stage 1 of power pellet
+        if (powerPelletTime == 1){ // stage 1 of power pellet
             Blinky.toggleCurrentDirection();
             Blinky.frightened();
             Pinky.toggleCurrentDirection();
@@ -364,7 +394,8 @@ int gameplay(){
             Inky.frightened();
             Clyde.toggleCurrentDirection();
             Clyde.frightened();
-        } else if (powerPelletConsumed){ // stage 2 and up of power pellet
+        } else if (powerPelletTime >= 1 && powerPelletTime < 30){ // stage 2 and up of power pellet
+            powerPelletTime++;
             if (Blinky.getCurrentState() == 2){
                 Blinky.frightened();
             }
@@ -376,6 +407,20 @@ int gameplay(){
             }
             if (Clyde.getCurrentState() == 2){
                 Clyde.frightened();
+            }
+        } else if (powerPelletTime >= 30){
+            powerPelletTime = 0;
+            if (Blinky.getCurrentState() == 2){
+                Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            }
+            if (Pinky.getCurrentState() == 2){
+                Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            }
+            if (Inky.getCurrentState() == 2){
+                Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            }
+            if (Clyde.getCurrentState() == 2){
+                Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
             }
         }
 
@@ -438,7 +483,7 @@ int gameplay(){
         }
 
         score += 50; // points for staying alive
-        
+
         display(Pacman, Blinky, Pinky, Inky, Clyde, map);
         // Sleep(250);
         usleep(300000); // use this for linux
@@ -456,6 +501,9 @@ int main()
         clear();
         if (startgame == 1 || startgame == 2) {
             score = gameplay();
+            clear();
+            // game over screen
+            usleep(300000);
         } else if (startgame == 3) {
             howToPlay();
         } else if (startgame == 4) {
@@ -465,11 +513,7 @@ int main()
         startgame = StartingSequence();
     }
 
-    // game over screen
-    usleep(300000);
-
     clear();
-
     EndingSequence(score);
     
     getch();

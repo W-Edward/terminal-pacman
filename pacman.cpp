@@ -40,7 +40,7 @@ void Pacman::updatePosition(int posX, int posY){ // updates the location of pacm
 }
 
 void Pacman::toggleFaceDirection(){ // toggles faceDirection from left to right or right to left
-    if (faceDirection == 1){
+    if (last_x > x){
         faceDirection = 0;
     } else {
         faceDirection = 1;

@@ -585,15 +585,15 @@ int main()
                 usleep(300000);
         } else if (startgame == 2) {
             loadprofile(highscore, name);
-            } else if (startgame == 3) {
-                howToPlay();
-            } else if (startgame == 4) {
-                loadStatistics(score, name, highscore);
+        } else if (startgame == 3) {
+            howToPlay();
+        } else if (startgame == 4) {
+            loadStatistics(score, name, highscore);
         } else if (startgame == 5) {
             exportprofile(highscore, name);
-            }
-            clear();
-            startgame = StartingSequence();
+        }
+        clear();
+        startgame = StartingSequence();
     }
 
     clear();

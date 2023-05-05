@@ -162,7 +162,7 @@ int EndingSequence(int score) {
 
 	int n = (41-to_string(score).size())/2; // number of blank spaces needed on either side of the score
 	string spacing(n, ' ');
-	endingScreen[10] = spacing + to_string(score) + spacing;
+	endingScreen[11] = spacing + to_string(score) + spacing;
 
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));

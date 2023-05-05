@@ -37,7 +37,7 @@ void mainmenu_display (int select) {
 		"",
 		"Play The Pac-Man Game !",
 		"Load Save",
-		"",
+		"Game Statistics",
 		"Exit The Game",
 		"",
 		"Please ensure your terminal font size is 16!",
@@ -110,7 +110,7 @@ int StartingSequence(){
 				// Load save
 				return 2;
 			}else if (selection == 2) {
-				// load  Credit Screen
+				// Load game statistics
 				return 3;
 			}else if (selection == 3) {
 				// exit the game
@@ -138,9 +138,9 @@ int StartingSequence(){
 	return 0;
 }
 
-int EndingSequence() {
+int EndingSequence(int score) {
 	int yMax, xMax;
-	string endingScreen[10] = {
+	string endingScreen[12] = {
 		"  _ __   __ _  ___ _ __ ___   __ _ _ __  ",
 		" | '_ \\ / _` |/ __| '_ ` _ \\ / _` | '_ \\ ",
 		" | |_) | (_| | (__| | | | | | (_| | | | |",
@@ -150,15 +150,17 @@ int EndingSequence() {
 		"",
 		"      This game is jointly created by   ",
 		"    Edward, Lewis, Kelly, Felix & Jason  ",
+		"        Your score in this round is:    ",
+		std::to_string(score),
 	};
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
-    for (int i = 0; i<9; i++) {
+    for (int i = 0; i<12; i++) {
         move((yMax/2) - endingScreen->length()/2 + i,(xMax/2) - endingScreen[i].length()/2);
         addstr(endingScreen[i].c_str());
     }
     attroff(COLOR_PAIR(1));
     refresh();
-    usleep(2000000);
+    usleep(5000000);
 	return 0;
 }

@@ -1,3 +1,5 @@
+// originally mainCurses.cpp
+
 #include <iostream>
 // #include <ncurses.h>
 #include <curses.h>

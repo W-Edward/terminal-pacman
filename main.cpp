@@ -14,7 +14,10 @@ using namespace std;
 //Make sure terminal is big enough BEFORE starting the game
 //DON'T ADJUST TERMINAL SIZE WHILE PLAYING GAME, IT WILL BREAK!
 
-void display(int y,int x,int last_y,int last_x,int face, int direction, string map[19][20], Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Clyde){
+// face is the direction pacman is facing
+// direction is the input of the user
+
+void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Clyde, string map[19][20]){
     int xMax,yMax;
     int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
@@ -23,37 +26,92 @@ void display(int y,int x,int last_y,int last_x,int face, int direction, string m
     yCursor = (yMax/2)-20;
     move(yCursor, xCursor);
 
-    map[last_y][last_x] = "  ";//erase the old Pac-Man
-    map[Blinky.getY()][Blinky.getX()] = "  "; //erase old Blinky
-    map[Pinky.getY()][Pinky.getX()] = "  "; //erase old Pinky
-    map[Inky.getY()][Inky.getX()] = "  "; //erase old Inky
-    map[Clyde.getY()][Clyde.getX()] = "  "; //erase old Clyde
-    map[8][9] = "==";
+    // erasing the old Pacman and ghosts
+    map[Pacman.getLastY()][Pacman.getLastX()] = "  ";
+    map[Blinky.getLastY()][Blinky.getLastX()] = "  ";
+    map[Pinky.getLastY()][Pinky.getLastX()] = "  ";
+    map[Inky.getLastY()][Inky.getLastX()] = "  ";
+    map[Clyde.getLastY()][Clyde.getLastX()] = "  ";
+    map[8][9] = "=="; // why tis here help
     map[8][10] = "==";
-    
-    //Update ghost positions here!
-    Blinky.chase(x, y, Blinky.getX(), Blinky.getY(), direction); //Third and fourth arguments must be BLINKY!!!!!
-    Pinky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
-    Inky.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
-    Clyde.chase(x, y, Blinky.getX(), Blinky.getY(), direction);
-    //Mr Pac Man XD
-    if (face == 1) {
-        map[y][x]="(<";
+
+    // updating position of Pacman
+    if (Pacman.getFaceDirection() == 1){
+        map[Pacman.getY()][Pacman.getX()] = "(<"; // Pacman is facing right
     } else {
-        map[y][x]=">)";
+        map[Pacman.getY()][Pacman.getX()] = ">)"; // Pacman is facing left
     }
 
-    // prints ghosts onto the map
-    map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky, he likes to squirt from behind.
-    map[Pinky.getY()][Pinky.getX()] = "()"; //Ms.Pinky, she loves doing it from the front.
-    map[Inky.getY()][Inky.getX()] = "{}"; //Mr.Inky, he is a third wheel helping out Blinky squirt.
-    map[Clyde.getY()][Clyde.getX()] = "<>";//Mr.Clyde, the innocent one
-    attron(COLOR_PAIR(1));
+    // updating positions of ghosts
+    map[Blinky.getY()][Blinky.getX()] = "[]";
+    map[Pinky.getY()][Pinky.getX()] = "()";
+    map[Inky.getY()][Inky.getX()] = "{}";
+    map[Clyde.getY()][Clyde.getX()] = "<>";
+    // attron(COLOR_PAIR(1));
 
+    // some sort of variable for frightened and eaten colour here
+    switch(Blinky.getCurrentState()){
+        case 0: // Normal/Chase mode
+            // normal colour here
+            break;
+        case 1: // Scatter mode
+            // normal colour here
+            break;
+        case 2: // Frightened mode
+            // frightened colour here
+            break;
+        case 3: // Eaten mode
+            // eaten colour here
+            break;
+    }
+    switch(Pinky.getCurrentState()){
+        case 0: // Normal/Chase mode
+            // normal colour here
+            break;
+        case 1: // Scatter mode
+            // normal colour here
+            break;
+        case 2: // Frightened mode
+            // frightened colour here
+            break;
+        case 3: // Eaten mode
+            // eaten colour here
+            break;
+    }
+    switch(Inky.getCurrentState()){
+        case 0: // Normal/Chase mode
+            // normal colour here
+            break;
+        case 1: // Scatter mode
+            // normal colour here
+            break;
+        case 2: // Frightened mode
+            // frightened colour here
+            break;
+        case 3: // Eaten mode
+            // eaten colour here
+            break;
+    }
+    switch(Clyde.getCurrentState()){
+        case 0: // Normal/Chase mode
+            // normal colour here
+            break;
+        case 1: // Scatter mode
+            // normal colour here
+            break;
+        case 2: // Frightened mode
+            // frightened colour here
+            break;
+        case 3: // Eaten mode
+            // eaten colour here
+            break;
+    }
+
+    // prints the actual map
     for (int i = 0; i < 19; i++) 
     {
             for (int j = 0; j < 20; j++) {
-                    if (i == y && j == x) {
+                    if (i == Pacman.getY() && j == Pacman.getX()) {
                         attron(COLOR_PAIR(2));
                         addch(map[i][j][0]);
                         addch(map[i][j][1]);
@@ -70,7 +128,7 @@ void display(int y,int x,int last_y,int last_x,int face, int direction, string m
     refresh(); //Print output to window "stdscr"
 }
 
-void input(int& direction){
+void input(int& direction){ // wasdq = 12345
     char ch = getch();
     switch(ch){
             case 'w':
@@ -91,11 +149,36 @@ void input(int& direction){
     }
 }
 
+bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Clyde){
+/*  Checks if pacman has collided with either of the ghosts; the return value depends on what Pacman has collided with.
+    0: No collision, 1: Blinky, 2: Pinky, 3: Inky, 4: Clyde */
+    if ((Pacman.getX() == Blinky.getX()) && (Pacman.getY() == Blinky.getY())){
+        return 1;
+    } else if ((Pacman.getX() == Pinky.getX()) && (Pacman.getY() == Pinky.getY())){
+        return 2;
+    } else if ((Pacman.getX() == Inky.getX()) && (Pacman.getY() == Inky.getY())){
+        return 3;
+    } else if ((Pacman.getX() == Clyde.getX()) && (Pacman.getY() == Clyde.getY())){
+        return 4;
+    } else {
+        return 0;
+    }
+}
 
+bool uponCollision(Ghost &Ghost){ // handles actions upon collision; returns "quit" value
+    if (Ghost.getCurrentState() == 0 || Ghost.getCurrentState() == 1){ // Normal/Scatter mode
+        // game over screen (+ score if applicable)
+        return true;
+    } else if (Ghost.getCurrentState() == 2) { // Frightened mode
+        Ghost.eaten();
+    }
+    // Eaten mode is ignored because there is no effect
+    return false;
+}
 
 int main()
 {
-    //Screen Settings
+    // Screen Settings
     initscr();
     start_color();
     if(can_change_color()) {
@@ -109,13 +192,7 @@ int main()
     keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
 
-    //Game Startup
-    int y=13;
-    int x=2;
-    int last_y = 13;
-    int last_x = 2;
-    int direction = 4;
-    int face = 1;
+    // Game Startup
     int xMax, yMax;
     string map[19][20] = { //y max = 18, x max = 19
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
@@ -140,67 +217,137 @@ int main()
     };
     bool quit = false;
     int startgame = 0;
-    //Instantiate Ghosts here!
-    Ghost Blinky(4, 5, "Blinky"); //x = 4, y =5
+    int eatenghosts = 0;
+    int score=0;
+    
+    // Character Startup
+    int x = 2, y = 13; // initial pos of pacman; keeps track of pacman's x and y
+    Pacman Pacman(x, y); // x = 2, y = 13
+    Ghost Blinky(4, 5, "Blinky"); // x = 4, y = 5
     Ghost Pinky(18, 6, "Pinky");
     Ghost Inky(1, 8, "Inky");
     Ghost Clyde(18, 17, "Clyde");
+    int direction = 4, collisionStatus = 0;
 
-    
     startgame = StartingSequence();
     clear();
 
-    //Game Flow
+    // Game Flow
     if (startgame == 1 || startgame == 2) {
+        display(Pacman, Blinky, Pinky, Inky, Clyde, map);
+        // getch() || usleep()
         while (!quit) {
-            display(y,x,last_y,last_x,face,direction,map,Blinky, Pinky, Inky, Clyde);
             input(direction);
-            last_y = y;
-            last_x = x;
+            
+            // update position of Pacman
             switch (direction) {
-                case 1:
-                    if (y > 1 && map[y-1][x]!="##") {y--;}
-                    break;
-                case 2:
-                    if (x > 1 && map[y][x-1]!="##") {x--;}
-                    else if ( x <= 1 && y == 8) //used for Pac-Man Looping
+            case 1:
+                if (y > 1 && map[y-1][x]!="##") {y--;}
+                Pacman.toggleFaceDirection();
+                break;
+            case 2:
+                if (x > 1 && map[y][x-1]!="##") {x--;}
+                else if ( x <= 1 && y == 8) //used for Pac-Man Looping
+                {
+                    x--;
+                    if (x == -1)
                     {
-                        x--;
-                        if (x == -1)
-                        {
-                            x = 19;
-                        }
-                    } 
-                    face = 0;
-                    break;
-                case 3:
-                    if (y < 17 && map[y+1][x]!="##" && map[y+1][x]!="==") {y++;}
-                    break;
-                case 4:
-                    if (x < 18 && map[y][x+1]!="##") {x++;}
-                    else if (x >= 18 && y == 8) //used for Pac-Man Looping
+                        x = 19;
+                    }
+                } 
+                Pacman.toggleFaceDirection();
+                break;
+            case 3:
+                if (y < 17 && map[y+1][x]!="##" && map[y+1][x]!="==") {y++;}
+                Pacman.toggleFaceDirection();
+                break;
+            case 4:
+                if (x < 18 && map[y][x+1]!="##") {x++;}
+                else if (x >= 18 && y == 8) //used for Pac-Man Looping
+                {
+                    x++;
+                    if (x == 20)
                     {
-                        x++;
-                        if (x == 20)
-                        {
-                            x = 0;
-                        }
-                    } 
-                    face = 1;
+                        x = 0;
+                    }
+                } 
+                Pacman.toggleFaceDirection();
+                break;
+            case 5:
+                quit = true;
+        }
+            Pacman.updatePosition(x, y);
+
+            // handles collisions (Normal >> Game over >> Break/game over || Frightened >> Eaten mode)
+            collisionStatus = haveCollided(Pacman, Blinky, Pinky, Inky, Clyde);
+            switch (collisionStatus){
+                case 1: // Collision with Blinky
+                    quit = uponCollision(Blinky);
                     break;
-                case 5:
-                    quit = true;
+                case 2: // Collision with Pinky
+                    quit = uponCollision(Pinky);
+                    break;
+                case 3: // Collision with Inky
+                    quit = uponCollision(Inky);
+                    break;
+                case 4: // Collision with Clyde
+                    quit = uponCollision(Clyde);
+                    break;
             }
-            // Sleep(250); //use usleep(250000); in linux
-            usleep(250000);
+
+            // handle if power pellet consumed (handle entering and staying in frightened mode)
+            int powerPelletConsumed = 0; // temp variable to be replaced
+            if (powerPelletConsumed){ // stage 1 of power pellet
+                Blinky.toggleCurrentDirection();
+                Blinky.frightened();
+                Pinky.toggleCurrentDirection();
+                Pinky.frightened();
+                Inky.toggleCurrentDirection();
+                Inky.frightened();
+                Clyde.toggleCurrentDirection();
+                Clyde.frightened();
+            } else if (powerPelletConsumed){ // stage 2 and up of power pellet
+                if (Blinky.getCurrentState() == 2){
+                    Blinky.frightened();
+                }
+                if (Pinky.getCurrentState() == 2){
+                    Pinky.frightened();
+                }
+                if (Inky.getCurrentState() == 2){
+                    Inky.frightened();
+                }
+                if (Clyde.getCurrentState() == 2){
+                    Clyde.frightened();
+                }
+            }
+
+            // update position of ghost
+            switch(Blinky.getCurrentState()){
+                case 0: // Normal/Chase mode
+                    Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                    break;
+                case 1: // Scatter mode
+                    Blinky.scatter();
+                    break;
+                case 2: // Frightened mode
+                    Blinky.frightened();
+                    break;
+                case 3: // Eaten mode
+                    Blinky.eaten();
+                    break;
+            }
+
+            display(Pacman, Blinky, Pinky, Inky, Clyde, map);
+            // Sleep(250);
+            usleep(250000); // use this for linux
         }
     } else if (startgame == 3) {
-        //creadit screen 
-    }
+        // load game statistics
+    } // startgame == 4 >> Ending sequence
 
     clear();
 
-    EndingSequence();
+    EndingSequence(score);
     
     getch();
     endwin();

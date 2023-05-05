@@ -9,15 +9,32 @@ class Ghost
         void scatter();
         void frightened(); // instigates frightened state
         void eaten();
-        void escape();
         int getX();
         int getY();
-        bool getFrightened();
-        bool getEaten();
+        int getLastX();
+        int getLastY();
+        int getCurrentState();
+        void toggleCurrentDirection();
+        int getEaten(); // proposed scoring func
     private:
-        int x,y,currentDirection;
+        int x, y, last_x, last_y, currentDirection, currentState;
         string name;
-        bool isFrightened, isEaten; // flag for whether or not it is frightened/eaten
         int findOppositeDirection(int currentDir);
+        void updateLastPosition();
         void chaseTargetTile(int targetX, int targetY);
+};
+
+class Pacman
+{
+    public:
+        Pacman(int posX, int posY);
+        int getFaceDirection();
+        int getX();
+        int getY();
+        int getLastX();
+        int getLastY();
+        void updatePosition(int posX, int posY);
+        void toggleFaceDirection(); // chances faceDirection
+    private:
+        int x, y, last_x, last_y, faceDirection; // faceDirection is the direction the face of pacman is facing (i.e. 0 for left, 1 for right)
 };

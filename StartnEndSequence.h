@@ -2,6 +2,6 @@
 #define STARTNENDSEQUENCE
 
 int StartingSequence();
-int EndingSequence();
+int EndingSequence(int score);
 
 #endif

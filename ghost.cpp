@@ -44,10 +44,16 @@ Ghost::Ghost(int posX, int posY, string ghostName) // initializes the ghosts' in
 {
     x = posX;
     y = posY;
+    last_x = posX;
+    last_y = posY;
     name = ghostName;
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
-    isFrightened = false; // checks if ghost is in frightened state
-    isEaten = false; // checks if ghost is in eaten state
+    currentState = 0; // state of ghost; 0: Normal/Chase, 1: Scatter, 2: Frightened, 3: Eaten
+}
+
+void Ghost::updateLastPosition(){ // updates the last position of the ghost
+    last_x = x;
+    last_y = y;
 }
 
 void Ghost::chaseTargetTile(int targetX, int targetY)
@@ -131,6 +137,9 @@ void Ghost::scatter()
 /*  scatter state pathfinding (crucial such that ghosts arent hunting pacman 24/7)
     This function updates the ghost so they target their respective corner tiles of the map while in this state */
 {
+    currentState = 1;
+    updateLastPosition();
+
     if (name == "Blinky")
     //Goes to top right direction
     {
@@ -161,6 +170,8 @@ void Ghost::chase(int playerPosX, int playerPosY, int blinkyPosX, int blinkyPosY
 /*playerPosX and Y are Pac-Man's X and Y Coordinates, direction is Pac-Man's current direction, blinkyPosX and blinkyPosY are x and y positions of Blinky.
 This function updates x and y coordinates + currentDirection of ghosts in chase mode */
 {
+    currentState = 0;
+    updateLastPosition();
     //Implementation to update posX and posY every frame to chase Pac-Man
 
     if (name == "Blinky")
@@ -263,21 +274,14 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
 
 void Ghost::frightened() // frightened mode movement and pathfinding
 {
-    isFrightened = true;
-    // add these codes when pacman touches power pellet, outside this function
-    // isFrightened = true;
-    // currentDirection = findOppositeDirection(currentDirection);
-    // frightened();
-
-    // always have this between:
-    // if (Ghost::isFrightened){Ghost::frightened();}
-
+    currentState = 2;
+    updateLastPosition();
+    
     // add these codes when power pellet is used up
     // isFrightened = false;
 
     // notes: If when debugging, ghosts always go back to unfrightened after one time frame, check line 48 of ghost.cpp
     // also consider adding a visual of whenever ghosts are in frightened mode, and a pre-exist frightened mode visual thign
-
 
     // check directions that are "  "
     int availableDirections[4] = {1, 2, 3, 4}; // = up, left, down, right
@@ -322,27 +326,21 @@ void Ghost::frightened() // frightened mode movement and pathfinding
 
 void Ghost::eaten()
 {
-    // Remember to isEaten = true; after pacman touches the ghost
-    // then if (isEaten){eaten();}
-
     // notes: If when debugging, ghosts always go back to uneaten after one time frame, check line 49 of ghost.cpp
     // ghosts cannot interact with pacman in this state. Remember to check the eaten flag every time upon interaction
     // Implement eaten visual
 
+    currentState = 3;
+    updateLastPosition();
+
     if ((x == 7 && y == 9) || (x == 8 && y == 9)){ // ghost should enter ghost house here
         chaseTargetTile(9, 9);
     } else if (x == 9 && y == 9){ // ghost is inside ghost house; exit frightened mode and go back to chase mode here
-        isFrightened = false;
-        isEaten = false;
+        currentState = 0;
         // should be able to return to chase mode after this
     } else {
         chaseTargetTile(7, 9); // chase the tile directly in front of the ghost gate
     }
-}
-
-void Ghost::escape()
-{
-    //To be implemented
 }
 
 int Ghost::getX() // returns X coord of ghost
@@ -355,10 +353,34 @@ int Ghost::getY() // returns Y coord of ghost
     return y;
 }
 
-bool Ghost::getFrightened() { // returns the frightened state of ghost
-    return isFrightened;
+int Ghost::getLastX(){ // returns last X coord of ghost
+    return last_x;
 }
 
-bool Ghost::getEaten() { // returns the eaten state of the ghost
-    return isEaten;
+int Ghost::getLastY(){ // returns last Y coord of ghost
+    return last_y;
 }
+
+int Ghost::getCurrentState() { // returns the eaten state of the ghost
+    return currentState;
+}
+
+void Ghost::toggleCurrentDirection(){
+    currentDirection = findOppositeDirection(currentDirection);
+}
+
+int Ghost::getEaten() { // returns the eaten state of the ghost
+	//Proposed method for adding scores upon ghost is eaten
+
+	//if (isEaten==true)
+	//	eatenghosts++;
+	//if (eatenghosts==1)
+	//	score+=200;
+	//else if (eatenghosts==2)
+	//	score+=400;
+	//else if (eatenghosts==3)
+	//	score+=800;
+	//else if (eatenghosts==4)
+	//	score+=1600;
+    return currentState;
+} // scoring system should be handled in main or some other code pieces, will be implemented later

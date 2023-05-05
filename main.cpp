@@ -22,6 +22,27 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
     int xCursor, yCursor; //Placement of cursor in "stdscr" window
 
     getmaxyx(stdscr,yMax,xMax);
+
+    attron(COLOR_PAIR(9));
+    xCursor = (xMax/2)-21;
+    yCursor = (yMax/2)-21;
+    move(yCursor,xCursor);
+    addstr("                                           ");
+    move(++yCursor,xCursor);
+    for(int i = 0; i < 20; i++) {
+        addstr("  ");
+        if (i == 19) {
+            move(yCursor,xCursor+1);
+            addstr("  W - Up; A - Left; S - Down; D - Right  ");
+        }
+        move(yCursor,xCursor+41);
+        addstr("  ");
+        ++yCursor;
+        move(yCursor,xCursor);
+    }
+    addstr("                                           ");
+    attroff(COLOR_PAIR(9));
+
     xCursor = (xMax/2)-20;
     yCursor = (yMax/2)-20;
     move(yCursor, xCursor);
@@ -224,6 +245,8 @@ int main()
     init_pair(7,COLOR_GREEN,COLOR_BLACK);
     //Ghost frighten mode colour
     init_pair(8,COLOR_WHITE,COLOR_BLACK);
+    //colour for the frame
+    init_pair(9,COLOR_GREEN,COLOR_GREEN);
 
 
     noecho();

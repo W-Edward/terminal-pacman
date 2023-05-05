@@ -220,8 +220,7 @@ bool uponCollision(Ghost &Ghost){ // handles actions upon collision; returns "qu
     return false;
 }
 
-int main()
-{
+int gameplay(){
     // Screen Settings
     initscr();
     start_color();
@@ -278,9 +277,7 @@ int main()
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
-    int startgame = 0;
-    int eatenghosts = 0;
-    int score=0;
+    int eatenghosts = 0, score = 0;
     
     // Character Startup
     int x = 2, y = 13; // initial pos of pacman; keeps track of pacman's x and y
@@ -291,18 +288,13 @@ int main()
     Ghost Clyde(18, 17, "Clyde");
     int direction = 4, collisionStatus = 0;
 
-    startgame = StartingSequence();
-    clear();
-
-    // Game Flow
-    if (startgame == 1 || startgame == 2) {
-        display(Pacman, Blinky, Pinky, Inky, Clyde, map);
-        // getch() || usleep()
-        while (!quit) {
-            input(direction);
-            
-            // update position of Pacman
-            switch (direction) {
+    display(Pacman, Blinky, Pinky, Inky, Clyde, map);
+    // getch() || usleep()
+    while (!quit) {
+        input(direction);
+        
+        // update position of Pacman
+        switch (direction) {
             case 1:
                 if (y > 1 && map[y-1][x]!="##") {y--;}
                 break;
@@ -336,119 +328,142 @@ int main()
             case 5:
                 quit = true;
         }
-            Pacman.updatePosition(x, y);
-
-            // handles collisions (Normal >> Game over >> Break/game over || Frightened >> Eaten mode)
-            collisionStatus = haveCollided(Pacman, Blinky, Pinky, Inky, Clyde);
-            switch (collisionStatus){
-                case 1: // Collision with Blinky
-                    quit = uponCollision(Blinky);
-                    break;
-                case 2: // Collision with Pinky
-                    quit = uponCollision(Pinky);
-                    break;
-                case 3: // Collision with Inky
-                    quit = uponCollision(Inky);
-                    break;
-                case 4: // Collision with Clyde
-                    quit = uponCollision(Clyde);
-                    break;
-            }
-            if (quit) {
-                break;
-            }
-
-            // handle if power pellet consumed (handle entering and staying in frightened mode)
-            int powerPelletConsumed = 0; // temp variable to be replaced
-            if (powerPelletConsumed){ // stage 1 of power pellet
-                Blinky.toggleCurrentDirection();
-                Blinky.frightened();
-                Pinky.toggleCurrentDirection();
-                Pinky.frightened();
-                Inky.toggleCurrentDirection();
-                Inky.frightened();
-                Clyde.toggleCurrentDirection();
-                Clyde.frightened();
-            } else if (powerPelletConsumed){ // stage 2 and up of power pellet
-                if (Blinky.getCurrentState() == 2){
-                    Blinky.frightened();
-                }
-                if (Pinky.getCurrentState() == 2){
-                    Pinky.frightened();
-                }
-                if (Inky.getCurrentState() == 2){
-                    Inky.frightened();
-                }
-                if (Clyde.getCurrentState() == 2){
-                    Clyde.frightened();
-                }
-            }
-
-            // update position of ghost
-            switch(Blinky.getCurrentState()){
-                case 0: // Normal/Chase mode
-                    Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-                    break;
-                case 1: // Scatter mode
-                    Blinky.scatter();
-                    break;
-                case 2: // Frightened mode
-                    Blinky.frightened();
-                    break;
-                case 3: // Eaten mode
-                    Blinky.eaten();
-                    break;
-            }
-            switch(Pinky.getCurrentState()){
-                case 0: // Normal/Chase mode
-                    Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-                    break;
-                case 1: // Scatter mode
-                    Blinky.scatter();
-                    break;
-                case 2: // Frightened mode
-                    Blinky.frightened();
-                    break;
-                case 3: // Eaten mode
-                    Blinky.eaten();
-                    break;
-            }
-            switch(Inky.getCurrentState()){
-                case 0: // Normal/Chase mode
-                    Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-                    break;
-                case 1: // Scatter mode
-                    Inky.scatter();
-                    break;
-                case 2: // Frightened mode
-                    Inky.frightened();
-                    break;
-                case 3: // Eaten mode
-                    Inky.eaten();
-                    break;
-            }
-            switch(Clyde.getCurrentState()){
-                case 0: // Normal/Chase mode
-                    Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-                    break;
-                case 1: // Scatter mode
-                    Clyde.scatter();
-                    break;
-                case 2: // Frightened mode
-                    Clyde.frightened();
-                    break;
-                case 3: // Eaten mode
-                    Clyde.eaten();
-                    break;
-            }
-
-            display(Pacman, Blinky, Pinky, Inky, Clyde, map);
-            // Sleep(250);
-            usleep(300000); // use this for linux
+        if (quit) {
+            break;
         }
-    } else if (startgame == 3) {
-        // load game statistics
-    } // startgame == 4 >> Ending sequence
+        Pacman.updatePosition(x, y);
+
+        // handles collisions (Normal >> Game over >> Break/game over || Frightened >> Eaten mode)
+        collisionStatus = haveCollided(Pacman, Blinky, Pinky, Inky, Clyde);
+        switch (collisionStatus){
+            case 1: // Collision with Blinky
+                quit = uponCollision(Blinky);
+                break;
+            case 2: // Collision with Pinky
+                quit = uponCollision(Pinky);
+                break;
+            case 3: // Collision with Inky
+                quit = uponCollision(Inky);
+                break;
+            case 4: // Collision with Clyde
+                quit = uponCollision(Clyde);
+                break;
+        }
+        if (quit) {
+            break;
+        }
+
+        // handle if power pellet consumed (handle entering and staying in frightened mode)
+        int powerPelletConsumed = 0; // temp variable to be replaced
+        if (powerPelletConsumed){ // stage 1 of power pellet
+            Blinky.toggleCurrentDirection();
+            Blinky.frightened();
+            Pinky.toggleCurrentDirection();
+            Pinky.frightened();
+            Inky.toggleCurrentDirection();
+            Inky.frightened();
+            Clyde.toggleCurrentDirection();
+            Clyde.frightened();
+        } else if (powerPelletConsumed){ // stage 2 and up of power pellet
+            if (Blinky.getCurrentState() == 2){
+                Blinky.frightened();
+            }
+            if (Pinky.getCurrentState() == 2){
+                Pinky.frightened();
+            }
+            if (Inky.getCurrentState() == 2){
+                Inky.frightened();
+            }
+            if (Clyde.getCurrentState() == 2){
+                Clyde.frightened();
+            }
+        }
+
+        // update position of ghost
+        switch(Blinky.getCurrentState()){
+            case 0: // Normal/Chase mode
+                Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                break;
+            case 1: // Scatter mode
+                Blinky.scatter();
+                break;
+            case 2: // Frightened mode
+                Blinky.frightened();
+                break;
+            case 3: // Eaten mode
+                Blinky.eaten();
+                break;
+        }
+        switch(Pinky.getCurrentState()){
+            case 0: // Normal/Chase mode
+                Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                break;
+            case 1: // Scatter mode
+                Blinky.scatter();
+                break;
+            case 2: // Frightened mode
+                Blinky.frightened();
+                break;
+            case 3: // Eaten mode
+                Blinky.eaten();
+                break;
+        }
+        switch(Inky.getCurrentState()){
+            case 0: // Normal/Chase mode
+                Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                break;
+            case 1: // Scatter mode
+                Inky.scatter();
+                break;
+            case 2: // Frightened mode
+                Inky.frightened();
+                break;
+            case 3: // Eaten mode
+                Inky.eaten();
+                break;
+        }
+        switch(Clyde.getCurrentState()){
+            case 0: // Normal/Chase mode
+                Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                break;
+            case 1: // Scatter mode
+                Clyde.scatter();
+                break;
+            case 2: // Frightened mode
+                Clyde.frightened();
+                break;
+            case 3: // Eaten mode
+                Clyde.eaten();
+                break;
+        }
+
+        score += 50; // points for staying alive
+        
+        display(Pacman, Blinky, Pinky, Inky, Clyde, map);
+        // Sleep(250);
+        usleep(300000); // use this for linux
+    }
+    return score;
+}
+
+int main()
+{
+    int startgame = 0, score = 0;
+    startgame = StartingSequence();
+
+    // Game Flow
+    while (startgame != 5){
+        clear();
+        if (startgame == 1 || startgame == 2) {
+            score = gameplay();
+        } else if (startgame == 3) {
+            howToPlay();
+        } else if (startgame == 4) {
+            loadStatistics();
+        }
+        clear();
+        startgame = StartingSequence();
+    }
 
     // game over screen
     usleep(300000);

@@ -30,13 +30,14 @@ void mainmenu_display (int select) {
     int xCursor, yCursor;
 	// ifstream art;
 	// string logo;
-	string menuitem[15] = {
+	string menuitem[16] = {
 		"***********************************", 
 		" Welcome to Pac-Man: Alpha Edition ", 
 		"***********************************",
 		"",
 		"Play The Pac-Man Game !",
 		"Load Save",
+		"How to Play",
 		"Game Statistics",
 		"Exit The Game",
 		"",
@@ -66,7 +67,7 @@ void mainmenu_display (int select) {
 	// }
 	
 	attron(COLOR_PAIR(1));
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < 16; i++) {
 		if (i-4 == select) {
 			attron(A_REVERSE);
 		}
@@ -110,14 +111,17 @@ int StartingSequence(){
 				// Load save
 				return 2;
 			}else if (selection == 2) {
-				// Load game statistics
+				// How to Play
 				return 3;
 			}else if (selection == 3) {
-				// exit the game
+				// Load game statistics
 				return 4;
+			}else if (selection == 4) {
+				// exit the game
+				return 5;
 			}
 		} else if (cinput == KEY_DOWN) {
-			if (selection < 3) {
+			if (selection < 4) {
 				selection++;
 			} else { // loop back to the first option
 				selection = 0;
@@ -126,7 +130,7 @@ int StartingSequence(){
 			if (selection > 0) {
 				selection--;
 			} else { // loop back to the last option
-				selection = 3;
+				selection = 4;
 			}
 		}
 		usleep(150000);
@@ -174,4 +178,32 @@ int EndingSequence(int score) {
     refresh();
     usleep(5000000);
 	return 0;
+}
+
+void howToPlay(){
+	int yMax, xMax;
+	string instructions[8] = { // 44 spaces across
+		"                How to Play!                ",
+		"    ------------------------------------    ",
+		"",
+		"   The aim of the game is to capture the    ",
+		"highest score before being eaten by ghosts. ",
+		"",
+		"   Control pacman to evade the ghosts and   ",
+		"     capture as many fruits as you can!     "
+	};
+
+	getmaxyx(stdscr,yMax,xMax);
+    attron(COLOR_PAIR(1));
+    for (int i = 0; i<8; i++) {
+        move((yMax/2) - instructions->length()/2 + i,(xMax/2) - instructions[i].length()/2);
+        addstr(instructions[i].c_str());
+    }
+    attroff(COLOR_PAIR(1));
+    refresh();
+	usleep(5000000);
+}
+
+void loadStatistics(){
+	//
 }

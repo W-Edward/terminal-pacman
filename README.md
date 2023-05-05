@@ -1,7 +1,7 @@
 # Pac-Man: Alpha Edition
 ENGG1340 Final Group Project - Group 68
 
-![](https://img.shields.io/badge/Exam%20Preparation-Low-red) ![](https://img.shields.io/badge/Stress%20level-High-critical) ![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
+![](https://img.shields.io/badge/Exam%20Preparation-Low-red) ![](https://img.shields.io/badge/Stress%20Levels-High-critical) ![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
 
 ![alt text](https://m.media-amazon.com/images/S/aplus-media-library-service-media/aab7335f-9acf-46b6-bd3b-ee09c407e7ca.__CR0,0,970,300_PT0_SX970_V1___.jpg)
 
@@ -24,13 +24,13 @@ ENGG1340 Final Group Project - Group 68
 <br>
 
 ## Group Members
-|  Name  |  UID  |
+|  Name  |  UID  |  GitHub Username  |
 | :------------:  |  :------------: |
-|  **Fong Ting Hin**  |  xxxxxxxxxx  | FongTingHin on Github
-|  **Lok Wang Yi**  |  3036067420  | lokwy-hku on Github
-|  **Lui Yik Hang**  |  3036067652  | felixlyh on Github
-|  **Widjaja Edward Aryaguna**  |  3036029703  | W-Edward on Github
-|  **Wong Hoi Lei**  |  3036063917  | ginngerine on Github
+|  **Fong Ting Hin**  |  xxxxxxxxxx  | FongTingHin
+|  **Lok Wang Yi**  |  3036067420  | lokwy-hku
+|  **Lui Yik Hang**  |  3036067652  | felixlyh
+|  **Widjaja Edward Aryaguna**  |  3036029703  | W-Edward
+|  **Wong Hoi Lei**  |  3036063917  | ginngerine
 
 <br>
 

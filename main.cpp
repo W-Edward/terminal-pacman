@@ -331,6 +331,9 @@ int main()
                     quit = uponCollision(Clyde);
                     break;
             }
+            if (quit) {
+                break;
+            }
 
             // handle if power pellet consumed (handle entering and staying in frightened mode)
             int powerPelletConsumed = 0; // temp variable to be replaced
@@ -373,14 +376,59 @@ int main()
                     Blinky.eaten();
                     break;
             }
+            switch(Pinky.getCurrentState()){
+                case 0: // Normal/Chase mode
+                    Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                    break;
+                case 1: // Scatter mode
+                    Blinky.scatter();
+                    break;
+                case 2: // Frightened mode
+                    Blinky.frightened();
+                    break;
+                case 3: // Eaten mode
+                    Blinky.eaten();
+                    break;
+            }
+            switch(Inky.getCurrentState()){
+                case 0: // Normal/Chase mode
+                    Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                    break;
+                case 1: // Scatter mode
+                    Inky.scatter();
+                    break;
+                case 2: // Frightened mode
+                    Inky.frightened();
+                    break;
+                case 3: // Eaten mode
+                    Inky.eaten();
+                    break;
+            }
+            switch(Clyde.getCurrentState()){
+                case 0: // Normal/Chase mode
+                    Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+                    break;
+                case 1: // Scatter mode
+                    Clyde.scatter();
+                    break;
+                case 2: // Frightened mode
+                    Clyde.frightened();
+                    break;
+                case 3: // Eaten mode
+                    Clyde.eaten();
+                    break;
+            }
 
             display(Pacman, Blinky, Pinky, Inky, Clyde, map);
             // Sleep(250);
-            usleep(250000); // use this for linux
+            usleep(300000); // use this for linux
         }
     } else if (startgame == 3) {
         // load game statistics
     } // startgame == 4 >> Ending sequence
+
+    // game over screen
+    usleep(300000);
 
     clear();
 

@@ -88,7 +88,6 @@ StartnEndSequence.h is a header file stating the starting screen and ending scre
 <br>
 
 ## Non-Standard Libraries Used
-Not applicable
 
 ### Ncurses
 
@@ -107,4 +106,4 @@ You may navigate with pressing "W,A,S,D" keys during gameplay.
 Pac-Man moves automatically based on your previously pressed key.
 Press "W" once for turning upwards, or "A" for turning left, or "S" for turning downward, or "D" for turning right.
 
-To exit the game while playing, simply type "quit" on the keyboard. The ending screen will then displayed and program will exit afterwards.
+To exit the game while playing, simply hit "q" on the keyboard. The ending screen will then displayed and program will exit afterwards.

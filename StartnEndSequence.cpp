@@ -150,13 +150,19 @@ int EndingSequence(int score) {
 		"",
 		"      This game is jointly created by    ",
 		"    Edward, Lewis, Kelly, Felix & Jason  ",
+		"",
 		"        Your score in this round is:     ",
-		"", // to be replaced
+		"" // to be replaced
 	};
+	/* "  _ __   __ _  ___ _ __ ___   __ _ _ __  ",
+		" | '_ \\ / _` |/ __| '_ ` _ \\ / _` | '_ \\ ",
+		" | |_) | (_| | (__| | | | | | (_| | | | |",
+		" | .__/ \\__,_|\\___|_| |_| |_|\\__,_|_| |_|",
+		" |_|                                     ", */
 
 	int n = (41-to_string(score).size())/2; // number of blank spaces needed on either side of the score
 	string spacing(n, ' ');
-	endingScreen[11] = spacing + to_string(score) + spacing;
+	endingScreen[10] = spacing + to_string(score) + spacing;
 
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));

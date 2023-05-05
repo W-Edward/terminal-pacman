@@ -26,60 +26,52 @@ ENGG1340 Final Group Project - Group 68
 ## Group Members
 |  Name  |  UID  |
 | :------------:  |  :------------: |
-|  **Fong Ting Hin**  |  xxxxxxxxxx  |
-|  **Lok Wang Yi**  |  xxxxxxxxxx  |
-|  **Lui Yik Hang**  |  3036067652  |
-|  **Widjaja Edward Aryaguna**  |  xxxxxxxxxx  |
-|  **Wong Hoi Lei**  |  3036063917  |
+|  **Fong Ting Hin**  |  xxxxxxxxxx  | FongTingHin on Github
+|  **Lok Wang Yi**  |  3036067420  | lokwy-hku on Github
+|  **Lui Yik Hang**  |  3036067652  | felixlyh on Github
+|  **Widjaja Edward Aryaguna**  |  3036029703  | W-Edward on Github
+|  **Wong Hoi Lei**  |  3036063917  | ginngerine on Github
 
 <br>
 
 ##  About the Game
-welcome to the game of pacman ... (not yet write, lazy :) )
+< TO BE FILLED>
 
 ###  Game Description
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat.
+< TO BE FILLED >
 
 ###  Game Rules
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+< TO BE FILLED > 
 
 <br>
 
 ##  Features Implemented
-### Generation of random game sets or events
+< TO BE FILLED >
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+### Generation of random game sets or events
+< TO BE FILLED >
 
 ### Data structures for storing game status
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+< TO BE FILLED >
 
 ### Dynamic memory management
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+< TO BE FILLED >
 
 ### File input/output
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+< TO BE FILLED >
 
 ### Program codes in multiple files
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat. 
+< TO BE FILLED >
 
 <br>
 
 ## Non-Standard Libraries Used
+< TO BE FILLED >
+
 ### Ncurses
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet mauris nunc. Sed luctus mollis tincidunt. Mauris scelerisque felis in risus scelerisque, et varius dolor sagittis. Sed malesuada ante sit amet augue porttitor feugiat.
+< TO BE FILLED >
 
 <br>
 
 ## Compilation and Execution Instructions
-
-1. Lorem ipsum dolor sit amet
-2. Lorem ipsum dolor sit amet
-3. Lorem ipsum dolor sit amet
-4. Lorem ipsum dolor sit amet
-5. Lorem ipsum dolor sit amet
+< TO BE FILLED >

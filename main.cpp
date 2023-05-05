@@ -42,6 +42,8 @@ void display(int y,int x,int last_y,int last_x,int face, int direction, string m
     } else {
         map[y][x]=">)";
     }
+
+    // prints ghosts onto the map
     map[Blinky.getY()][Blinky.getX()] = "[]"; //Mr.Blinky, he likes to squirt from behind.
     map[Pinky.getY()][Pinky.getX()] = "()"; //Ms.Pinky, she loves doing it from the front.
     map[Inky.getY()][Inky.getX()] = "{}"; //Mr.Inky, he is a third wheel helping out Blinky squirt.
@@ -189,8 +191,8 @@ int main()
                 case 5:
                     quit = true;
             }
-            // Sleep(250); //use usleep(150000); in linux
-            usleep(150000);
+            // Sleep(250); //use usleep(250000); in linux
+            usleep(250000);
         }
     } else if (startgame == 3) {
         //creadit screen 

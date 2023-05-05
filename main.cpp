@@ -49,88 +49,97 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
     map[Clyde.getY()][Clyde.getX()] = "<>";
     // attron(COLOR_PAIR(1));
 
-    // some sort of variable for frightened and eaten colour here
-    switch(Blinky.getCurrentState()){
-        case 0: // Normal/Chase mode
-            // normal colour here
-            break;
-        case 1: // Scatter mode
-            // normal colour here
-            break;
-        case 2: // Frightened mode
-            // frightened colour here
-            break;
-        case 3: // Eaten mode
-            // eaten colour here
-            break;
-    }
-    switch(Pinky.getCurrentState()){
-        case 0: // Normal/Chase mode
-            // normal colour here
-            break;
-        case 1: // Scatter mode
-            // normal colour here
-            break;
-        case 2: // Frightened mode
-            // frightened colour here
-            break;
-        case 3: // Eaten mode
-            // eaten colour here
-            break;
-    }
-    switch(Inky.getCurrentState()){
-        case 0: // Normal/Chase mode
-            // normal colour here
-            break;
-        case 1: // Scatter mode
-            // normal colour here
-            break;
-        case 2: // Frightened mode
-            // frightened colour here
-            break;
-        case 3: // Eaten mode
-            // eaten colour here
-            break;
-    }
-    switch(Clyde.getCurrentState()){
-        case 0: // Normal/Chase mode
-            // normal colour here
-            break;
-        case 1: // Scatter mode
-            // normal colour here
-            break;
-        case 2: // Frightened mode
-            // frightened colour here
-            break;
-        case 3: // Eaten mode
-            // eaten colour here
-            break;
-    }
-
     // prints the actual map
     attron(COLOR_PAIR(1));
     for (int i = 0; i < 19; i++) 
     {
             for (int j = 0; j < 20; j++) {
-                    // if (i == Pacman.getY() && j == Pacman.getX()) {
-                    //     attron(COLOR_PAIR(2));
-                    //     addch(map[i][j][0]);
-                    //     addch(map[i][j][1]);
-                    //     attron(COLOR_PAIR(1));
-                    // } else {
-                    //     addch(map[i][j][0]);
-                    //     addch(map[i][j][1]);
-                    // }
                     if (i == Pacman.getY() && j == Pacman.getX()) {
                         attron(COLOR_PAIR(2));
                     } else if (i == Blinky.getY() && j == Blinky.getX()) {
-                        attron(COLOR_PAIR(3));
+                        switch (Blinky.getCurrentState())
+                        {
+                        case 0:
+                            attron(COLOR_PAIR(3));
+                        
+                        case 1:
+                            attron(COLOR_PAIR(3));
+
+                        case 2:
+                            //frighten colour
+                            attron(COLOR_PAIR(7));
+
+                        case 3:
+                            //eaton colour
+                            attron(COLOR_PAIR(8));
+                        
+                        default:
+                            attron(COLOR_PAIR(3));
+                            break;
+                        }
                     } else if (i == Pinky.getY() && j == Pinky.getX()) {
-                        attron(COLOR_PAIR(4));
+                        switch (Blinky.getCurrentState())
+                        {
+                        case 0:
+                            attron(COLOR_PAIR(4));
+                        
+                        case 1:
+                            attron(COLOR_PAIR(4));
+
+                        case 2:
+                            //frighten colour
+                            attron(COLOR_PAIR(7));
+
+                        case 3:
+                            //eaton colour
+                            attron(COLOR_PAIR(8));
+                        
+                        default:
+                            attron(COLOR_PAIR(4));
+                            break;
+                        }
                     } else if (i == Inky.getY() && j == Inky.getX()) {
-                        attron(COLOR_PAIR(5));
+                        switch (Blinky.getCurrentState())
+                        {
+                        case 0:
+                            attron(COLOR_PAIR(5));
+                        
+                        case 1:
+                            attron(COLOR_PAIR(5));
+
+                        case 2:
+                            //frighten colour
+                            attron(COLOR_PAIR(7));
+
+                        case 3:
+                            //eaton colour
+                            attron(COLOR_PAIR(8));
+                        
+                        default:
+                            attron(COLOR_PAIR(5));
+                            break;
+                        }
                     } else if (i == Clyde.getY() && j == Clyde.getX()) {
-                        attron(COLOR_PAIR(6));
+                        switch (Blinky.getCurrentState())
+                        {
+                        case 0:
+                            attron(COLOR_PAIR(6));
+                        
+                        case 1:
+                            attron(COLOR_PAIR(6));
+
+                        case 2:
+                            //frighten colour
+                            attron(COLOR_PAIR(7));
+
+                        case 3:
+                            //eaton colour
+                            attron(COLOR_PAIR(8));
+                        
+                        default:
+                            attron(COLOR_PAIR(6));
+                            break;
+                        }
                     }
                     addch(map[i][j][0]);
                     addch(map[i][j][1]);
@@ -199,12 +208,20 @@ int main()
         init_color(COLOR_BLACK,0,0,0);
         init_color(COLOR_CYAN,0,0,888);
     }
+    //background colur
     init_pair(1,COLOR_CYAN,COLOR_BLACK);
+    //pacman colour
     init_pair(2,COLOR_YELLOW,COLOR_BLACK);
+    //Blinky colour
     init_pair(3,COLOR_RED,COLOR_BLACK);
+    //Pinky colour
     init_pair(4,COLOR_MAGENTA,COLOR_BLACK);
+    //Inky colour
     init_pair(5,COLOR_BLUE,COLOR_BLACK);
-    init_pair(6,COLOR_WHITE,COLOR_BLACK);
+    //Clyde colour
+    init_pair(7,COLOR_GREEN,COLOR_BLACK);
+    //Ghost frighten mode colour
+    init_pair(8,COLOR_WHITE,COLOR_BLACK);
     noecho();
     cbreak();
     keypad(stdscr, TRUE);

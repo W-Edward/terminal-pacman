@@ -198,7 +198,14 @@ void howToPlay(){
     attron(COLOR_PAIR(1));
     for (int i = 0; i<19; i++) {
         move((yMax/2) - instructions->length()/2 + i,(xMax/2) - instructions[i].length()/2);
-        addstr(instructions[i].c_str());
+		if (i == 13 || i == 14) {
+			attron(COLOR_PAIR(8));
+			addstr(instructions[i].c_str());
+			attron(COLOR_PAIR(1));
+		} else {
+			addstr(instructions[i].c_str());
+		}
+        
     }
     attroff(COLOR_PAIR(1));
     refresh();

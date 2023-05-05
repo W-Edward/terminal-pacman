@@ -243,7 +243,6 @@ int main()
             switch (direction) {
             case 1:
                 if (y > 1 && map[y-1][x]!="##") {y--;}
-                Pacman.toggleFaceDirection();
                 break;
             case 2:
                 if (x > 1 && map[y][x-1]!="##") {x--;}
@@ -259,7 +258,6 @@ int main()
                 break;
             case 3:
                 if (y < 17 && map[y+1][x]!="##" && map[y+1][x]!="==") {y++;}
-                Pacman.toggleFaceDirection();
                 break;
             case 4:
                 if (x < 18 && map[y][x+1]!="##") {x++;}

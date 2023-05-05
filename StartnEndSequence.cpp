@@ -148,9 +148,9 @@ int EndingSequence(int score) {
 		" |_|                                     ",
 		"       Thanks for playing our game!      ",
 		"",
-		"      This game is jointly created by   ",
+		"      This game is jointly created by    ",
 		"    Edward, Lewis, Kelly, Felix & Jason  ",
-		"        Your score in this round is:    ",
+		"        Your score in this round is:     ",
 		std::to_string(score),
 	};
     getmaxyx(stdscr,yMax,xMax);

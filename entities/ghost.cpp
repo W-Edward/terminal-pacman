@@ -390,6 +390,7 @@ int Ghost::getPotentialState(){
 int Ghost::getCurrentState() { // returns the eaten state of the ghost
     return currentState;
 }
+
 void Ghost::setCurrentState(int i){
     currentState = i;
 }

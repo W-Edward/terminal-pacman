@@ -151,8 +151,13 @@ int EndingSequence(int score) {
 		"      This game is jointly created by    ",
 		"    Edward, Lewis, Kelly, Felix & Jason  ",
 		"        Your score in this round is:     ",
-		std::to_string(score),
+		"", // to be replaced
 	};
+
+	int n = (41-to_string(score).size())/2; // number of blank spaces needed on either side of the score
+	string spacing(n, ' ');
+	endingScreen[11] = spacing + to_string(score) + spacing;
+
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
     for (int i = 0; i<12; i++) {

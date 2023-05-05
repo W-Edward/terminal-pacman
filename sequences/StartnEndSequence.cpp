@@ -349,14 +349,14 @@ void exportprofile(int highscore, string name){
 	"    ----------------------------------    	",
 	};
 	if (fout.fail()){
-		loadscreen[3] = "      Failed to export to Profile.txt!    ";
-		loadscreen[5] = "  Try creating Profile.txt in the folder! ";}
+		exportscreen[3] = "      Failed to export to Profile.txt!    ";
+		exportscreen[5] = "  Try creating Profile.txt in the folder! ";}
 	else{
 		fout << name << endl;
 		fout << highscore << endl;
-		loadscreen[2] = "   Successfully exported to Profile.txt!  ";
-		loadscreen[4] = "               Player Name:               ";
-		loadscreen[6] = "           Highest Score Record:          ";}
+		exportscreen[2] = "   Successfully exported to Profile.txt!  ";
+		exportscreen[4] = "               Player Name:               ";
+		exportscreen[6] = "           Highest Score Record:          ";}
 	fout.close();
 		
 	int n = (42-name.size())/2; // number of blank spaces needed on either side of the name

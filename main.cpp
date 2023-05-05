@@ -108,6 +108,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
     }
 
     // prints the actual map
+    attron(COLOR_PAIR(1));
     for (int i = 0; i < 19; i++) 
     {
             for (int j = 0; j < 20; j++) {

@@ -59,10 +59,11 @@ Pac-Man is a video game back in the 1980s which was once extremely popular acros
   The four ghosts in our game are not necessarily chasing Pac-man all the time. Occasionally, ghosts will be in a "scatter" mode where they target their corner tiles instead of pac-man.  On the other hand, when ghosts engaged their "chase" mode, the program will check pac-man's positions and assign ghosts to chase after it.
 
 ### Generation of random game sets or events
-
+ Pacman's fruits will appear in random positions of the map in random times. This helps increases the game score.
 
 ### Data structures for storing game status
-
+ Objects' positions and direction (Pacman, ghosts) are stored in sets of integers. (two variables namely x,y representing coordinates)
+ Game score will be stored as an integer.
 
 ### Dynamic memory management
 

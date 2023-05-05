@@ -30,17 +30,23 @@ void mainmenu_display (int select) {
     int xCursor, yCursor;
 	// ifstream art;
 	// string logo;
-	string menuitem[10] = {
+	string menuitem[15] = {
 		"***********************************", 
 		" Welcome to Pac-Man: Alpha Edition ", 
 		"***********************************",
 		"",
 		"Play The Pac-Man Game !",
 		"Load Save",
-		"View The Staff Credits",
+		"",
 		"Exit The Game",
 		"",
-		"Please expand your terminal for a better game experience!",
+		"Please ensure your terminal font size is 16!",
+		"",
+		"Please also do not adjust the terminal screen",
+		" while playing to avoid text display errors! ",
+		"",
+		"Use keyboard arrow keys to navigate the menu.",
+
 	};
 
 	getmaxyx(stdscr,yMax,xMax);
@@ -60,7 +66,7 @@ void mainmenu_display (int select) {
 	// }
 	
 	attron(COLOR_PAIR(1));
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 15; i++) {
 		if (i-4 == select) {
 			attron(A_REVERSE);
 		}
@@ -140,11 +146,14 @@ int EndingSequence() {
 		" | |_) | (_| | (__| | | | | | (_| | | | |",
 		" | .__/ \\__,_|\\___|_| |_| |_|\\__,_|_| |_|",
 		" |_|                                     ",
-		"       Thanks for playing our game :)    ",
+		"       Thanks for playing our game!      ",
+		"",
+		"      This game is jointly created by   ",
+		"    Edward, Lewis, Kelly, Felix & Jason  ",
 	};
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
-    for (int i = 0; i<6; i++) {
+    for (int i = 0; i<9; i++) {
         move((yMax/2) - endingScreen->length()/2 + i,(xMax/2) - endingScreen[i].length()/2);
         addstr(endingScreen[i].c_str());
     }

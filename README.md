@@ -27,7 +27,7 @@ ENGG1340 Final Group Project - Group 68
 ## Group Members
 |  Name  |  UID  |  GitHub Username  |
 | :------------:  |  :------------: |  :------------: |
-|  **Fong Ting Hin**  |  3036......  | FongTingHin
+|  **Fong Ting Hin**  |  3036068802  | FongTingHin
 |  **Lok Wang Yi**  |  3036067420  | lokwy-hku
 |  **Lui Yik Hang**  |  3036067652  | felixlyh
 |  **Widjaja Edward Aryaguna**  |  3036029703  | W-Edward

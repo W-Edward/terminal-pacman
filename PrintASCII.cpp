@@ -4,7 +4,7 @@
 #include <iostream>
 #include "entities.h"
 
-void PrintASCII::txtprint(int deviationFromMidX, int deviationFromMidY, string filename) {\
+void PrintASCII::txtprint(int deviationFromMidX, int deviationFromMidY, string filename, int colorpair) {\
 
 	//variable setup
 	int xMax,yMax;
@@ -28,11 +28,13 @@ void PrintASCII::txtprint(int deviationFromMidX, int deviationFromMidY, string f
 	}
 
 	//Drawing Loop
+	attron(COLOR_PAIR(colorpair));
 	for (int i=0; i < pictureHeight(filename); ++i){
 		getline(txtfile,line);
 		addstr(line.c_str());
 		move(++yCursor,xCursor);
 	}
+	attroff(COLOR_PAIR(colorpair));
 	txtfile.close();
 	return;
 }

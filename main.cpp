@@ -112,16 +112,29 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
     for (int i = 0; i < 19; i++) 
     {
             for (int j = 0; j < 20; j++) {
+                    // if (i == Pacman.getY() && j == Pacman.getX()) {
+                    //     attron(COLOR_PAIR(2));
+                    //     addch(map[i][j][0]);
+                    //     addch(map[i][j][1]);
+                    //     attron(COLOR_PAIR(1));
+                    // } else {
+                    //     addch(map[i][j][0]);
+                    //     addch(map[i][j][1]);
+                    // }
                     if (i == Pacman.getY() && j == Pacman.getX()) {
                         attron(COLOR_PAIR(2));
-                        addch(map[i][j][0]);
-                        addch(map[i][j][1]);
-                        attron(COLOR_PAIR(1));
-                    } else {
-                        addch(map[i][j][0]);
-                        addch(map[i][j][1]);
+                    } else if (i == Blinky.getY() && j == Blinky.getX()) {
+                        attron(COLOR_PAIR(3));
+                    } else if (i == Pinky.getY() && j == Pinky.getX()) {
+                        attron(COLOR_PAIR(4));
+                    } else if (i == Inky.getY() && j == Inky.getX()) {
+                        attron(COLOR_PAIR(5));
+                    } else if (i == Clyde.getY() && j == Clyde.getX()) {
+                        attron(COLOR_PAIR(6));
                     }
-                    
+                    addch(map[i][j][0]);
+                    addch(map[i][j][1]);
+                    attron(COLOR_PAIR(1));
             }
             move(++yCursor, xCursor); //Moves the cursor position to a new line!
     }
@@ -188,6 +201,10 @@ int main()
     }
     init_pair(1,COLOR_CYAN,COLOR_BLACK);
     init_pair(2,COLOR_YELLOW,COLOR_BLACK);
+    init_pair(3,COLOR_RED,COLOR_BLACK);
+    init_pair(4,COLOR_MAGENTA,COLOR_BLACK);
+    init_pair(5,COLOR_BLUE,COLOR_BLACK);
+    init_pair(6,COLOR_WHITE,COLOR_BLACK);
     noecho();
     cbreak();
     keypad(stdscr, TRUE);

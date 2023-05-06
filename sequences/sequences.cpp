@@ -32,7 +32,7 @@ void mainmenu_display (int select) {
     int xCursor, yCursor;
 	// ifstream art;
 	// string logo;
-	string menuitem[17] = {
+	string menuitem[18] = {
 		"***********************************", 
 		" Welcome to Pac-Man: Alpha Edition ", 
 		"***********************************",
@@ -42,6 +42,7 @@ void mainmenu_display (int select) {
 		"How to Play",
 		"View Game Statistics",
 		"Export Player Profile",
+		"Change Your Player Name",
 		"Exit The Game",
 		"",
 		"Please ensure your terminal font size is 16!",
@@ -69,7 +70,7 @@ void mainmenu_display (int select) {
 	// }
 	
 	attron(COLOR_PAIR(1));
-	for (int i = 0; i < 17; i++) {
+	for (int i = 0; i < 18; i++) {
 		if (i-4 == select) {
 			attron(A_REVERSE);
 		}
@@ -121,11 +122,14 @@ int StartingSequence(){
 				// Export Player Profile
 				return 5;
 			}else if (selection == 5) {
-				// exit the game
+				// Change Player Name
 				return 6;
+			}else if (selection == 6) {
+				// exit the game
+				return 7;
 			}
 		} else if (cinput == KEY_DOWN) {
-			if (selection < 5) {
+			if (selection < 6) {
 				selection++;
 			} else { // loop back to the first option
 				selection = 0;
@@ -134,7 +138,7 @@ int StartingSequence(){
 			if (selection > 0) {
 				selection--;
 			} else { // loop back to the last option
-				selection = 5;
+				selection = 6;
 			}
 		}
 		usleep(150000);
@@ -382,4 +386,59 @@ void exportprofile(int highscore, string name){
     attroff(COLOR_PAIR(1));
     refresh();
     usleep(5000000);
+}
+
+void changename(string &name){
+	int yMax, xMax;
+	string namescreen[8] = {
+		"             Change Player Name            ",
+		"    ----------------------------------     ",
+		"",
+		"            Current Player Name:           ",
+		"",
+		"    Enter New Name And Then Press Enter    ",
+		"                                           ",
+		"    ----------------------------------     ",
+		};
+	
+	int n = (44-name.size())/2; // number of blank spaces needed on either side of the name
+	string spacing(n, ' ');
+	namescreen[4] = spacing + name + spacing;
+	
+    getmaxyx(stdscr,yMax,xMax);
+    attron(COLOR_PAIR(1));
+    for (int i = 0; i<8; i++) {
+        move((yMax/2) - namescreen->length()/2 + i,(xMax/2) - namescreen[i].length()/2);
+        addstr(namescreen[i].c_str());
+    }
+    attroff(COLOR_PAIR(1));
+    refresh();
+    string newname;
+    cin >> newname;
+    name = newname;
+    clear();
+    string newnamescreen[8] = {
+		"             Change Player Name            ",
+		"    ----------------------------------     ",
+		"",
+		"        Your New Player Name is now:       ",
+		"",
+		"  We are now returning to the main menu... ",
+		"",
+		"    ----------------------------------     ",
+		};
+	
+	n = (44-name.size())/2; // number of blank spaces needed on either side of the name
+	spacing.assign(n, ' ');
+	newnamescreen[4] = spacing + name + spacing;
+	
+    getmaxyx(stdscr,yMax,xMax);
+    attron(COLOR_PAIR(1));
+    for (int i = 0; i<8; i++) {
+        move((yMax/2) - newnamescreen->length()/2 + i,(xMax/2) - newnamescreen[i].length()/2);
+        addstr(newnamescreen[i].c_str());
+    }
+    attroff(COLOR_PAIR(1));
+    refresh();
+    usleep(3000000);
 }

@@ -1,7 +1,7 @@
 // #include <ncurses.h>
 #include <curses.h>
 // #include <windows.h>
-#include <windows.h> //replace w windows.h for windows
+#include <unistd.h> //replace w windows.h for windows
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -134,7 +134,7 @@ int StartingSequence(){
 				selection = 4;
 			}
 		}
-		Sleep(150);
+		usleep(150000);
 	}
 
 	getch();
@@ -177,7 +177,7 @@ int EndingSequence(int score) {
     }
     attroff(COLOR_PAIR(1));
     refresh();
-    Sleep(5000);
+    usleep(5000000);
 	return 0;
 }
 
@@ -213,7 +213,7 @@ void howToPlay(){
     }
     attroff(COLOR_PAIR(1));
     refresh();
-	Sleep(5000);
+	usleep(5000000);
 }
 
 void loadStatistics(){

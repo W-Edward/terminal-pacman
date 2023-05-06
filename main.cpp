@@ -1,7 +1,7 @@
 // #include <ncurses.h>
 #include <curses.h>
 // #include <windows.h>
-#include <windows.h> //replace w windows.h for windows
+#include <unistd.h> //replace w windows.h for windows
 #include <iostream>
 #include <string>
 #include <stdio.h>
@@ -537,7 +537,7 @@ int gameplay(){
 
         display(Pacman, Blinky, Pinky, Inky, Clyde, map);
         // Sleep(250);
-        Sleep(300); // use this for linux
+        usleep(300000); // use this for linux
     }
     return score;
 }
@@ -554,7 +554,7 @@ int main()
             score = gameplay();
             clear();
             // game over screen
-            Sleep(300);
+            usleep(300000);
         } else if (startgame == 3) {
             howToPlay();
         } else if (startgame == 4) {

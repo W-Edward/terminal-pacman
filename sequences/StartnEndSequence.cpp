@@ -7,6 +7,7 @@
 #include <string>
 #include <stdio.h>
 #include"StartnEndSequence.h"
+#include"../entities/entities.h"
 using namespace std;
 
 int fileline(string filename) {

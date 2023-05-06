@@ -354,9 +354,6 @@ int gameplay(){
             break;
         }
 
-        Pacman.updatePosition(x, y);
-        Pacman.toggleFaceDirection();
-
         // handles collisions (Normal >> Game over >> Break/game over || Frightened >> Eaten mode)
         collisionStatus = haveCollided(Pacman, Blinky, Pinky, Inky, Clyde);
         switch (collisionStatus){

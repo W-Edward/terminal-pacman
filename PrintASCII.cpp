@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-#include "entities.h"
+#include "./entities/entities.h"
 
 void PrintASCII::txtprint(int deviationFromMidX, int deviationFromMidY, string filename, int colorpair) {\
 

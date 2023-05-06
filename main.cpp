@@ -7,8 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
-#include "entities.h"
-#include "StartnEndSequence.h"
+#include "./entities/entities.h"
+#include "./sequences/StartnEndSequence.h"
 using namespace std;
 
 //Notes:

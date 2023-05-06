@@ -4,15 +4,15 @@ LINKER_FLAGS = -lncurses
 
 # starting and end sequence
 STARTINGSEQ_OBJ = StartnEndSequence.o
-STARTINGSEQ_SRC = StartnEndSequence.cpp
-STARTINGSEQ_HEADER = StartnEndSequence.h
+STARTINGSEQ_SRC = ./sequences/StartnEndSequence.cpp
+STARTINGSEQ_HEADER = ./sequences/StartnEndSequence.h
 # ghost
 GHOST_OBJ = ghost.o
-GHOST_SRC = ghost.cpp
-ENTITIES_HEADER = entities.h
+GHOST_SRC = ./entities/ghost.cpp
+ENTITIES_HEADER = ./entities/entities.h
 # pacman
 PACMAN_OBJ = pacman.o
-PACMAN_SRC = pacman.cpp
+PACMAN_SRC = ./entities/pacman.cpp
 
 PRINTASCII_OBJ = PrintASCII.o
 PRINTASCII_SRC = PrintASCII.cpp

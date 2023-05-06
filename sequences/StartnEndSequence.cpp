@@ -7,7 +7,6 @@
 #include <string>
 #include <stdio.h>
 #include"StartnEndSequence.h"
-#include"entities.h"
 using namespace std;
 
 int fileline(string filename) {
@@ -145,7 +144,7 @@ int StartingSequence(){
 	return 0;
 }
 
-int EndingSequence(int score) {
+int EndingSequence() {
 	int yMax, xMax;
 	string endingScreen[9] = {
 		"  _ __   __ _  ___ _ __ ___   __ _ _ __  ",
@@ -245,6 +244,7 @@ void loadStatistics(int score){
 		"                Player Name:                "
 	};
 }
+
 void loadprofile(){
 }
 

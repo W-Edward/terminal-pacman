@@ -186,10 +186,10 @@ void howToPlay(){
 		"  the states they are in, aside from their  ",
 		"               normal colour.               ",
 		"",
-		"    Black and Grey for Frightened Mode:     ",
+		"    Black and Gray for Frightened Mode:     ",
 		" Pac-man can consume ghosts in this state.  ",
 		"",
-		"       Blue and Yellow for Eaten Mode:      ",
+		"        Blue & Yellow for Eaten Mode:       ",
 		"Pac-man cannot interact with ghosts in this ",
 		"                   state.                   "
 	};
@@ -263,11 +263,11 @@ void loadStatistics(int score, string name, int highscore){
 	
 	n = (44-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
 	spacing.assign(n, ' ');
-	stat[4] = spacing + to_string(highscore) + spacing;
+	stat[6] = spacing + to_string(highscore) + spacing;
 	
 	n = (44-to_string(score).size())/2; // number of blank spaces needed on either side of the score
 	spacing.assign(n, ' ');
-	stat[4] = spacing + to_string(score) + spacing;
+	stat[8] = spacing + to_string(score) + spacing;
 	
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
@@ -280,12 +280,12 @@ void loadStatistics(int score, string name, int highscore){
     usleep(5000000);
 }
 
-void CheckScore(int score, int highscore){
+void CheckScore(int score, int &highscore){
 	if (score>highscore)
 		highscore=score;
 }
 	
-void loadprofile(int highscore, string name){
+void loadprofile(int &highscore, string &name){
 	int yMax, xMax;
 	ifstream fin;
 	fin.open("Profile.txt");
@@ -302,24 +302,28 @@ void loadprofile(int highscore, string name){
 	"    ----------------------------------    	",
 	};
 	if (fin.fail()){
+		loadscreen[2] ="";
 		loadscreen[3] = "     Failed to import from Profile.txt!   ";
+		loadscreen[4] ="";
 		loadscreen[5] = "  Please put Profile.txt into the folder! ";
+		loadscreen[6] ="";
 		loadscreen[7] = " Example Profile.txt content: Andrew 3000 ";}
 	else{
 		fin >> name;
 		fin >> highscore;
 		loadscreen[2] = "  Successfully imported from Profile.txt! ";
+		loadscreen[3] ="";
 		loadscreen[4] = "               Player Name:               ";
-		loadscreen[6] = "           Highest Score Record:          ";}
+		loadscreen[5] ="";
+		loadscreen[6] = "           Highest Score Record:          ";
+		loadscreen[7] ="";
+		int n = (42-name.size())/2; // number of blank spaces needed on either side of the name
+		string spacing(n, ' ');
+		loadscreen[5] = spacing + name + spacing;
+		n = (42-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
+		spacing.assign(n, ' ');
+		loadscreen[7] = spacing + to_string(highscore) + spacing;}
 	fin.close();
-		
-	int n = (42-name.size())/2; // number of blank spaces needed on either side of the name
-	string spacing(n, ' ');
-	loadscreen[5] = spacing + name + spacing;
-	
-	n = (42-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
-	spacing.assign(n, ' ');
-	loadscreen[7] = spacing + to_string(highscore) + spacing;
 
 	getmaxyx(stdscr,yMax,xMax);
     	attron(COLOR_PAIR(1));
@@ -337,7 +341,7 @@ void exportprofile(int highscore, string name){
 	ofstream fout;
 	fout.open("Profile.txt");
 	string exportscreen[10]={
-	"           Import Player Profile          ",
+	"           Export Player Profile          ",
 	"    ----------------------------------    ",
 	"",
 	"",
@@ -349,14 +353,21 @@ void exportprofile(int highscore, string name){
 	"    ----------------------------------    	",
 	};
 	if (fout.fail()){
+		exportscreen[2] ="";
 		exportscreen[3] = "      Failed to export to Profile.txt!    ";
-		exportscreen[5] = "  Try creating Profile.txt in the folder! ";}
+		exportscreen[4] ="";
+		exportscreen[5] = "  Try creating Profile.txt in the folder! ";
+		exportscreen[6] ="";
+		exportscreen[7] ="";}
 	else{
 		fout << name << endl;
 		fout << highscore << endl;
 		exportscreen[2] = "   Successfully exported to Profile.txt!  ";
+		exportscreen[3] ="";
 		exportscreen[4] = "               Player Name:               ";
-		exportscreen[6] = "           Highest Score Record:          ";}
+		exportscreen[5] ="";
+		exportscreen[6] = "           Highest Score Record:          ";
+		exportscreen[7] ="";}
 	fout.close();
 		
 	int n = (42-name.size())/2; // number of blank spaces needed on either side of the name

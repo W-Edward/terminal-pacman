@@ -296,6 +296,7 @@ void Ghost::frightened() // frightened mode movement and pathfinding
     currentState = 2;
     updateLastPosition();
     
+    chaseTargetTile(rand()%20, rand()%20);
     // add these codes when power pellet is used up
     // isFrightened = false;
 
@@ -303,46 +304,47 @@ void Ghost::frightened() // frightened mode movement and pathfinding
     // also consider adding a visual of whenever ghosts are in frightened mode, and a pre-exist frightened mode visual thign
 
     // check directions that are "  "
-    int availableDirections[4] = {1, 2, 3, 4}; // = up, left, down, right
-    if (tempa[y-1][x] != "  "){availableDirections[0] = -1;} // up
-    if (tempa[y+1][x] != "  "){availableDirections[2] = -1;} // down
+    // int availableDirections[4] = {1, 2, 3, 4}; // = up, left, down, right
+    // if (tempa[y-1][x] != "  "){availableDirections[0] = -1;} // up
+    // if (tempa[y+1][x] != "  "){availableDirections[2] = -1;} // down
     
-    // checks if ghost is on the edge of the map and handles looping for direction checking
-    if (x==0){
-        if (tempa[y][19] != "  "){availableDirections[1] = -1;} // left
-        if (tempa[y][x+1] != "  "){availableDirections[3] = -1;} // right
-    } else if (x==19){
-        if (tempa[y][x-1] != "  "){availableDirections[1] = -1;} // left
-        if (tempa[y][0] != "  "){availableDirections[3] = -1;} // right
-    } else {
-        if (tempa[y][x-1] != "  "){availableDirections[1] = -1;} // left
-        if (tempa[y][x+1] != "  "){availableDirections[3] = -1;} // right
-    }
+    // // checks if ghost is on the edge of the map and handles looping for direction checking
+    // if (x==0){
+    //     if (tempa[y][19] != "  "){availableDirections[1] = -1;} // left
+    //     if (tempa[y][x+1] != "  "){availableDirections[3] = -1;} // right
+    // } else if (x==19){
+    //     if (tempa[y][x-1] != "  "){availableDirections[1] = -1;} // left
+    //     if (tempa[y][0] != "  "){availableDirections[3] = -1;} // right
+    // } else {
+    //     if (tempa[y][x-1] != "  "){availableDirections[1] = -1;} // left
+    //     if (tempa[y][x+1] != "  "){availableDirections[3] = -1;} // right
+    // }
 
-    // block off opposite direction since ghosts cant walk backwards
-    int oppDirection = findOppositeDirection(currentDirection);
-    availableDirections[oppDirection-1] = -1;
+    // // block off opposite direction since ghosts cant walk backwards
+    // int oppDirection = findOppositeDirection(currentDirection);
+    // availableDirections[oppDirection-1] = -1;
 
-    // roll a random direction that isn't blocked off
-    int roll = rand() % 4;
-    // while (availableDirections[roll] == -1){roll = rand() % 4;}
+    // // roll a random direction that isn't blocked off
+    // int roll = rand() % 4;
+    // // while (availableDirections[roll] == -1){roll = rand() % 4;}
     
-    switch (availableDirections[roll]){
-        case 1:
-            x--;
-            break;
-        case 2:
-            y--;
-            break;
-        case 3:
-            x++;
-            break;
-        case 4:
-            y++;
-            break;
-        case -1:
-            break;
-    }
+    // switch (roll){
+    //     case 0:
+    //         x--;
+    //         break;
+    //     case 1:
+    //         y--;
+    //         break;
+    //     case 2:
+    //         x++;
+    //         break;
+    //     case 3:
+    //         y++;
+    //         break;
+    //     case -1:
+    //         chaseTargetTile(rand);
+    //         break;
+    // }
 }
 
 void Ghost::eaten()
@@ -354,10 +356,11 @@ void Ghost::eaten()
     currentState = 3;
     updateLastPosition();
 
-    if ((x == 7 && y == 9) || (x == 8 && y == 9)){ // ghost should enter ghost house here
+    if ((y == 7 && x == 9) || (y == 8 && x == 9)){ // ghost should enter ghost house here
         chaseTargetTile(9, 9);
     } else if (x == 9 && y == 9){ // ghost is inside ghost house; exit frightened mode and go back to chase mode here
-        currentState = 0;
+        chaseTargetTile(7, 9);
+        potentialState = 0;
         // should be able to return to chase mode after this
     } else {
         chaseTargetTile(7, 9); // chase the tile directly in front of the ghost gate

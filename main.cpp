@@ -471,14 +471,38 @@ int gameplay(){
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eatens
                 Blinky.setPotentialState(2);
             }
+            else if (Blinky.getPotentialState() == 0)
+            {
+                Blinky.setPotentialState(0);
+                powerPelletTime = 0;
+                powerPelletConsumed = 0;
+            }
             if (Pinky.getPotentialState() == 2){
                 Pinky.setPotentialState(2);
+            }
+            else if (Pinky.getPotentialState() == 0)
+            {
+                Pinky.setPotentialState(0);
+                powerPelletTime = 0;
+                powerPelletConsumed = 0;
             }
             if (Inky.getPotentialState() == 2){
                 Inky.setPotentialState(2);
             }
+            else if (Inky.getPotentialState() == 0)
+            {
+                Inky.setPotentialState(0);
+                powerPelletTime = 0;
+                powerPelletConsumed = 0;
+            }
             if (Clyde.getPotentialState() == 2){
                 Clyde.setPotentialState(2);
+            }
+            else if (Clyde.getPotentialState() == 0)
+            {
+                Clyde.setPotentialState(0);
+                powerPelletTime = 0;
+                powerPelletConsumed = 0;
             }
         } else if (powerPelletTime >= 30){
             powerPelletTime = 0;
@@ -507,10 +531,10 @@ int gameplay(){
                 break;
             case 2: // Frightened mode
                 Blinky.frightened();
-                score += 300;
                 break;
             case 3: // Eaten mode
                 Blinky.eaten();
+                score += 300;
                 break;
         }
         switch(Pinky.getPotentialState()){
@@ -522,10 +546,10 @@ int gameplay(){
                 break;
             case 2: // Frightened mode
                 Pinky.frightened();
-                score += 300;
                 break;
             case 3: // Eaten mode
                 Pinky.eaten();
+                score += 300;
                 break;
         }
         switch(Inky.getPotentialState()){
@@ -537,10 +561,10 @@ int gameplay(){
                 break;
             case 2: // Frightened mode
                 Inky.frightened();
-                score += 300;
                 break;
             case 3: // Eaten mode
                 Inky.eaten();
+                score += 300;
                 break;
         }
         switch(Clyde.getPotentialState()){
@@ -552,10 +576,10 @@ int gameplay(){
                 break;
             case 2: // Frightened mode
                 Clyde.frightened();
-                score += 300;
                 break;
             case 3: // Eaten mode
                 Clyde.eaten();
+                score += 300;
                 break;
         }
 

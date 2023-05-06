@@ -573,6 +573,7 @@ int main()
             clear();
 	    GameOver(score);
 	    clear();
+	    CheckScore(score);  //Check if score exceeded previous highest score record
             usleep(300000);
 	} else if (startgame == 2) {
 		loadprofile();

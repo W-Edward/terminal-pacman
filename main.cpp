@@ -566,24 +566,29 @@ int main()
     startgame = StartingSequence();
 
     // Game Flow
-    while (startgame != 5){
+    while (startgame != 6){
         clear();
-        if (startgame == 1 || startgame == 2) {
+        if (startgame == 1) {
             score = gameplay();
             clear();
-            // game over screen
+	    GameOver(score);
+	    clear();
             usleep(300000);
+	} else if (startgame == 2) {
+		loadprofile();
         } else if (startgame == 3) {
             howToPlay();
         } else if (startgame == 4) {
-            loadStatistics();
+            loadStatistics(score);
+	} else if (startgame == 5) {
+		exportprofile();
         }
         clear();
         startgame = StartingSequence();
     }
 
     clear();
-    EndingSequence(score);
+    EndingSequence();
     
     getch();
     endwin();

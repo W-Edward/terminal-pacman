@@ -1,6 +1,9 @@
 #ifndef STARTNENDSEQUENCE
 #define STARTNENDSEQUENCE
 
+#include <iostream>
+using namespace std;
+
 int StartingSequence();
 int EndingSequence();
 void howToPlay();

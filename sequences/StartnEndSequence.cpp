@@ -261,12 +261,12 @@ void loadStatistics(int score, string name, int highscore){
 	string spacing(n, ' ');
 	stat[4] = spacing + name + spacing;
 	
-	int n = (44-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
-	string spacing(n, ' ');
+	n = (44-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
+	spacing = (n, ' ');
 	stat[4] = spacing + to_string(highscore) + spacing;
 	
-	int n = (44-to_string(score).size())/2; // number of blank spaces needed on either side of the score
-	string spacing(n, ' ');
+	n = (44-to_string(score).size())/2; // number of blank spaces needed on either side of the score
+	spacing = (n, ' ');
 	stat[4] = spacing + to_string(score) + spacing;
 	
     getmaxyx(stdscr,yMax,xMax);
@@ -317,8 +317,8 @@ void loadprofile(int highscore, string name){
 	string spacing(n, ' ');
 	loadscreen[5] = spacing + name + spacing;
 	
-	int n = (42-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
-	string spacing(n, ' ');
+	n = (42-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
+	spacing = (n, ' ');
 	loadscreen[7] = spacing + to_string(highscore) + spacing;
 
 	getmaxyx(stdscr,yMax,xMax);

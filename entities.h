@@ -48,3 +48,16 @@ class PrintASCII
         int pictureHeight(string filename);
         int pictureWidth(string filename);
 };
+
+class Fruit
+{
+	public:
+		Fruit(int posX, int posY);
+		int getX();
+		int getY();
+		void eaten();
+		int getCurrentState(); //Check if fruit is eaten
+		int getEaten();
+	private:
+		int x, y, currentState;
+};

@@ -51,20 +51,20 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
 
     // erasing the old Pacman and ghosts
     map[Pacman.getLastY()][Pacman.getLastX()] = "  ";
-    if (Blinky.ateApple) {map[Blinky.getLastY()][Blinky.getLastX()] = "''";}
-    else if (Blinky.atePowerPellet) {map[Blinky.getLastY()][Blinky.getLastX()] = "||";}
+    if (Blinky.ateApple) {map[Blinky.getLastY()][Blinky.getLastX()] = "··";}
+    else if (Blinky.atePowerPellet) {map[Blinky.getLastY()][Blinky.getLastX()] = "••";}
     else {map[Blinky.getLastY()][Blinky.getLastX()] = "  ";}
 
-    if (Pinky.ateApple) {map[Pinky.getLastY()][Pinky.getLastX()] = "''";}
-    else if (Pinky.atePowerPellet) {map[Pinky.getLastY()][Pinky.getLastX()] = "||";}
+    if (Pinky.ateApple) {map[Pinky.getLastY()][Pinky.getLastX()] = "··";}
+    else if (Pinky.atePowerPellet) {map[Pinky.getLastY()][Pinky.getLastX()] = "••";}
     else {map[Pinky.getLastY()][Pinky.getLastX()] = "  ";}
 
-    if (Inky.ateApple) {map[Inky.getLastY()][Inky.getLastX()] = "''";}
-    else if (Inky.atePowerPellet) {map[Inky.getLastY()][Inky.getLastX()] = "||";}
+    if (Inky.ateApple) {map[Inky.getLastY()][Inky.getLastX()] = "··";}
+    else if (Inky.atePowerPellet) {map[Inky.getLastY()][Inky.getLastX()] = "••";}
     else {map[Inky.getLastY()][Inky.getLastX()] = "  ";}
 
-    if (Clyde.ateApple) {map[Clyde.getLastY()][Clyde.getLastX()] = "''";}
-    else if (Clyde.atePowerPellet) {map[Clyde.getLastY()][Clyde.getLastX()] = "||";}
+    if (Clyde.ateApple) {map[Clyde.getLastY()][Clyde.getLastX()] = "··";}
+    else if (Clyde.atePowerPellet) {map[Clyde.getLastY()][Clyde.getLastX()] = "••";}
     else {map[Clyde.getLastY()][Clyde.getLastX()] = "  ";}
 
     // map[Blinky.getLastY()][Blinky.getLastX()] = "  ";
@@ -276,23 +276,23 @@ int gameplay(){
     int xMax, yMax;
     string map[19][20] = { //y max = 18, x max = 19
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
-        {"##","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","##"},
-        {"##","''","''","##","''","''","''","##","##","''","''","##","##","''","''","''","##","''","''","##"},
-        {"##","||","##","##","''","##","''","''","##","''","''","##","''","''","##","''","##","##","||","##"},
-        {"##","''","''","##","''","##","''","''","##","''","''","##","''","''","##","''","##","''","''","##"},
-        {"##","''","''","##","''","''","''","''","##","''","''","##","''","''","''","''","##","''","''","##"},
-        {"##","''","''","''","''","''","''","##","##","''","''","##","##","''","''","''","''","''","''","##"},
-        {"##","##","''","##","##","##","''","''","''","''","''","''","''","''","##","##","##","''","##","##"},
-        {"  ","''","''","''","''","''","''","##","##","==","==","##","##","''","''","''","''","''","''","  "},
-        {"##","''","##","''","##","''","''","##","  ","  ","  ","  ","##","''","''","##","''","##","''","##"},
-        {"##","''","##","''","##","''","''","##","  ","  ","  ","  ","##","''","''","##","''","##","''","##"},
-        {"##","''","##","''","##","''","''","##","##","##","##","##","##","''","''","##","''","##","''","##"},
-        {"##","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","##"},
-        {"##","''","''","##","''","##","##","''","##","##","##","##","''","##","##","''","##","''","''","##"},
-        {"##","||","''","##","''","''","''","''","''","''","''","''","''","''","''","''","##","''","||","##"},
-        {"##","''","##","##","''","''","##","##","##","''","''","##","##","##","''","''","##","##","''","##"},
-        {"##","''","''","##","''","''","##","##","##","''","''","##","##","##","''","''","##","''","''","##"},
-        {"##","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","##"},
+        {"##","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","##"},
+        {"##","··","··","##","··","··","··","##","##","··","··","##","##","··","··","··","##","··","··","##"},
+        {"##","••","##","##","··","##","··","··","##","··","··","##","··","··","##","··","##","##","••","##"},
+        {"##","··","··","##","··","##","··","··","##","··","··","##","··","··","##","··","##","··","··","##"},
+        {"##","··","··","##","··","··","··","··","##","··","··","##","··","··","··","··","##","··","··","##"},
+        {"##","··","··","··","··","··","··","##","##","··","··","##","##","··","··","··","··","··","··","##"},
+        {"##","##","··","##","##","##","··","··","··","··","··","··","··","··","##","##","##","··","##","##"},
+        {"  ","··","··","··","··","··","··","##","##","==","==","##","##","··","··","··","··","··","··","  "},
+        {"##","··","##","··","##","··","··","##","  ","  ","  ","  ","##","··","··","##","··","##","··","##"},
+        {"##","··","##","··","##","··","··","##","  ","  ","  ","  ","##","··","··","##","··","##","··","##"},
+        {"##","··","##","··","##","··","··","##","##","##","##","##","##","··","··","##","··","##","··","##"},
+        {"##","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","##"},
+        {"##","··","··","##","··","##","##","··","##","##","##","##","··","##","##","··","##","··","··","##"},
+        {"##","••","··","##","··","··","··","··","··","··","··","··","··","··","··","··","##","··","••","##"},
+        {"##","··","##","##","··","··","##","##","##","··","··","##","##","##","··","··","##","##","··","##"},
+        {"##","··","··","##","··","··","##","##","##","··","··","##","##","##","··","··","##","··","··","##"},
+        {"##","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","··","##"},
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     vector<vector<string>>vecmap = {vector<string>(begin(map[0]), end(map[0])), //2D vectir conversion of the 2D string map
@@ -397,21 +397,22 @@ int gameplay(){
         Pacman.updatePosition(x, y);
         Pacman.toggleFaceDirection();
 
-        if (map[Pacman.getY()][Pacman.getX()] == "''")
+        if (map[Pacman.getY()][Pacman.getX()] == "··")
         {
             Blinky.emptyMap(Pacman.getX(), Pacman.getY());
             Pinky.emptyMap(Pacman.getX(), Pacman.getY());
             Inky.emptyMap(Pacman.getX(), Pacman.getY());
             Clyde.emptyMap(Pacman.getX(), Pacman.getY());
-            score += 50; // points for staying alive
+            score += 20; // points for staying alive
         }
-        else if (map[Pacman.getY()][Pacman.getX()] == "||")
+        else if (map[Pacman.getY()][Pacman.getX()] == "••")
         {
             Blinky.emptyMap(Pacman.getX(), Pacman.getY());
             Pinky.emptyMap(Pacman.getX(), Pacman.getY());
             Inky.emptyMap(Pacman.getX(), Pacman.getY());
             Clyde.emptyMap(Pacman.getX(), Pacman.getY());
             powerPelletConsumed = 1;
+            score += 100;
         }
 
         //scatter mode implementation
@@ -451,7 +452,7 @@ int gameplay(){
         }
         scatterTimer++;
         // some sort of condition to make powerPelletTime++
-        if (/*powerPelletConsumed*/ false){
+        if (powerPelletConsumed){
             powerPelletTime++;
         }
 
@@ -468,16 +469,16 @@ int gameplay(){
         } else if (powerPelletTime >= 1 && powerPelletTime < 30){ // stage 2 and up of power pellet
             powerPelletTime++;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eatens
-                Blinky.setPotentialState(3);
+                Blinky.setPotentialState(2);
             }
             if (Pinky.getPotentialState() == 2){
-                Pinky.setPotentialState(3);
+                Pinky.setPotentialState(2);
             }
             if (Inky.getPotentialState() == 2){
-                Inky.setPotentialState(3);
+                Inky.setPotentialState(2);
             }
             if (Clyde.getPotentialState() == 2){
-                Clyde.setPotentialState(3);
+                Clyde.setPotentialState(2);
             }
         } else if (powerPelletTime >= 30){
             powerPelletTime = 0;
@@ -505,6 +506,7 @@ int gameplay(){
                 break;
             case 2: // Frightened mode
                 Blinky.frightened();
+                score += 300;
                 break;
             case 3: // Eaten mode
                 Blinky.eaten();
@@ -515,13 +517,14 @@ int gameplay(){
                 Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
                 break;
             case 1: // Scatter mode
-                Blinky.scatter();
+                Pinky.scatter();
                 break;
             case 2: // Frightened mode
-                Blinky.frightened();
+                Pinky.frightened();
+                score += 300;
                 break;
             case 3: // Eaten mode
-                Blinky.eaten();
+                Pinky.eaten();
                 break;
         }
         switch(Inky.getPotentialState()){
@@ -533,6 +536,7 @@ int gameplay(){
                 break;
             case 2: // Frightened mode
                 Inky.frightened();
+                score += 300;
                 break;
             case 3: // Eaten mode
                 Inky.eaten();
@@ -547,6 +551,7 @@ int gameplay(){
                 break;
             case 2: // Frightened mode
                 Clyde.frightened();
+                score += 300;
                 break;
             case 3: // Eaten mode
                 Clyde.eaten();
@@ -574,21 +579,21 @@ int main()
         if (startgame == 1) {
             score = gameplay();
             clear();
-	    GameOver(score);
-	    clear();
-	    CheckScore(score, highscore);  //Check if score exceeded previous highest score record
-            usleep(300000);
-	} else if (startgame == 2) {
-		loadprofile(highscore, name);
-        } else if (startgame == 3) {
-            howToPlay();
-        } else if (startgame == 4) {
-            loadStatistics(score, name, highscore);
-	} else if (startgame == 5) {
-		exportprofile(highscore, name);
-        }
-        clear();
-        startgame = StartingSequence();
+            GameOver(score);
+            clear();
+            CheckScore(score, highscore);  //Check if score exceeded previous highest score record
+                usleep(300000);
+        } else if (startgame == 2) {
+            loadprofile(highscore, name);
+            } else if (startgame == 3) {
+                howToPlay();
+            } else if (startgame == 4) {
+                loadStatistics(score, name, highscore);
+        } else if (startgame == 5) {
+            exportprofile(highscore, name);
+            }
+            clear();
+            startgame = StartingSequence();
     }
 
     clear();

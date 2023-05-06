@@ -186,10 +186,10 @@ void howToPlay(){
 		"  the states they are in, aside from their  ",
 		"               normal colour.               ",
 		"",
-		"       (colour) for Frightened Mode:        ",
+		"    Black and Grey for Frightened Mode:     ",
 		" Pac-man can consume ghosts in this state.  ",
 		"",
-		"          (colour) for Eaten Mode:          ",
+		"       Blue and Yellow for Eaten Mode:      ",
 		"Pac-man cannot interact with ghosts in this ",
 		"                   state.                   "
 	};

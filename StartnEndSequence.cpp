@@ -1,7 +1,7 @@
-#include <ncurses.h>
+// #include <ncurses.h>
 #include <curses.h>
 // #include <windows.h>
-#include <unistd.h> //replace w windows.h for linux
+#include <unistd.h> //replace w windows.h for windows
 #include <iostream>
 #include <fstream>
 #include <string>

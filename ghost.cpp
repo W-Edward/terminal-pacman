@@ -263,7 +263,7 @@ This function updates x and y coordinates + currentDirection of ghosts in chase 
         if (sqrt( pow( (x-playerPosX) , 2 ) + pow( (y-playerPosY) , 2 )) <= 8)
         {
             //algo for scatter mode (bottomleft)
-            scatter();
+            currentState = 1;
         } 
         else
         {
@@ -363,6 +363,9 @@ int Ghost::getLastY(){ // returns last Y coord of ghost
 
 int Ghost::getCurrentState() { // returns the eaten state of the ghost
     return currentState;
+}
+void Ghost::setCurrentState(int i){
+    currentState = i;
 }
 
 void Ghost::toggleCurrentDirection(){

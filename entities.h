@@ -14,6 +14,7 @@ class Ghost
         int getLastX();
         int getLastY();
         int getCurrentState();
+        void setCurrentState(int i);
         void toggleCurrentDirection();
         int getEaten(); // proposed scoring func
     private:

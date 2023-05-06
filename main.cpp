@@ -1,10 +1,11 @@
 // #include <ncurses.h>
 #include <curses.h>
 // #include <windows.h>
-#include <unistd.h> //replace w windows.h for linux
+#include <unistd.h> //replace w windows.h for windows
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <stdlib.h>
 #include "entities.h"
 #include "StartnEndSequence.h"
 using namespace std;
@@ -199,11 +200,11 @@ bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghos
     if ((Pacman.getX() == Blinky.getX()) && (Pacman.getY() == Blinky.getY())){
         return 1;
     } else if ((Pacman.getX() == Pinky.getX()) && (Pacman.getY() == Pinky.getY())){
-        return 2;
+        return 1;
     } else if ((Pacman.getX() == Inky.getX()) && (Pacman.getY() == Inky.getY())){
-        return 3;
+        return 1;
     } else if ((Pacman.getX() == Clyde.getX()) && (Pacman.getY() == Clyde.getY())){
-        return 4;
+        return 1;
     } else {
         return 0;
     }
@@ -299,10 +300,10 @@ int gameplay(){
         
         // update position of Pacman
         switch (direction) {
-            case 1:
+            case 1: //up
                 if (y > 1 && map[y-1][x]!="##") {y--;}
                 break;
-            case 2:
+            case 2: //left
                 if (x > 1 && map[y][x-1]!="##") {x--;}
                 else if ( x <= 1 && y == 8) //used for Pac-Man Looping
                 {
@@ -312,12 +313,11 @@ int gameplay(){
                         x = 19;
                     }
                 } 
-                Pacman.toggleFaceDirection();
                 break;
-            case 3:
+            case 3: //down
                 if (y < 17 && map[y+1][x]!="##" && map[y+1][x]!="==") {y++;}
                 break;
-            case 4:
+            case 4: //right
                 if (x < 18 && map[y][x+1]!="##") {x++;}
                 else if (x >= 18 && y == 8) //used for Pac-Man Looping
                 {
@@ -327,7 +327,6 @@ int gameplay(){
                         x = 0;
                     }
                 } 
-                Pacman.toggleFaceDirection();
                 break;
             case 5:
                 quit = true;
@@ -335,7 +334,6 @@ int gameplay(){
         if (quit) {
             break;
         }
-        Pacman.updatePosition(x, y);
 
         // handles collisions (Normal >> Game over >> Break/game over || Frightened >> Eaten mode)
         collisionStatus = haveCollided(Pacman, Blinky, Pinky, Inky, Clyde);
@@ -357,27 +355,26 @@ int gameplay(){
             break;
         }
 
-        // scatter mode implementation
-        if (scatterTimer == 30){
-            scatterTimer = 0;
-            Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-            Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-            Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-            Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
-        }
-        if ((internalTimer % 90) == 0){
-            roll = rand() % 4;
-            if (roll == 0){
-                Blinky.scatter();
-            } else if (roll == 1){
-                Pinky.scatter();
-            } else if (roll == 2){
-                Inky.scatter();
-            } else if (roll == 3){
-                Clyde.scatter();
-            }
-        }
-        scatterTimer++;
+        Pacman.updatePosition(x, y);
+        Pacman.toggleFaceDirection();
+
+        // // scatter mode implementation
+        // if (scatterTimer % 30 == 0){ //Ghosts stay in chase mode
+ 
+        // }
+        // if ((internalTimer % 90) == 0){ //Ghosts switch to scatter mode
+        //     roll = rand() % 4;
+        //     if (roll == 0){
+
+        //     } else if (roll == 1){
+
+        //     } else if (roll == 2){
+
+        //     } else if (roll == 3){
+
+        //     }
+        // }
+        // scatterTimer++;
 
         // some sort of condition to make powerPelletTime++
         if (/*powerPelletConsumed*/ false){

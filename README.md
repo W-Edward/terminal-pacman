@@ -54,6 +54,8 @@ In the game, the four ghosts Blinky, Pinky, Inky and Clyde have different pathfi
 | Frightened Mode | The ghost moves around the map randomly | Ghost is consumed and enters Eaten Mode upon collision |
 | Eaten Mode | The ghost returns to the ghost house after being consumed | No interaction upon collision |
 
+<br>
+
 In order to win the game, players can consume fruits, power pellets and frightened ghosts to gain points. The map is renewed once all fruits and pellets are consumed while the score is kept.
 
 | Item | Points Awarded |
@@ -72,7 +74,7 @@ In order to win the game, players can consume fruits, power pellets and frighten
 
 4. Once Pacman has been damaged 3 times by the ghosts, the game will conclude.
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -100,6 +102,8 @@ if ((internalTimer % 90) == 0 && internalTimer != 0){ //Ghosts switch to scatter
         }
 ```
 > A snippet of the code responsible for randomizing which ghost enters *scatter mode*.
+
+<br>
 
 **Variable ghost movement:** When ghosts are in *frightened mode*, their movement is generated randomly based on the available pathways they can take.
  
@@ -193,16 +197,16 @@ Our project consists of several c++ source code files dedicated to specific part
 
 `StartnEndSequence.h` is a header file stating the menu functions involved in StartnEndSequence.cpp file which is used when compiling the game program by Makefile.
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
 ## Non-Standard Libraries Used
 
 ### NCurses
-**Display:** NCurses is used to make the display colourful, clear the terminal, refresh the terminal, etc..
-
 **User Input:** NCurses is also used to take various forms of input from the user, such as arrow key operations and user input without displaying the inputted characters.
+
+**Display:** NCurses is used to make the display colourful, clear the terminal, refresh the terminal, etc..
 
 The display of user interface (UI) is supported by the Ncurses library
 
@@ -212,7 +216,7 @@ The display of user interface (UI) is supported by the Ncurses library
 
 > Main menu UI with extentions from Ncurses
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -235,4 +239,4 @@ In order to exit the game, navigate to "Exit the Game" and press *ENTER* to quit
 
 > Game Demonstration Video: *insert yt link here*
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)

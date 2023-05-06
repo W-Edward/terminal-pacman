@@ -585,7 +585,7 @@ int main()
     startgame = StartingSequence();
 
     // Game Flow
-    while (startgame != 6){ // Quit the Game
+    while (startgame != 7){ // Quit the Game
         clear();
         if (startgame == 1) { // Play the Game
             score = gameplay();
@@ -602,6 +602,8 @@ int main()
             loadStatistics(score, name, highscore);
         } else if (startgame == 5) { // Export Player Profile
             exportprofile(highscore, name);
+	} else if (startgame == 6) { // Change Playername
+            changename(name);
         }
         clear();
         startgame = StartingSequence();

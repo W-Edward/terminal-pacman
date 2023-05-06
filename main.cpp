@@ -136,11 +136,11 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
             move(++yCursor, xCursor); //Moves the cursor position to a new line!
     }
 
-    // state bug tester
-    mvaddch(0,0,char(Blinky.getCurrentState()+ '0'));
-    mvaddch(0,1,char(Pinky.getCurrentState()+ '0'));
-    mvaddch(0,2,char(Inky.getCurrentState()+ '0'));
-    mvaddch(0,3,char(Clyde.getCurrentState()+ '0'));
+    // // state bug tester
+    // mvaddch(0,0,char(Blinky.getCurrentState()+ '0'));
+    // mvaddch(0,1,char(Pinky.getCurrentState()+ '0'));
+    // mvaddch(0,2,char(Inky.getCurrentState()+ '0'));
+    // mvaddch(0,3,char(Clyde.getCurrentState()+ '0'));
     attroff(COLOR_PAIR(1));
     refresh(); //Print output to window "stdscr"
 }

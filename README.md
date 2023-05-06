@@ -25,6 +25,8 @@ ENGG1340 Final Group Project - Group 68
     - [NCurses](#ncurses)
   - [Compilation and Execution Instructions](#compilation-and-execution-instructions)
 
+<a href="#top">Back to top</a>
+
 <br>
 
 ## Group Members

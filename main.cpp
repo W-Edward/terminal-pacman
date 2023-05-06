@@ -562,7 +562,10 @@ int gameplay(){
 
 int main()
 {
-    int startgame = 0, score = 0;
+    string name="Guest-Player";
+    int highscore=0;
+    int score=0;
+    int startgame = 0;
     startgame = StartingSequence();
 
     // Game Flow
@@ -573,16 +576,16 @@ int main()
             clear();
 	    GameOver(score);
 	    clear();
-	    CheckScore(score);  //Check if score exceeded previous highest score record
+	    CheckScore(score, highscore);  //Check if score exceeded previous highest score record
             usleep(300000);
 	} else if (startgame == 2) {
-		loadprofile();
+		loadprofile(highscore, name);
         } else if (startgame == 3) {
             howToPlay();
         } else if (startgame == 4) {
-            loadStatistics(score);
+            loadStatistics(score, name, highscore);
 	} else if (startgame == 5) {
-		exportprofile();
+		exportprofile(highscore, name);
         }
         clear();
         startgame = StartingSequence();

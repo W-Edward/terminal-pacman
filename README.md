@@ -1,7 +1,7 @@
 # Pac-Man: Alpha Edition
 ENGG1340 Final Group Project - Group 68
 
-![](https://img.shields.io/badge/Exam%20Preparation-Low-red) ![](https://img.shields.io/badge/Stress%20Levels-High-critical) ![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
+![](https://img.shields.io/badge/C%2B%2B%20-100%25-brightgreen)
 
 ![alt text](https://m.media-amazon.com/images/S/aplus-media-library-service-media/aab7335f-9acf-46b6-bd3b-ee09c407e7ca.__CR0,0,970,300_PT0_SX970_V1___.jpg)
 
@@ -66,10 +66,10 @@ Pac-Man is a video game back in the 1980s which was once extremely popular acros
  Game score will be stored as an integer.
 
 ### Dynamic memory management
-
+The game map will be stored in vector form.
 
 ### File input/output
-
+The Player's profile including name and highest score can be imported or exported from a text file into the game.
 
 ### Program codes in multiple files
 
@@ -90,7 +90,6 @@ StartnEndSequence.h is a header file stating the starting screen and ending scre
 ## Non-Standard Libraries Used
 
 ### Ncurses
-
 
 <br>
 

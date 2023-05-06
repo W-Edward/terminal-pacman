@@ -51,6 +51,7 @@ Ghost::Ghost(int posX, int posY, string ghostName) // initializes the ghosts' in
     atePowerPellet = 0;
     currentDirection = 2; //1 is up, 2 is left, 3 is down and 4 is right
     currentState = 0; // state of ghost; 0: Normal/Chase, 1: Scatter, 2: Frightened, 3: Eaten
+    potentialState = 0; // state of ghost; 0: Normal/Chase, 1: Scatter, 2: Frightened, 3: Eaten
 }
 
 void Ghost::updateLastPosition(){ // updates the last position of the ghost
@@ -376,6 +377,14 @@ int Ghost::getLastX(){ // returns last X coord of ghost
 
 int Ghost::getLastY(){ // returns last Y coord of ghost
     return last_y;
+}
+
+void Ghost::setPotentialState(int state){
+    potentialState = state;
+}
+
+int Ghost::getPotentialState(){
+    return potentialState;
 }
 
 int Ghost::getCurrentState() { // returns the eaten state of the ghost

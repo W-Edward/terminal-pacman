@@ -11,6 +11,7 @@ void loadStatistics(int score, string name, int highscore);
 void CheckScore(int score, int &highscore);
 void loadprofile(int &highscore, string &name);
 void exportprofile(int highscore, string name);
+void changename(string &name);
 int GameOver(int score);
 
 #endif

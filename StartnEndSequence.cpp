@@ -31,15 +31,16 @@ void mainmenu_display (int select) {
     int xCursor, yCursor;
 	// ifstream art;
 	// string logo;
-	string menuitem[16] = {
+	string menuitem[17] = {
 		"***********************************", 
 		" Welcome to Pac-Man: Alpha Edition ", 
 		"***********************************",
 		"",
 		"Play The Pac-Man Game !",
-		"Load Save",
+		"Load Player Profile",
 		"How to Play",
-		"Game Statistics",
+		"View Game Statistics",
+		"Export Player Profile",
 		"Exit The Game",
 		"",
 		"Please ensure your terminal font size is 16!",
@@ -48,7 +49,6 @@ void mainmenu_display (int select) {
 		" while playing to avoid text display errors! ",
 		"",
 		"Use keyboard arrow keys to navigate the menu.",
-
 	};
 
 	getmaxyx(stdscr,yMax,xMax);
@@ -68,7 +68,7 @@ void mainmenu_display (int select) {
 	// }
 	
 	attron(COLOR_PAIR(1));
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 17; i++) {
 		if (i-4 == select) {
 			attron(A_REVERSE);
 		}
@@ -106,10 +106,9 @@ int StartingSequence(){
 		if (cinput == '\n') {
 			if (selection == 0){
 				//enter the main game
-				cout << "asdf" << endl;
 				return 1;
 			}else if (selection == 1) {
-				// Load save
+				// Load Player Profile
 				return 2;
 			}else if (selection == 2) {
 				// How to Play
@@ -118,11 +117,14 @@ int StartingSequence(){
 				// Load game statistics
 				return 4;
 			}else if (selection == 4) {
-				// exit the game
+				// Export Player Profile
 				return 5;
+			}else if (selection == 5) {
+				// exit the game
+				return 6;
 			}
 		} else if (cinput == KEY_DOWN) {
-			if (selection < 4) {
+			if (selection < 5) {
 				selection++;
 			} else { // loop back to the first option
 				selection = 0;
@@ -131,7 +133,7 @@ int StartingSequence(){
 			if (selection > 0) {
 				selection--;
 			} else { // loop back to the last option
-				selection = 4;
+				selection = 5;
 			}
 		}
 		usleep(150000);
@@ -145,7 +147,7 @@ int StartingSequence(){
 
 int EndingSequence(int score) {
 	int yMax, xMax;
-	string endingScreen[12] = {
+	string endingScreen[9] = {
 		"  _ __   __ _  ___ _ __ ___   __ _ _ __  ",
 		" | '_ \\ / _` |/ __| '_ ` _ \\ / _` | '_ \\ ",
 		" | |_) | (_| | (__| | | | | | (_| | | | |",
@@ -155,23 +157,11 @@ int EndingSequence(int score) {
 		"",
 		"      This game is jointly created by    ",
 		"    Edward, Lewis, Kelly, Felix & Jason  ",
-		"",
-		"        Your score in this round is:     ",
-		"" // to be replaced
 	};
-	/* "  _ __   __ _  ___ _ __ ___   __ _ _ __  ",
-		" | '_ \\ / _` |/ __| '_ ` _ \\ / _` | '_ \\ ",
-		" | |_) | (_| | (__| | | | | | (_| | | | |",
-		" | .__/ \\__,_|\\___|_| |_| |_|\\__,_|_| |_|",
-		" |_|                                     ", */
-
-	int n = (41-to_string(score).size())/2; // number of blank spaces needed on either side of the score
-	string spacing(n, ' ');
-	endingScreen[11] = spacing + to_string(score) + spacing;
 
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
-    for (int i = 0; i<12; i++) {
+    for (int i = 0; i<9; i++) {
         move((yMax/2) - endingScreen->length()/2 + i,(xMax/2) - endingScreen[i].length()/2);
         addstr(endingScreen[i].c_str());
     }
@@ -246,6 +236,17 @@ int GameOver(int score){
 	return 0;
 }
 
-void loadStatistics(){
-	//
+void loadStatistics(int score){
+	int yMax, xMax;
+	string stats[10] = {
+		"                 Statistics                 ",
+		"    ------------------------------------    ",
+		"",
+		"                Player Name:                "
+	};
+}
+void loadprofile(){
+}
+
+void exportprofile(){
 }

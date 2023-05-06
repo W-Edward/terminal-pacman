@@ -240,16 +240,6 @@ To exit the game while playing, simply hit *q* on the keyboard. The ending scree
 
 In order to exit the game, navigate to "Exit the Game" and press *ENTER* to quit the program.
 
-<iframe
-    width="640"
-    height="480"
-    src="https://www.youtube.com/watch?v=OWKlQe2JkJ4&ab_channel=ItzLewisWY"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
->
-</iframe>
-
-> Game Demonstration Video: *insert yt link here*
+> Game Demonstration Video: [*demonstration*](https://www.youtube.com/watch?v=OWKlQe2JkJ4&ab_channel=ItzLewisWY)
 
 [Back to Table of Contents](#table-of-contents)

@@ -162,6 +162,11 @@ Our project consists of three c++ source code files (StartnEndSequence.cpp, main
 
 ### Ncurses
 
+The display of user interface (UI) is supported by the Ncurses library
+
+![UI](./Picture/MainMenu.jpg)
+>Main menu UI with extentions from Ncurses
+
 [Back to table of content](#table-of-contents)
 
 <br>

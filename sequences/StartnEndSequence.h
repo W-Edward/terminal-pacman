@@ -5,6 +5,7 @@ int StartingSequence();
 int EndingSequence();
 void howToPlay();
 void loadStatistics(int score);
+void CheckScore(int score);
 void loadprofile();
 void exportprofile();
 int GameOver(int score);

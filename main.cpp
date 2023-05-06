@@ -51,19 +51,19 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
 
     // erasing the old Pacman and ghosts
     map[Pacman.getLastY()][Pacman.getLastX()] = "  ";
-    if (Blinky.ateApple) {map[Blinky.getLastY()][Blinky.getLastX()] = "··";}
+    if (Blinky.ateApple) {map[Blinky.getLastY()][Blinky.getLastX()] = "''";}
     else if (Blinky.atePowerPellet) {map[Blinky.getLastY()][Blinky.getLastX()] = "||";}
     else {map[Blinky.getLastY()][Blinky.getLastX()] = "  ";}
 
-    if (Pinky.ateApple) {map[Pinky.getLastY()][Pinky.getLastX()] = "··";}
+    if (Pinky.ateApple) {map[Pinky.getLastY()][Pinky.getLastX()] = "''";}
     else if (Pinky.atePowerPellet) {map[Pinky.getLastY()][Pinky.getLastX()] = "||";}
     else {map[Pinky.getLastY()][Pinky.getLastX()] = "  ";}
 
-    if (Inky.ateApple) {map[Inky.getLastY()][Inky.getLastX()] = "··";}
+    if (Inky.ateApple) {map[Inky.getLastY()][Inky.getLastX()] = "''";}
     else if (Inky.atePowerPellet) {map[Inky.getLastY()][Inky.getLastX()] = "||";}
     else {map[Inky.getLastY()][Inky.getLastX()] = "  ";}
 
-    if (Clyde.ateApple) {map[Clyde.getLastY()][Clyde.getLastX()] = "··";}
+    if (Clyde.ateApple) {map[Clyde.getLastY()][Clyde.getLastX()] = "''";}
     else if (Clyde.atePowerPellet) {map[Clyde.getLastY()][Clyde.getLastX()] = "||";}
     else {map[Clyde.getLastY()][Clyde.getLastX()] = "  ";}
 

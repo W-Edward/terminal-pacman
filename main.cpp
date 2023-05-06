@@ -105,11 +105,11 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
 
                         case 2:
                             //frighten colour
-                            attron(COLOR_PAIR(7));
+                            attron(COLOR_PAIR(8));
 
                         case 3:
                             //eaton colour
-                            attron(COLOR_PAIR(8));
+                            attron(COLOR_PAIR(1));
                         
                         default:
                             attron(COLOR_PAIR(3));
@@ -126,11 +126,11 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
 
                         case 2:
                             //frighten colour
-                            attron(COLOR_PAIR(7));
+                            attron(COLOR_PAIR(8));
 
                         case 3:
                             //eaton colour
-                            attron(COLOR_PAIR(8));
+                            attron(COLOR_PAIR(1));
                         
                         default:
                             attron(COLOR_PAIR(4));
@@ -147,11 +147,11 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
 
                         case 2:
                             //frighten colour
-                            attron(COLOR_PAIR(7));
+                            attron(COLOR_PAIR(8));
 
                         case 3:
                             //eaton colour
-                            attron(COLOR_PAIR(8));
+                            attron(COLOR_PAIR(1));
                         
                         default:
                             attron(COLOR_PAIR(5));
@@ -161,21 +161,21 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                         switch (Clyde.getCurrentState())
                         {
                         case 0:
-                            attron(COLOR_PAIR(6));
+                            attron(COLOR_PAIR(7));
                         
                         case 1:
-                            attron(COLOR_PAIR(6));
+                            attron(COLOR_PAIR(7));
 
                         case 2:
                             //frighten colour
-                            attron(COLOR_PAIR(7));
+                            attron(COLOR_PAIR(8));
 
                         case 3:
                             //eaton colour
-                            attron(COLOR_PAIR(8));
+                            attron(COLOR_PAIR(1));
                         
                         default:
-                            attron(COLOR_PAIR(6));
+                            attron(COLOR_PAIR(7));
                             break;
                         }
                     } else if (i == Pacman.getY() && j == Pacman.getX()) {
@@ -257,6 +257,8 @@ int gameplay(){
     if(can_change_color()) {
         init_color(COLOR_BLACK,0,0,0);
         init_color(COLOR_CYAN,0,0,888);
+        init_color(COLOR_GREEN,0,888,666);
+        init_color(COLOR_RED,888,0,0);
     }
 
     // colour init

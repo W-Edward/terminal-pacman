@@ -2,9 +2,11 @@
 #define STARTNENDSEQUENCE
 
 int StartingSequence();
-int EndingSequence(int score);
+int EndingSequence();
 void howToPlay();
-void loadStatistics();
+void loadStatistics(int score);
+void loadprofile();
+void exportprofile();
 int GameOver(int score);
 
 #endif

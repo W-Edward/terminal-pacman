@@ -216,6 +216,36 @@ void howToPlay(){
 	usleep(5000000);
 }
 
+int GameOver(int score){
+	int yMax, xMax;
+	string FinishScreen[9] = {
+		" ____  ____ ________   ___    ___  __    __  ___  ____  ",
+		"/  _ |/ _  |  _   _ \\ / _ \\  / _ \\ \\ \\  / / / _ \\|  __| ",
+		"| (_|| (_| | | | | | |  __/ | (_) | \\ \\/ / |  __/| /    ",
+		"\\__  |\\____|_| |_| |_|\\___|  \\___/   \\__/   \\___||_|    ",
+		"|___/                                                   ",
+		"        Oh no, Pac-Man got eaten by the ghosts!         ",
+		"",
+		"              Your score in this round is:              ",
+		""	
+	};
+
+	int n = (54-to_string(score).size())/2; // number of blank spaces needed on either side of the score
+	string spacing(n, ' ');
+	FinishScreen[8] = spacing + to_string(score) + spacing;
+
+    getmaxyx(stdscr,yMax,xMax);
+    attron(COLOR_PAIR(1));
+    for (int i = 0; i<9; i++) {
+        move((yMax/2) - FinishScreen->length()/2 + i,(xMax/2) - FinishScreen[i].length()/2);
+        addstr(FinishScreen[i].c_str());
+    }
+    attroff(COLOR_PAIR(1));
+    refresh();
+    usleep(5000000);
+	return 0;
+}
+
 void loadStatistics(){
 	//
 }

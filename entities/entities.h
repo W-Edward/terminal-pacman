@@ -17,10 +17,8 @@ class Ghost
         void setPotentialState(int state);
         int getPotentialState();
         int getCurrentState();
-        void setCurrentState(int i);
         void toggleCurrentDirection();
         void emptyMap(int posX, int posY);
-        int getEaten(); // proposed scoring func
     private:
         int x, y, last_x, last_y, currentDirection, currentState, potentialState;
         string name;
@@ -47,7 +45,7 @@ class Pacman
 class PrintASCII 
 {
     public:
-        void txtprint(int deviationFromMidX, int deviationFromMidY, string filename, int colorpair);
+        void txtprint(int deviationFromMidX, int deviationFromMidY, string filename);
     private:
         int pictureHeight(string filename);
         int pictureWidth(string filename);

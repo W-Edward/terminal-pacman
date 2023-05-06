@@ -397,10 +397,6 @@ int Ghost::getCurrentState() { // returns the eaten state of the ghost
     return currentState;
 }
 
-void Ghost::setCurrentState(int i){
-    currentState = i;
-}
-
 void Ghost::toggleCurrentDirection(){
     currentDirection = findOppositeDirection(currentDirection);
 }
@@ -409,19 +405,3 @@ void Ghost::emptyMap(int posX, int posY)
 {
     tempa[posY][posX] = "  ";
 }
-
-int Ghost::getEaten() { // returns the eaten state of the ghost
-	//Proposed method for adding scores upon ghost is eaten
-
-	//if (isEaten==true)
-	//	eatenghosts++;
-	//if (eatenghosts==1)
-	//	score+=200;
-	//else if (eatenghosts==2)
-	//	score+=400;
-	//else if (eatenghosts==3)
-	//	score+=800;
-	//else if (eatenghosts==4)
-	//	score+=1600;
-    return currentState;
-} // scoring system should be handled in main or some other code pieces, will be implemented later

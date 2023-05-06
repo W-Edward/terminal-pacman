@@ -47,7 +47,7 @@ class Pacman
 class PrintASCII 
 {
     public:
-        void txtprint(int deviationFromMidX, int deviationFromMidY, string filename, int colorpair);
+        void txtprint(int deviationFromMidX, int deviationFromMidY, string filename);
     private:
         int pictureHeight(string filename);
         int pictureWidth(string filename);

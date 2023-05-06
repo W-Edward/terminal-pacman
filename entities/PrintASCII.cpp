@@ -4,7 +4,7 @@
 #include <iostream>
 #include "entities.h"
 
-void PrintASCII::txtprint(int deviationFromMidX, int deviationFromMidY, string filename, int colorpair) {\
+void PrintASCII::txtprint(int deviationFromMidX, int deviationFromMidY, string filename) {\
 
 	//variable setup
 	int xMax,yMax;
@@ -19,22 +19,22 @@ void PrintASCII::txtprint(int deviationFromMidX, int deviationFromMidY, string f
 	//File IO setup
 	ifstream txtfile;
 	string line;
-	txtfile.open(filename);
+	txtfile.open(filename.c_str());
 	 
 	//error message for fail to open file
 	 if (txtfile.fail()) {
+		addstr("error");
 		std::cerr << "ERROR: Fail to open the file" << endl;
 		return;
 	}
 
 	//Drawing Loop
-	attron(COLOR_PAIR(colorpair));
+	attron(COLOR_PAIR(1));
 	for (int i=0; i < pictureHeight(filename); ++i){
 		getline(txtfile,line);
 		addstr(line.c_str());
 		move(++yCursor,xCursor);
 	}
-	attroff(COLOR_PAIR(colorpair));
 	txtfile.close();
 	return;
 }

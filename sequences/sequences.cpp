@@ -6,7 +6,9 @@
 #include <fstream>
 #include <string>
 #include <stdio.h>
+#include<dirent.h>
 #include"sequences.h"
+#include"../entities/entities.h"
 using namespace std;
 
 int fileline(string filename) {
@@ -146,12 +148,7 @@ int StartingSequence(){
 
 int EndingSequence() {
 	int yMax, xMax;
-	string endingScreen[9] = {
-		"  _ __   __ _  ___ _ __ ___   __ _ _ __  ",
-		" | '_ \\ / _` |/ __| '_ ` _ \\ / _` | '_ \\ ",
-		" | |_) | (_| | (__| | | | | | (_| | | | |",
-		" | .__/ \\__,_|\\___|_| |_| |_|\\__,_|_| |_|",
-		" |_|                                     ",
+	string endingScreen[4] = {
 		"       Thanks for playing our game!      ",
 		"",
 		"      This game is jointly created by    ",
@@ -159,11 +156,17 @@ int EndingSequence() {
 	};
 
     getmaxyx(stdscr,yMax,xMax);
+
     attron(COLOR_PAIR(1));
-    for (int i = 0; i<9; i++) {
-        move((yMax/2) - endingScreen->length()/2 + i,(xMax/2) - endingScreen[i].length()/2);
+	
+	PrintASCII printer;
+	printer.txtprint(20,12,"pacmanlogo.txt");
+
+    for (int i = 0; i<4; i++) {
+        move((yMax/2) + i-5,(xMax/2) - endingScreen[i].length()/2);
         addstr(endingScreen[i].c_str());
     }
+
     attroff(COLOR_PAIR(1));
     refresh();
     usleep(5000000);
@@ -207,12 +210,7 @@ void howToPlay(){
 
 int GameOver(int score){
 	int yMax, xMax;
-	string FinishScreen[9] = {
-		" ____  ____ ________   ___    ___  __    __  ___  ____  ",
-		"/  _ |/ _  |  _   _ \\ / _ \\  / _ \\ \\ \\  / / / _ \\|  __| ",
-		"| (_|| (_| | | | | | |  __/ | (_) | \\ \\/ / |  __/| /    ",
-		"\\__  |\\____|_| |_| |_|\\___|  \\___/   \\__/   \\___||_|    ",
-		"|___/                                                   ",
+	string FinishScreen[4] = {
 		"        Oh no, Pac-Man got eaten by the ghosts!         ",
 		"",
 		"              Your score in this round is:              ",
@@ -225,8 +223,12 @@ int GameOver(int score){
 
     getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
-    for (int i = 0; i<9; i++) {
-        move((yMax/2) - FinishScreen->length()/2 + i,(xMax/2) - FinishScreen[i].length()/2);
+
+	PrintASCII printer;
+	printer.txtprint(20,12,"gameover.txt");
+
+    for (int i = 0; i<4; i++) {
+        move((yMax/2) + i - 5,(xMax/2) - FinishScreen[i].length()/2);
         addstr(FinishScreen[i].c_str());
     }
     attroff(COLOR_PAIR(1));

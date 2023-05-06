@@ -3,9 +3,9 @@ GENERAL_FLAGS = -pedantic-errors -std=c++11
 LINKER_FLAGS = -lncurses
 
 # starting and end sequence
-STARTINGSEQ_OBJ = StartnEndSequence.o
-STARTINGSEQ_SRC = ./sequences/StartnEndSequence.cpp
-STARTINGSEQ_HEADER = ./sequences/StartnEndSequence.h
+STARTINGSEQ_OBJ = sequences.o
+STARTINGSEQ_SRC = ./sequences/sequences.cpp
+STARTINGSEQ_HEADER = ./sequences/sequences.h
 # ghost
 GHOST_OBJ = ghost.o
 GHOST_SRC = ./entities/ghost.cpp

@@ -220,6 +220,7 @@ bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghos
         return 1;
     } else if (((Pacman.getX() == Pinky.getX()) && (Pacman.getY() == Pinky.getY())) || ((Pacman.getLastX() == Pinky.getX() && Pacman.getLastY() == Pinky.getY()) 
     && (Pacman.getX() == Pinky.getLastX() && Pacman.getY() == Pinky.getLastY()))){
+        return 2;
     } else if (((Pacman.getX() == Inky.getX()) && (Pacman.getY() == Inky.getY())) || ((Pacman.getLastX() == Inky.getX() && Pacman.getLastY() == Inky.getY()) 
     && (Pacman.getX() == Inky.getLastX() && Pacman.getY() == Inky.getLastY()))){
         return 3;

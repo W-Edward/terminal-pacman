@@ -51,19 +51,19 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
 
     // erasing the old Pacman and ghosts
     map[Pacman.getLastY()][Pacman.getLastX()] = "  ";
-    if (Blinky.ateApple) {map[Blinky.getLastY()][Blinky.getLastX()] = "··";}
+    if (Blinky.ateApple) {map[Blinky.getLastY()][Blinky.getLastX()] = "''";}
     else if (Blinky.atePowerPellet) {map[Blinky.getLastY()][Blinky.getLastX()] = "||";}
     else {map[Blinky.getLastY()][Blinky.getLastX()] = "  ";}
 
-    if (Pinky.ateApple) {map[Pinky.getLastY()][Pinky.getLastX()] = "··";}
+    if (Pinky.ateApple) {map[Pinky.getLastY()][Pinky.getLastX()] = "''";}
     else if (Pinky.atePowerPellet) {map[Pinky.getLastY()][Pinky.getLastX()] = "||";}
     else {map[Pinky.getLastY()][Pinky.getLastX()] = "  ";}
 
-    if (Inky.ateApple) {map[Inky.getLastY()][Inky.getLastX()] = "··";}
+    if (Inky.ateApple) {map[Inky.getLastY()][Inky.getLastX()] = "''";}
     else if (Inky.atePowerPellet) {map[Inky.getLastY()][Inky.getLastX()] = "||";}
     else {map[Inky.getLastY()][Inky.getLastX()] = "  ";}
 
-    if (Clyde.ateApple) {map[Clyde.getLastY()][Clyde.getLastX()] = "··";}
+    if (Clyde.ateApple) {map[Clyde.getLastY()][Clyde.getLastX()] = "''";}
     else if (Clyde.atePowerPellet) {map[Clyde.getLastY()][Clyde.getLastX()] = "||";}
     else {map[Clyde.getLastY()][Clyde.getLastX()] = "  ";}
 
@@ -218,11 +218,11 @@ bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghos
     if ((Pacman.getX() == Blinky.getX()) && (Pacman.getY() == Blinky.getY())){
         return 1;
     } else if ((Pacman.getX() == Pinky.getX()) && (Pacman.getY() == Pinky.getY())){
-        return 1;
+        return 2;
     } else if ((Pacman.getX() == Inky.getX()) && (Pacman.getY() == Inky.getY())){
-        return 1;
+        return 3;
     } else if ((Pacman.getX() == Clyde.getX()) && (Pacman.getY() == Clyde.getY())){
-        return 1;
+        return 4;
     } else {
         return 0;
     }
@@ -482,6 +482,7 @@ int gameplay(){
             }
         } else if (powerPelletTime >= 30){
             powerPelletTime = 0;
+            powerPelletConsumed = 0;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eaten
                 Blinky.setPotentialState(0);
             }

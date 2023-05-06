@@ -305,18 +305,18 @@ void Ghost::frightened() // frightened mode movement and pathfinding
     // check directions that are "  "
     int availableDirections[4] = {1, 2, 3, 4}; // = up, left, down, right
     if (tempa[y-1][x] != "  "){availableDirections[0] = -1;} // up
-    if (tempa[y+1][x] != "  "){availableDirections[0] = -1;} // down
+    if (tempa[y+1][x] != "  "){availableDirections[2] = -1;} // down
     
     // checks if ghost is on the edge of the map and handles looping for direction checking
     if (x==0){
-        if (tempa[y][19] != "  "){availableDirections[0] = -1;} // left
-        if (tempa[y][x+1] != "  "){availableDirections[0] = -1;} // right
+        if (tempa[y][19] != "  "){availableDirections[1] = -1;} // left
+        if (tempa[y][x+1] != "  "){availableDirections[3] = -1;} // right
     } else if (x==19){
-        if (tempa[y][x-1] != "  "){availableDirections[0] = -1;} // left
-        if (tempa[y][0] != "  "){availableDirections[0] = -1;} // right
+        if (tempa[y][x-1] != "  "){availableDirections[1] = -1;} // left
+        if (tempa[y][0] != "  "){availableDirections[3] = -1;} // right
     } else {
-        if (tempa[y][x-1] != "  "){availableDirections[0] = -1;} // left
-        if (tempa[y][x+1] != "  "){availableDirections[0] = -1;} // right
+        if (tempa[y][x-1] != "  "){availableDirections[1] = -1;} // left
+        if (tempa[y][x+1] != "  "){availableDirections[3] = -1;} // right
     }
 
     // block off opposite direction since ghosts cant walk backwards
@@ -325,7 +325,7 @@ void Ghost::frightened() // frightened mode movement and pathfinding
 
     // roll a random direction that isn't blocked off
     int roll = rand() % 4;
-    while (availableDirections[roll] == -1){roll = rand() % 4;}
+    // while (availableDirections[roll] == -1){roll = rand() % 4;}
     
     switch (availableDirections[roll]){
         case 1:
@@ -339,6 +339,8 @@ void Ghost::frightened() // frightened mode movement and pathfinding
             break;
         case 4:
             y++;
+            break;
+        case -1:
             break;
     }
 }

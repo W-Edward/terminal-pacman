@@ -95,88 +95,36 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
     {
             for (int j = 0; j < 20; j++) {
                     if (i == Blinky.getY() && j == Blinky.getX()) {
-                        switch (Blinky.getCurrentState())
-                        {
-                        case 0:
+                        if (Blinky.getCurrentState() == 0 || Blinky.getCurrentState() == 1){
                             attron(COLOR_PAIR(3));
-                        
-                        case 1:
-                            attron(COLOR_PAIR(3));
-
-                        case 2:
-                            //frighten colour
+                        } else if (Blinky.getCurrentState() == 2){
                             attron(COLOR_PAIR(8));
-
-                        case 3:
-                            //eaton colour
+                        } else if (Blinky.getCurrentState() == 3){
                             attron(COLOR_PAIR(1));
-                        
-                        default:
-                            attron(COLOR_PAIR(3));
-                            break;
                         }
                     } else if (i == Pinky.getY() && j == Pinky.getX()) {
-                        switch (Pinky.getCurrentState())
-                        {
-                        case 0:
-                            attron(COLOR_PAIR(4));
-                        
-                        case 1:
-                            attron(COLOR_PAIR(4));
-
-                        case 2:
-                            //frighten colour
+                        if (Pinky.getCurrentState() == 0 || Pinky.getCurrentState() == 1){
+                            attron(COLOR_PAIR(3));
+                        } else if (Pinky.getCurrentState() == 2){
                             attron(COLOR_PAIR(8));
-
-                        case 3:
-                            //eaton colour
+                        } else if (Pinky.getCurrentState() == 3){
                             attron(COLOR_PAIR(1));
-                        
-                        default:
-                            attron(COLOR_PAIR(4));
-                            break;
                         }
                     } else if (i == Inky.getY() && j == Inky.getX()) {
-                        switch (Inky.getCurrentState())
-                        {
-                        case 0:
-                            attron(COLOR_PAIR(5));
-                        
-                        case 1:
-                            attron(COLOR_PAIR(5));
-
-                        case 2:
-                            //frighten colour
+                        if (Inky.getCurrentState() == 0 || Inky.getCurrentState() == 1){
+                            attron(COLOR_PAIR(3));
+                        } else if (Inky.getCurrentState() == 2){
                             attron(COLOR_PAIR(8));
-
-                        case 3:
-                            //eaton colour
+                        } else if (Inky.getCurrentState() == 3){
                             attron(COLOR_PAIR(1));
-                        
-                        default:
-                            attron(COLOR_PAIR(5));
-                            break;
                         }
                     } else if (i == Clyde.getY() && j == Clyde.getX()) {
-                        switch (Clyde.getCurrentState())
-                        {
-                        case 0:
-                            attron(COLOR_PAIR(7));
-                        
-                        case 1:
-                            attron(COLOR_PAIR(7));
-
-                        case 2:
-                            //frighten colour
+                        if (Clyde.getCurrentState() == 0 || Clyde.getCurrentState() == 1){
+                            attron(COLOR_PAIR(3));
+                        } else if (Clyde.getCurrentState() == 2){
                             attron(COLOR_PAIR(8));
-
-                        case 3:
-                            //eaton colour
+                        } else if (Clyde.getCurrentState() == 3){
                             attron(COLOR_PAIR(1));
-                        
-                        default:
-                            attron(COLOR_PAIR(7));
-                            break;
                         }
                     } else if (i == Pacman.getY() && j == Pacman.getX()) {
                         attron(COLOR_PAIR(2));
@@ -188,11 +136,11 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
             move(++yCursor, xCursor); //Moves the cursor position to a new line!
     }
 
-    //state bug tester
-    // mvaddch(0,0,char(Blinky.getCurrentState()+ '0'));
-    // mvaddch(0,1,char(Pinky.getCurrentState()+ '0'));
-    // mvaddch(0,2,char(Inky.getCurrentState()+ '0'));
-    // mvaddch(0,3,char(Clyde.getCurrentState()+ '0'));
+    // state bug tester
+    mvaddch(0,0,char(Blinky.getCurrentState()+ '0'));
+    mvaddch(0,1,char(Pinky.getCurrentState()+ '0'));
+    mvaddch(0,2,char(Inky.getCurrentState()+ '0'));
+    mvaddch(0,3,char(Clyde.getCurrentState()+ '0'));
     attroff(COLOR_PAIR(1));
     refresh(); //Print output to window "stdscr"
 }
@@ -475,7 +423,7 @@ int gameplay(){
             Clyde.toggleCurrentDirection();
             Clyde.setPotentialState(2);
             ++powerPelletTime;
-        } else if (powerPelletTime > 1 && powerPelletTime < 15){ // stage 2 and up of power pellet
+        } else if (powerPelletTime > 1 && powerPelletTime < 20){ // stage 2 and up of power pellet
             powerPelletTime++;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eatens
                 Blinky.setPotentialState(2);
@@ -505,7 +453,7 @@ int gameplay(){
             {
                 Clyde.setPotentialState(0);
             }
-        } else if (powerPelletTime >= 15){
+        } else if (powerPelletTime >= 20){
             powerPelletTime = 0;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eaten
                 Blinky.setPotentialState(0);

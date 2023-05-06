@@ -6,6 +6,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 #include "entities.h"
 #include "StartnEndSequence.h"
 using namespace std;
@@ -374,6 +375,42 @@ int gameplay(){
             break;
         }
 
+        //scatter mode implementation
+        if (scatterTimer % 30 == 0 && scatterTimer != 0){ // Ghosts returns to chase mode
+            if (Blinky.getPotentialState() == 1){
+                Blinky.toggleCurrentDirection();
+                Blinky.setPotentialState(0);
+            }
+            if (Pinky.getPotentialState() == 1){
+                Pinky.toggleCurrentDirection();
+                Pinky.setPotentialState(0);
+            }
+            if (Inky.getPotentialState() == 1){
+                Inky.toggleCurrentDirection();
+                Inky.setPotentialState(0);
+            }
+            if (Clyde.getPotentialState() == 1){
+                Clyde.toggleCurrentDirection();
+                Clyde.setPotentialState(0);
+            }
+        }
+        if ((internalTimer % 90) == 0 && internalTimer != 0){ //Ghosts switch to scatter mode
+            roll = rand() % 4;
+            if (roll == 0 && Blinky.getPotentialState() <= 1){
+                Blinky.toggleCurrentDirection();
+                Blinky.setPotentialState(1);
+            } else if (roll == 1 && Pinky.getPotentialState() <= 1){
+                Pinky.toggleCurrentDirection();
+                Pinky.setPotentialState(1);
+            } else if (roll == 2 && Inky.getPotentialState() <= 1){
+                Inky.toggleCurrentDirection();
+                Inky.setPotentialState(1);
+            } else if (roll == 3 && Clyde.getPotentialState() <= 1){
+                Clyde.toggleCurrentDirection();
+                Clyde.setPotentialState(1);
+            }
+        }
+        scatterTimer++;
 
         Pacman.updatePosition(x, y);
         Pacman.toggleFaceDirection();
@@ -394,43 +431,6 @@ int gameplay(){
             Clyde.emptyMap(Pacman.getX(), Pacman.getY());
             powerPelletConsumed = 1;
         }
-
-        // scatter mode implementation
-        // if (scatterTimer % 30 == 0 && scatterTimer != 0){ // Ghosts returns to chase mode
-        //     if (Blinky.getPotentialState() == 1){
-        //         Blinky.toggleCurrentDirection();
-        //         Blinky.setPotentialState(0);
-        //     }
-        //     if (Pinky.getPotentialState() == 1){
-        //         Pinky.toggleCurrentDirection();
-        //         Pinky.setPotentialState(0);
-        //     }
-        //     if (Inky.getPotentialState() == 1){
-        //         Inky.toggleCurrentDirection();
-        //         Inky.setPotentialState(0);
-        //     }
-        //     if (Clyde.getPotentialState() == 1){
-        //         Clyde.toggleCurrentDirection();
-        //         Clyde.setPotentialState(0);
-        //     }
-        // }
-        // if ((internalTimer % 90) == 0 && internalTimer != 0){ //Ghosts switch to scatter mode
-        //     roll = rand() % 4;
-        //     if (roll == 0 && Blinky.getPotentialState() <= 1){
-        //         Blinky.toggleCurrentDirection();
-        //         Blinky.setPotentialState(1);
-        //     } else if (roll == 1 && Pinky.getPotentialState() <= 1){
-        //         Pinky.toggleCurrentDirection();
-        //         Pinky.setPotentialState(1);
-        //     } else if (roll == 2 && Inky.getPotentialState() <= 1){
-        //         Inky.toggleCurrentDirection();
-        //         Inky.setPotentialState(1);
-        //     } else if (roll == 3 && Clyde.getPotentialState() <= 1){
-        //         Clyde.toggleCurrentDirection();
-        //         Clyde.setPotentialState(1);
-        //     }
-        // }
-        // scatterTimer++;
 
         // some sort of condition to make powerPelletTime++
         if (/*powerPelletConsumed*/ false){

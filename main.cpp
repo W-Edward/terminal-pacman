@@ -104,7 +104,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                         }
                     } else if (i == Pinky.getY() && j == Pinky.getX()) {
                         if (Pinky.getCurrentState() == 0 || Pinky.getCurrentState() == 1){
-                            attron(COLOR_PAIR(3));
+                            attron(COLOR_PAIR(4));
                         } else if (Pinky.getCurrentState() == 2){
                             attron(COLOR_PAIR(8));
                         } else if (Pinky.getCurrentState() == 3){
@@ -112,7 +112,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                         }
                     } else if (i == Inky.getY() && j == Inky.getX()) {
                         if (Inky.getCurrentState() == 0 || Inky.getCurrentState() == 1){
-                            attron(COLOR_PAIR(3));
+                            attron(COLOR_PAIR(5));
                         } else if (Inky.getCurrentState() == 2){
                             attron(COLOR_PAIR(8));
                         } else if (Inky.getCurrentState() == 3){
@@ -120,7 +120,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                         }
                     } else if (i == Clyde.getY() && j == Clyde.getX()) {
                         if (Clyde.getCurrentState() == 0 || Clyde.getCurrentState() == 1){
-                            attron(COLOR_PAIR(3));
+                            attron(COLOR_PAIR(6));
                         } else if (Clyde.getCurrentState() == 2){
                             attron(COLOR_PAIR(8));
                         } else if (Clyde.getCurrentState() == 3){

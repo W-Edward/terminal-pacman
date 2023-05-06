@@ -35,7 +35,7 @@ ENGG1340 Final Group Project - Group 68
 |  **Widjaja Edward Aryaguna**  |  3036029703  | W-Edward
 |  **Wong Hoi Lei**  |  3036063917  | ginngerine
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 

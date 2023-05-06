@@ -394,6 +394,26 @@ int gameplay(){
             break;
         }
 
+        Pacman.updatePosition(x, y);
+        Pacman.toggleFaceDirection();
+
+        if (map[Pacman.getY()][Pacman.getX()] == "''")
+        {
+            Blinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Pinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Inky.emptyMap(Pacman.getX(), Pacman.getY());
+            Clyde.emptyMap(Pacman.getX(), Pacman.getY());
+            score += 50; // points for staying alive
+        }
+        else if (map[Pacman.getY()][Pacman.getX()] == "||")
+        {
+            Blinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Pinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Inky.emptyMap(Pacman.getX(), Pacman.getY());
+            Clyde.emptyMap(Pacman.getX(), Pacman.getY());
+            powerPelletConsumed = 1;
+        }
+
         //scatter mode implementation
         if (scatterTimer % 30 == 0 && scatterTimer != 0){ // Ghosts returns to chase mode
             if (Blinky.getPotentialState() == 1){
@@ -430,27 +450,6 @@ int gameplay(){
             }
         }
         scatterTimer++;
-
-        Pacman.updatePosition(x, y);
-        Pacman.toggleFaceDirection();
-
-        if (map[Pacman.getY()][Pacman.getX()] == "''")
-        {
-            Blinky.emptyMap(Pacman.getX(), Pacman.getY());
-            Pinky.emptyMap(Pacman.getX(), Pacman.getY());
-            Inky.emptyMap(Pacman.getX(), Pacman.getY());
-            Clyde.emptyMap(Pacman.getX(), Pacman.getY());
-            score += 50; // points for staying alive
-        }
-        else if (map[Pacman.getY()][Pacman.getX()] == "||")
-        {
-            Blinky.emptyMap(Pacman.getX(), Pacman.getY());
-            Pinky.emptyMap(Pacman.getX(), Pacman.getY());
-            Inky.emptyMap(Pacman.getX(), Pacman.getY());
-            Clyde.emptyMap(Pacman.getX(), Pacman.getY());
-            powerPelletConsumed = 1;
-        }
-
         // some sort of condition to make powerPelletTime++
         if (/*powerPelletConsumed*/ false){
             powerPelletTime++;

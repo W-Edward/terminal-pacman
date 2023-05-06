@@ -280,12 +280,12 @@ void loadStatistics(int score, string name, int highscore){
     usleep(5000000);
 }
 
-void CheckScore(int score, int &highscore){
+void CheckScore(int score, int highscore){
 	if (score>highscore)
 		highscore=score;
 }
 	
-void loadprofile(int &highscore, string &name){
+void loadprofile(int highscore, string name){
 	int yMax, xMax;
 	ifstream fin;
 	fin.open("Profile.txt");

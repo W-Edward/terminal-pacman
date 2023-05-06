@@ -215,7 +215,7 @@ bool uponCollision(Ghost &Ghost){ // handles actions upon collision; returns "qu
         // game over screen (+ score if applicable)
         return true;
     } else if (Ghost.getCurrentState() == 2) { // Frightened mode
-        Ghost.eaten();
+        Ghost.setPotentialState(3); // sets ghost to eaten mode
     }
     // Eaten mode is ignored because there is no effect
     return false;
@@ -335,6 +335,9 @@ int gameplay(){
             break;
         }
 
+        Pacman.updatePosition(x, y);
+        Pacman.toggleFaceDirection();
+
         // handles collisions (Normal >> Game over >> Break/game over || Frightened >> Eaten mode)
         collisionStatus = haveCollided(Pacman, Blinky, Pinky, Inky, Clyde);
         switch (collisionStatus){
@@ -355,26 +358,42 @@ int gameplay(){
             break;
         }
 
-        Pacman.updatePosition(x, y);
-        Pacman.toggleFaceDirection();
-
-        // // scatter mode implementation
-        // if (scatterTimer % 30 == 0){ //Ghosts stay in chase mode
- 
-        // }
-        // if ((internalTimer % 90) == 0){ //Ghosts switch to scatter mode
-        //     roll = rand() % 4;
-        //     if (roll == 0){
-
-        //     } else if (roll == 1){
-
-        //     } else if (roll == 2){
-
-        //     } else if (roll == 3){
-
-        //     }
-        // }
-        // scatterTimer++;
+        // scatter mode implementation
+        if (scatterTimer % 30 == 0 && scatterTimer != 0){ // Ghosts returns to chase mode
+            if (Blinky.getPotentialState() == 1){
+                Blinky.toggleCurrentDirection();
+                Blinky.setPotentialState(0);
+            }
+            if (Pinky.getPotentialState() == 1){
+                Pinky.toggleCurrentDirection();
+                Pinky.setPotentialState(0);
+            }
+            if (Inky.getPotentialState() == 1){
+                Inky.toggleCurrentDirection();
+                Inky.setPotentialState(0);
+            }
+            if (Clyde.getPotentialState() == 1){
+                Clyde.toggleCurrentDirection();
+                Clyde.setPotentialState(0);
+            }
+        }
+        if ((internalTimer % 90) == 0 && internalTimer != 0){ //Ghosts switch to scatter mode
+            roll = rand() % 4;
+            if (roll == 0 && Blinky.getPotentialState() <= 1){
+                Blinky.toggleCurrentDirection();
+                Blinky.setPotentialState(1);
+            } else if (roll == 1 && Pinky.getPotentialState() <= 1){
+                Pinky.toggleCurrentDirection();
+                Pinky.setPotentialState(1);
+            } else if (roll == 2 && Inky.getPotentialState() <= 1){
+                Inky.toggleCurrentDirection();
+                Inky.setPotentialState(1);
+            } else if (roll == 3 && Clyde.getPotentialState() <= 1){
+                Clyde.toggleCurrentDirection();
+                Clyde.setPotentialState(1);
+            }
+        }
+        scatterTimer++;
 
         // some sort of condition to make powerPelletTime++
         if (/*powerPelletConsumed*/ false){
@@ -384,45 +403,45 @@ int gameplay(){
         // handle if power pellet consumed (handle entering and staying in frightened mode)
         if (powerPelletTime == 1){ // stage 1 of power pellet
             Blinky.toggleCurrentDirection();
-            Blinky.frightened();
+            Blinky.setPotentialState(2);
             Pinky.toggleCurrentDirection();
-            Pinky.frightened();
+            Pinky.setPotentialState(2);
             Inky.toggleCurrentDirection();
-            Inky.frightened();
+            Inky.setPotentialState(2);
             Clyde.toggleCurrentDirection();
-            Clyde.frightened();
+            Clyde.setPotentialState(2);
         } else if (powerPelletTime >= 1 && powerPelletTime < 30){ // stage 2 and up of power pellet
             powerPelletTime++;
-            if (Blinky.getCurrentState() == 2){
-                Blinky.frightened();
+            if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eatens
+                Blinky.setPotentialState(3);
             }
-            if (Pinky.getCurrentState() == 2){
-                Pinky.frightened();
+            if (Pinky.getPotentialState() == 2){
+                Pinky.setPotentialState(3);
             }
-            if (Inky.getCurrentState() == 2){
-                Inky.frightened();
+            if (Inky.getPotentialState() == 2){
+                Inky.setPotentialState(3);
             }
-            if (Clyde.getCurrentState() == 2){
-                Clyde.frightened();
+            if (Clyde.getPotentialState() == 2){
+                Clyde.setPotentialState(3);
             }
         } else if (powerPelletTime >= 30){
             powerPelletTime = 0;
-            if (Blinky.getCurrentState() == 2){
-                Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eaten
+                Blinky.setPotentialState(0);
             }
-            if (Pinky.getCurrentState() == 2){
-                Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            if (Pinky.getPotentialState() == 2){
+                Pinky.setPotentialState(0);
             }
-            if (Inky.getCurrentState() == 2){
-                Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            if (Inky.getPotentialState() == 2){
+                Inky.setPotentialState(0);
             }
-            if (Clyde.getCurrentState() == 2){
-                Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
+            if (Clyde.getPotentialState() == 2){
+                Clyde.setPotentialState(0);
             }
         }
 
         // update position of ghost
-        switch(Blinky.getCurrentState()){
+        switch(Blinky.getPotentialState()){
             case 0: // Normal/Chase mode
                 Blinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
                 break;
@@ -436,7 +455,7 @@ int gameplay(){
                 Blinky.eaten();
                 break;
         }
-        switch(Pinky.getCurrentState()){
+        switch(Pinky.getPotentialState()){
             case 0: // Normal/Chase mode
                 Pinky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
                 break;
@@ -450,7 +469,7 @@ int gameplay(){
                 Blinky.eaten();
                 break;
         }
-        switch(Inky.getCurrentState()){
+        switch(Inky.getPotentialState()){
             case 0: // Normal/Chase mode
                 Inky.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
                 break;
@@ -464,7 +483,7 @@ int gameplay(){
                 Inky.eaten();
                 break;
         }
-        switch(Clyde.getCurrentState()){
+        switch(Clyde.getPotentialState()){
             case 0: // Normal/Chase mode
                 Clyde.chase(Pacman.getX(), Pacman.getY(), Blinky.getX(), Blinky.getY(), direction);
                 break;

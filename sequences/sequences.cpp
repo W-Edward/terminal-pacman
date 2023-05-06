@@ -7,7 +7,6 @@
 #include <string>
 #include <stdio.h>
 #include"sequences.h"
-#include"../entities/entities.h"
 using namespace std;
 
 int fileline(string filename) {
@@ -187,7 +186,7 @@ void howToPlay(){
 		"  the states they are in, aside from their  ",
 		"               normal colour.               ",
 		"",
-		"    Black and Gray for Frightened Mode:     ",
+		"     Black & Gray for Frightened Mode:      ",
 		" Pac-man can consume ghosts in this state.  ",
 		"",
 		"        Blue & Yellow for Eaten Mode:       ",
@@ -195,22 +194,15 @@ void howToPlay(){
 		"                   state.                   "
 	};
 
-	getmaxyx(stdscr,yMax,xMax);
+    getmaxyx(stdscr,yMax,xMax);
     attron(COLOR_PAIR(1));
     for (int i = 0; i<19; i++) {
         move((yMax/2) - instructions->length()/2 + i,(xMax/2) - instructions[i].length()/2);
-		if (i == 13 || i == 14) {
-			attron(COLOR_PAIR(8));
-			addstr(instructions[i].c_str());
-			attron(COLOR_PAIR(1));
-		} else {
-			addstr(instructions[i].c_str());
-		}
-        
+        addstr(instructions[i].c_str());
     }
     attroff(COLOR_PAIR(1));
     refresh();
-	usleep(5000000);
+    usleep(5000000);
 }
 
 int GameOver(int score){
@@ -227,7 +219,7 @@ int GameOver(int score){
 		""	
 	};
 
-	int n = (54-to_string(score).size())/2; // number of blank spaces needed on either side of the score
+	int n = (56-to_string(score).size())/2; // number of blank spaces needed on either side of the score
 	string spacing(n, ' ');
 	FinishScreen[8] = spacing + to_string(score) + spacing;
 
@@ -240,7 +232,7 @@ int GameOver(int score){
     attroff(COLOR_PAIR(1));
     refresh();
     usleep(5000000);
-	return 0;
+    return 0;
 }
 
 void loadStatistics(int score, string name, int highscore){
@@ -300,7 +292,7 @@ void loadprofile(int &highscore, string &name){
 	"",
 	"",
 	"",
-	"    ----------------------------------    	",
+	"    ----------------------------------    ",
 	};
 	if (fin.fail()){
 		loadscreen[2] ="";
@@ -351,7 +343,7 @@ void exportprofile(int highscore, string name){
 	"",
 	"",
 	"",
-	"    ----------------------------------    	",
+	"    ----------------------------------    ",
 	};
 	if (fout.fail()){
 		exportscreen[2] ="";

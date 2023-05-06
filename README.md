@@ -35,41 +35,82 @@ ENGG1340 Final Group Project - Group 68
 |  **Widjaja Edward Aryaguna**  |  3036029703  | W-Edward
 |  **Wong Hoi Lei**  |  3036063917  | ginngerine
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
 ##  About the Game
-Pac-man was a trending video game in the 1980s, and we have decided to bring back the retro game in a text-based form for users to relive their great memories. 
+Pac-Man was a trending video game in the 1980s. Taking inspiration from it, we decided to bring back it back with in a text-based yet arcade-style form for users to relive their greatest memories.
 
 ###  Game Description
-Pac-Man is a video game back in the 1980s which was once extremely popular across the globe. The game design is intended to be a harmonious-themed arcade game which is made to be suitable for everyone, including female gamers. Pac-Man managed to stand out among other video games in its era since most computer games were oriented for male users, since the majority of information technology staff were men.
+Pac-Man, a video game that originated in the 1980s, was once extremely popular across the globe. The game design was intended to be a harmonious-themed arcade game suitable for gamers of all genders. This helped Pac-Man stand out amongst other video games from its era since most computer games were strongly male-oriented, since the majority of people involved with information technology were men.
+
+In the game, the four ghosts Blinky, Pinky, Inky and Clyde have different pathfinding algorithms designed to chase down Pacman in different ways. To further enhance the game, ghosts can engage in different modes that allow the player to engage with them differently.
+
+| Ghost Mode | Ghost Behaviour | Impact Upon Collision |
+| :------------:  |  :------------: |  :------------: |
+| Chase Mode | The ghost chases Pacman based on its location and their respective algorithms | Pacman dies upon collision|
+| Scatter Mode | The ghosts targets their respective corner of the map, thus giving up the chase on Pacman | Pacman dies upon collision |
+| Frightened Mode | The ghost moves around the map randomly | Ghost is consumed and enters Eaten Mode upon collision |
+| Eaten Mode | The ghost returns to the ghost house after being consumed | No interaction upon collision |
+
+<br>
+
+In order to win the game, players can consume fruits, power pellets and frightened ghosts to gain points. The map is renewed once all fruits and pellets are consumed while the score is kept.
+
+| Item | Points Awarded |
+| :------------:  |  :------------: |
+| Fruit | 20 |
+| Power Pellet | 100 |
+| Frightened Ghost | 300 |
 
 ###  Game Rules
 
-1. In the map, pacman spawns along with 4 other ghosts which attempts to eat him. The player should avoid letting pacman approach the ghosts by controlling its movement pattern.
+1. In the map, Pacman spawns along with 4 ghosts, Blinky, Pinky, Inky and Clyde, which attempt to eat it. The player should evade the ghosts as Pacman by controlling its movement pattern.
 
-2. To increase the game score, pacman should absorb the circular points along different paths in the map.
+2. Pacman may collect a power pellet (||) which allows it to eat the ghosts and return the ghosts to the ghost house. Ghosts can only be consumed by Pacman when they are in frightened mode.
 
-3. Pacman may collect a powerup pill which allows it to eat the ghosts and return the ghosts to their spawning points. Ghosts are allowed to be smashed by pacman only when they have frightened mode trigerred.
+3. To increase the game score, Pacman should consume fruits (''), power pellets (||), and ghosts in frightened mode, which can be found along different paths in the map.
 
-4. Once pacman received 3 damages from the ghosts, the game will be concluded.
+4. Once Pacman has been damaged 3 times by the ghosts, the game will conclude.
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
 ##  Features Implemented
 
-- Variable ghost behaviour
-  
-  The four ghosts in our game are not necessarily chasing Pac-man all the time. Occasionally, ghosts will be in a "scatter" mode where they target their corner tiles instead of pac-man.  On the other hand, when ghosts engaged their "chase" mode, the program will check pac-man's positions and assign ghosts to chase after it.
-
 ### Generation of random game sets or events
- Pacman's fruits will appear in random positions of the map in random times. This helps increases the game score.
+**Variable ghost modes:** Ghosts' default modes are *chase mode* and *scatter mode*. The program utilizes a random number generator to decide when and if a certain ghost will enter *scatter mode* instead of *chase mode*, allowing players to take a break from its chase.
+
+```cpp
+if ((internalTimer % 90) == 0 && internalTimer != 0){ //Ghosts switch to scatter mode
+            roll = rand() % 4;
+            if (roll == 0 && Blinky.getPotentialState() <= 1){
+                Blinky.toggleCurrentDirection();
+                Blinky.setPotentialState(1);
+            } else if (roll == 1 && Pinky.getPotentialState() <= 1){
+                Pinky.toggleCurrentDirection();
+                Pinky.setPotentialState(1);
+            } else if (roll == 2 && Inky.getPotentialState() <= 1){
+                Inky.toggleCurrentDirection();
+                Inky.setPotentialState(1);
+            } else if (roll == 3 && Clyde.getPotentialState() <= 1){
+                Clyde.toggleCurrentDirection();
+                Clyde.setPotentialState(1);
+            }
+        }
+```
+> A snippet of the code responsible for randomizing which ghost enters *scatter mode*.
+
+<br>
+
+**Variable ghost movement:** When ghosts are in *frightened mode*, their movement is generated randomly based on the available pathways they can take.
+ 
+The four ghosts in our game are not necessarily chasing Pac-man all the time. Occasionally, ghosts will enter "scatter mode" where they target their respective corner tiles instead of pac-man.  On the other hand, when ghosts engaged their "chase mode", the program will check pac-man's positions and assign ghosts to chase after it.
 
 ### Data structures for storing game status
- Three different class (`pacman`, `ghost` and `fruit`) are setup to store the current game status with regards to the posistion, current state, special effect etc. of the pacman, the four different ghost and the fruit.
+Two different class (`pacman` and `ghost`) are setup to store the current game status with regards to the posistion, current state, special effect etc. of the pacman and the four different ghosts.
 
  ```c++
  class Pacman
@@ -87,14 +128,14 @@ Pac-Man is a video game back in the 1980s which was once extremely popular acros
         int x, y, last_x, last_y, faceDirection; // faceDirection is the direction the face of pacman is facing (i.e. 0 for left, 1 for right)
 };
  ```
-> A small snippet of the code to showcase the data structure we have created.
+> A snippet of the code to showcase the data structure we have created.
 
 
 ### Dynamic memory management
-The game map will be stored in vector form.
+The game map will be stored in vector form in order to facilitate accessing and changing the display of the game.
 
 ### File input/output
-The Player's profile including name and highest score can be imported or exported from a text file into the game.
+The Player's profile including name and highest score can be imported or exported from a text file into the game. This allows our game to keep track of and display a leaderboard of players with their corresponding highest score.
 
 ```c++
 void loadprofile(int &highscore, string &name){
@@ -138,29 +179,34 @@ void loadprofile(int &highscore, string &name){
 	fin.close();
 }
   ```
-  >sippet of the section of code responsible for the handling of importing user data ustilizing file IO 
+  > A sippet of the section of code responsible for the handling of importing user data ustilizing file I/O
 
 ### Program codes in multiple files
 
-Our project consists of three c++ source code files (StartnEndSequence.cpp, main.cpp and ghost.cpp.
+Our project consists of several c++ source code files dedicated to specific parts of the code. For instance, StartnEndSequence.cpp, main.cpp, ghost.cpp and more.
 
-`StartnEndSequence.cpp` stores the startup game menu and ending screen, which will be used at the beginning of execution and when the user exits the game.
+`StartnEndSequence.cpp` stores the menus that can be displayed from the main menu, e.g. startup game menu and ending screen, which are displayed upon load up of the game, when the user selects an item from the menu, when the user loses a game, and when the user quits the game.
 
-`main.cpp` stores the source code for the pacman game, which includes details for controlling the colors & manners of screen display, call relevant ghost behaviour functions from the ghost.cpp file and the 2D game map.
+`main.cpp` stores the source code for the pacman game, which includes details for controlling the colors & manners of screen display, calling relevant ghost behaviour functions from *ghost.cpp*, pacman behaviour functions from *pacman.cpp*, and the 2D game map.
 
 `ghost.cpp` stores the source code for all 4 ghosts' behaviours. Since the ghost behaviour are relatively complicated which requires a higher source code line count, we have decided to separate it to another source code file for easier management.
 
-`entities.h` is a header file which stores a c++ class named ghost, containing its various statuses like positions, true/false status for situations such as whether ghost is eaten, frightened, chasing pacman or escaping from pacman.
+`pacman.cpp` stores the source code for the behaviour of pacman.
 
-`StartnEndSequence.h` is a header file stating the starting screen and ending screen functions involved in StartnEndSequence.cpp file which is used when compiling the game program by Makefile.
+`entities.h` is a header file which stores the c++ classes `ghost` and `pacman`, containing its various statuses like positions, true/false status for situations such as whether ghost is eaten, frightened, chasing pacman or escaping from pacman.
 
-[Back to table of content](#table-of-contents)
+`StartnEndSequence.h` is a header file stating the menu functions involved in StartnEndSequence.cpp file which is used when compiling the game program by Makefile.
+
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
 ## Non-Standard Libraries Used
 
-### Ncurses
+### NCurses
+**User Input:** NCurses is also used to take various forms of input from the user, such as arrow key operations and user input without displaying the inputted characters.
+
+**Display:** NCurses is used to make the display colourful, clear the terminal, refresh the terminal, etc..
 
 The display of user interface (UI) is supported by the Ncurses library
 
@@ -170,23 +216,27 @@ The display of user interface (UI) is supported by the Ncurses library
 
 > Main menu UI with extentions from Ncurses
 
-[Back to table of content](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
 
 <br>
 
 ## Compilation and Execution Instructions
-In order to compile the game, you may choose to execute `make pacman`.
+In order to compile the game, download the files and input `make pacman` in your terminal.
 
-If you wish to not have .o files remaining in the folder after compiling, you may remove them by `make clean`
+If you wish to delete the object files remaining in the folder after compiling, you may remove them by `make clean`.
 
-After that, you may start the game program by executing `./pacman`
+After that, you may start the game program by executing `./pacman`. Make sure that your terminal window is large enough to display the game properly, and do not resize the window after execution to avoid any display errors.
 
-You will be directed to the start menu when the program is executed. You may navigate through the menu options with up/down arrow keys, and press ENTER to run the command. To play the game, you may navigate to "Play the Pac-Man Game!" and press enter. The selected option will be highlighted in yellow in the main menu.
+You will be directed to the *start menu* when the program is executed. You may navigate through the menu options with *up/down* arrow keys, and press *ENTER* to select the option. To play the game, you may navigate to "Play the Pac-Man Game!" and press *ENTER*. The selected option will be highlighted in yellow in the main menu.
 
-You may navigate with pressing "W,A,S,D" keys during gameplay.
+You may navigate with pressing *W*, *A*, *S*, *D* keys during gameplay.
 Pac-Man moves automatically based on your previously pressed key.
-Press "W" once for turning upwards, or "A" for turning left, or "S" for turning downward, or "D" for turning right.
+Press *W* once for moving upwards, *A* for moving to the left, *S* for moving downwards, or *D* for moving to the right.
 
-To exit the game while playing, simply hit "q" on the keyboard. The ending screen will then displayed and program will exit afterwards.
+To exit the game while playing, simply hit *q* on the keyboard. The ending screen will then displayed and program will exit to the main menu afterwards.
 
-[Back to table of content](#table-of-contents)
+In order to exit the game, navigate to "Exit the Game" and press *ENTER* to quit the program.
+
+> Game Demonstration Video: *insert yt link here*
+
+[Back to Table of Contents](#table-of-contents)

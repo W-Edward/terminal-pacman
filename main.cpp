@@ -76,9 +76,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
     for (int i = 0; i < 19; i++) 
     {
             for (int j = 0; j < 20; j++) {
-                    if (i == Pacman.getY() && j == Pacman.getX()) {
-                        attron(COLOR_PAIR(2));
-                    } else if (i == Blinky.getY() && j == Blinky.getX()) {
+                    if (i == Blinky.getY() && j == Blinky.getX()) {
                         switch (Blinky.getCurrentState())
                         {
                         case 0:
@@ -100,7 +98,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                             break;
                         }
                     } else if (i == Pinky.getY() && j == Pinky.getX()) {
-                        switch (Blinky.getCurrentState())
+                        switch (Pinky.getCurrentState())
                         {
                         case 0:
                             attron(COLOR_PAIR(4));
@@ -121,7 +119,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                             break;
                         }
                     } else if (i == Inky.getY() && j == Inky.getX()) {
-                        switch (Blinky.getCurrentState())
+                        switch (Inky.getCurrentState())
                         {
                         case 0:
                             attron(COLOR_PAIR(5));
@@ -142,7 +140,7 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                             break;
                         }
                     } else if (i == Clyde.getY() && j == Clyde.getX()) {
-                        switch (Blinky.getCurrentState())
+                        switch (Clyde.getCurrentState())
                         {
                         case 0:
                             attron(COLOR_PAIR(6));
@@ -162,6 +160,8 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
                             attron(COLOR_PAIR(6));
                             break;
                         }
+                    } else if (i == Pacman.getY() && j == Pacman.getX()) {
+                        attron(COLOR_PAIR(2));
                     }
                     addch(map[i][j][0]);
                     addch(map[i][j][1]);

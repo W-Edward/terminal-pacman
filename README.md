@@ -21,7 +21,7 @@ ENGG1340 Final Group Project - Group 68
     - [File input/output](#file-inputoutput)
     - [Program codes in multiple files](#program-codes-in-multiple-files)
   - [Non-Standard Libraries Used](#non-standard-libraries-used)
-    - [Ncurses](#ncurses)
+    - [NCurses](#ncurses)
   - [Compilation and Execution Instructions](#compilation-and-execution-instructions)
 
 <br>
@@ -68,9 +68,9 @@ In order to win the game, players can consume fruits, power pellets and frighten
 
 1. In the map, Pacman spawns along with 4 ghosts, Blinky, Pinky, Inky and Clyde, which attempt to eat it. The player should evade the ghosts as Pacman by controlling its movement pattern.
 
-2. Pacman may collect a power pellet (||) which allows it to eat the ghosts and return the ghosts to the ghost house. Ghosts can only be consumed by Pacman when they are in frightened mode.
+2. Pacman may collect a power pellet (`||`) which allows it to eat the ghosts and return the ghosts to the ghost house. Ghosts can only be consumed by Pacman when they are in frightened mode.
 
-3. To increase the game score, Pacman should consume fruits (''), power pellets (||), and ghosts in frightened mode, which can be found along different paths in the map.
+3. To increase the game score, Pacman should consume fruits (`''`), power pellets (`||`), and ghosts in frightened mode, which can be found along different paths in the map.
 
 4. Once Pacman has been damaged 3 times by the ghosts, the game will conclude.
 

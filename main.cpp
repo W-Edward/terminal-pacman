@@ -1,7 +1,7 @@
 // #include <ncurses.h>
 #include <curses.h>
 // #include <windows.h>
-#include <unistd.h> //replace w windows.h for windows
+#include <windows.h> //replace w windows.h for windows
 #include <iostream>
 #include <string>
 #include <stdio.h>
@@ -50,11 +50,28 @@ void display(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Cl
 
     // erasing the old Pacman and ghosts
     map[Pacman.getLastY()][Pacman.getLastX()] = "  ";
-    map[Blinky.getLastY()][Blinky.getLastX()] = "  ";
-    map[Pinky.getLastY()][Pinky.getLastX()] = "  ";
-    map[Inky.getLastY()][Inky.getLastX()] = "  ";
-    map[Clyde.getLastY()][Clyde.getLastX()] = "  ";
-    map[8][9] = "=="; // why tis here help
+    if (Blinky.ateApple) {map[Blinky.getLastY()][Blinky.getLastX()] = "''";}
+    else if (Blinky.atePowerPellet) {map[Blinky.getLastY()][Blinky.getLastX()] = "||";}
+    else {map[Blinky.getLastY()][Blinky.getLastX()] = "  ";}
+
+    if (Pinky.ateApple) {map[Pinky.getLastY()][Pinky.getLastX()] = "''";}
+    else if (Pinky.atePowerPellet) {map[Pinky.getLastY()][Pinky.getLastX()] = "||";}
+    else {map[Pinky.getLastY()][Pinky.getLastX()] = "  ";}
+
+    if (Inky.ateApple) {map[Inky.getLastY()][Inky.getLastX()] = "''";}
+    else if (Inky.atePowerPellet) {map[Inky.getLastY()][Inky.getLastX()] = "||";}
+    else {map[Inky.getLastY()][Inky.getLastX()] = "  ";}
+
+    if (Clyde.ateApple) {map[Clyde.getLastY()][Clyde.getLastX()] = "''";}
+    else if (Clyde.atePowerPellet) {map[Clyde.getLastY()][Clyde.getLastX()] = "||";}
+    else {map[Clyde.getLastY()][Clyde.getLastX()] = "  ";}
+
+    // map[Blinky.getLastY()][Blinky.getLastX()] = "  ";
+    // map[Pinky.getLastY()][Pinky.getLastX()] = "  ";
+    // map[Inky.getLastY()][Inky.getLastX()] = "  ";
+    // map[Clyde.getLastY()][Clyde.getLastX()] = "  ";
+
+    map[8][9] = "=="; // why tis here help, ;This is here so that when ghost cross it, it wont be replaced by blank space
     map[8][10] = "==";
 
     // updating position of Pacman
@@ -258,31 +275,33 @@ int gameplay(){
     int xMax, yMax;
     string map[19][20] = { //y max = 18, x max = 19
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"},
-        {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
-        {"##","  ","  ","##","  ","  ","  ","##","##","  ","  ","##","##","  ","  ","  ","##","  ","  ","##"},
-        {"##","  ","##","##","  ","##","  ","  ","##","  ","  ","##","  ","  ","##","  ","##","##","  ","##"},
-        {"##","  ","  ","##","  ","##","  ","  ","##","  ","  ","##","  ","  ","##","  ","##","  ","  ","##"},
-        {"##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##"},
-        {"##","  ","  ","  ","  ","  ","  ","##","##","  ","  ","##","##","  ","  ","  ","  ","  ","  ","##"},
-        {"##","##","  ","##","##","##","  ","  ","  ","  ","  ","  ","  ","  ","##","##","##","  ","##","##"},
-        {"  ","  ","  ","  ","  ","  ","  ","##","##","==","==","##","##","  ","  ","  ","  ","  ","  ","  "},
-        {"##","  ","##","  ","##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##","  ","##","  ","##"},
-        {"##","  ","##","  ","##","  ","  ","##","  ","  ","  ","  ","##","  ","  ","##","  ","##","  ","##"},
-        {"##","  ","##","  ","##","  ","  ","##","##","##","##","##","##","  ","  ","##","  ","##","  ","##"},
-        {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
-        {"##","  ","  ","##","  ","##","##","  ","##","##","##","##","  ","##","##","  ","##","  ","  ","##"},
-        {"##","  ","  ","##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##","  ","  ","##"},
-        {"##","  ","##","##","  ","  ","##","##","##","  ","  ","##","##","##","  ","  ","##","##","  ","##"},
-        {"##","  ","  ","##","  ","  ","##","##","##","  ","  ","##","##","##","  ","  ","##","  ","  ","##"},
-        {"##","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","  ","##"},
+        {"##","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","##"},
+        {"##","''","''","##","''","''","''","##","##","''","''","##","##","''","''","''","##","''","''","##"},
+        {"##","||","##","##","''","##","''","''","##","''","''","##","''","''","##","''","##","##","||","##"},
+        {"##","''","''","##","''","##","''","''","##","''","''","##","''","''","##","''","##","''","''","##"},
+        {"##","''","''","##","''","''","''","''","##","''","''","##","''","''","''","''","##","''","''","##"},
+        {"##","''","''","''","''","''","''","##","##","''","''","##","##","''","''","''","''","''","''","##"},
+        {"##","##","''","##","##","##","''","''","''","''","''","''","''","''","##","##","##","''","##","##"},
+        {"  ","''","''","''","''","''","''","##","##","==","==","##","##","''","''","''","''","''","''","  "},
+        {"##","''","##","''","##","''","''","##","  ","  ","  ","  ","##","''","''","##","''","##","''","##"},
+        {"##","''","##","''","##","''","''","##","  ","  ","  ","  ","##","''","''","##","''","##","''","##"},
+        {"##","''","##","''","##","''","''","##","##","##","##","##","##","''","''","##","''","##","''","##"},
+        {"##","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","##"},
+        {"##","''","''","##","''","##","##","''","##","##","##","##","''","##","##","''","##","''","''","##"},
+        {"##","||","''","##","''","''","''","''","''","''","''","''","''","''","''","''","##","''","||","##"},
+        {"##","''","##","##","''","''","##","##","##","''","''","##","##","##","''","''","##","##","''","##"},
+        {"##","''","''","##","''","''","##","##","##","''","''","##","##","##","''","''","##","''","''","##"},
+        {"##","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","##"},
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
     bool quit = false;
     int eatenghosts = 0, powerPelletTime = 0, internalTimer = 0, scatterTimer = 0, roll = 0, score = 0;
+    bool powerPelletConsumed = 0;
     // powerPelletTime is the timer for power pellets to control how long they last for
     // internalTimer is the timer for how long the game has been running for
     // scatterTimer is the timer to track how long scatter state is
     // roll is for random roll for scatter() implementation
+    // powerPelletConsumed is the boolean to track whether pac man has consumed the powerpellet in the last 30 seconds
     
     // Character Startup
     int x = 2, y = 13; // initial pos of pacman; keeps track of pacman's x and y
@@ -357,6 +376,23 @@ int gameplay(){
 
         Pacman.updatePosition(x, y);
         Pacman.toggleFaceDirection();
+
+        if (map[Pacman.getY()][Pacman.getX()] == "''")
+        {
+            Blinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Pinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Inky.emptyMap(Pacman.getX(), Pacman.getY());
+            Clyde.emptyMap(Pacman.getX(), Pacman.getY());
+            score += 50; // points for staying alive
+        }
+        else if (map[Pacman.getY()][Pacman.getX()] == "||")
+        {
+            Blinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Pinky.emptyMap(Pacman.getX(), Pacman.getY());
+            Inky.emptyMap(Pacman.getX(), Pacman.getY());
+            Clyde.emptyMap(Pacman.getX(), Pacman.getY());
+            powerPelletConsumed = 1;
+        }
 
         // // scatter mode implementation
         // if (scatterTimer % 30 == 0){ //Ghosts stay in chase mode
@@ -479,11 +515,9 @@ int gameplay(){
                 break;
         }
 
-        score += 50; // points for staying alive
-
         display(Pacman, Blinky, Pinky, Inky, Clyde, map);
         // Sleep(250);
-        usleep(300000); // use this for linux
+        Sleep(300); // use this for linux
     }
     return score;
 }
@@ -500,7 +534,7 @@ int main()
             score = gameplay();
             clear();
             // game over screen
-            usleep(300000);
+            Sleep(300);
         } else if (startgame == 3) {
             howToPlay();
         } else if (startgame == 4) {

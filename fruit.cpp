@@ -2,9 +2,10 @@
 #include <cmath>
 #include "entities.h"
 
-Fruit::Fruit(int posX, int posY){
+Fruit::Fruit(int posX, int posY, bool big){
 	x = posX;
 	y = posY;
+	eatenState = 0;
 }
 
 int Fruit::getX(){
@@ -16,12 +17,9 @@ int Fruit::getY(){
 }
 
 void Fruit::eaten(){
-	currentState=3;
-int Fruit::getCurrentState(){ //check if fruit is eaten
-	return currentState;
+	eatenState = 1;
 }
 
-int Fruit::getEaten(){
-	//if (isEaten==true)
-	//	score+=300;
-	return currentState;
+int Fruit::getCurrentState(){ //check if fruit is eaten
+	return eatenState;
+}

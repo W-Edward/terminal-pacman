@@ -4,6 +4,7 @@ using namespace std;
 class Ghost
 {
     public:
+        bool ateApple, atePowerPellet; //Not good practice but convenient
         Ghost(int posX, int posY, string ghostName);
         void chase(int playerPosX, int playerPosY, int blinkyPosX, int blinkyPosY, int direction);
         void scatter();
@@ -16,6 +17,7 @@ class Ghost
         int getCurrentState();
         void setCurrentState(int i);
         void toggleCurrentDirection();
+        void emptyMap(int posX, int posY);
         int getEaten(); // proposed scoring func
     private:
         int x, y, last_x, last_y, currentDirection, currentState;
@@ -52,12 +54,12 @@ class PrintASCII
 class Fruit
 {
 	public:
-		Fruit(int posX, int posY);
+		Fruit(int posX, int posY, bool big);
 		int getX();
 		int getY();
 		void eaten();
 		int getCurrentState(); //Check if fruit is eaten
-		int getEaten();
 	private:
-		int x, y, currentState;
+		int x, y;
+        bool eatenState;
 };

@@ -215,13 +215,16 @@ void input(int& direction){ // wasdq = 12345
 bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Clyde){
 /*  Checks if pacman has collided with either of the ghosts; the return value depends on what Pacman has collided with.
     0: No collision, 1: Blinky, 2: Pinky, 3: Inky, 4: Clyde */
-    if ((Pacman.getX() == Blinky.getX()) && (Pacman.getY() == Blinky.getY())){
+    if (((Pacman.getX() == Blinky.getX()) && (Pacman.getY() == Blinky.getY())) || ((Pacman.getLastX() == Blinky.getX() && Pacman.getLastY() == Blinky.getY()) 
+    && (Pacman.getX() == Blinky.getLastX() && Pacman.getY() == Blinky.getLastY()))){
         return 1;
-    } else if ((Pacman.getX() == Pinky.getX()) && (Pacman.getY() == Pinky.getY())){
-        return 2;
-    } else if ((Pacman.getX() == Inky.getX()) && (Pacman.getY() == Inky.getY())){
+    } else if (((Pacman.getX() == Pinky.getX()) && (Pacman.getY() == Pinky.getY())) || ((Pacman.getLastX() == Pinky.getX() && Pacman.getLastY() == Pinky.getY()) 
+    && (Pacman.getX() == Pinky.getLastX() && Pacman.getY() == Pinky.getLastY()))){
+    } else if (((Pacman.getX() == Inky.getX()) && (Pacman.getY() == Inky.getY())) || ((Pacman.getLastX() == Inky.getX() && Pacman.getLastY() == Inky.getY()) 
+    && (Pacman.getX() == Inky.getLastX() && Pacman.getY() == Inky.getLastY()))){
         return 3;
-    } else if ((Pacman.getX() == Clyde.getX()) && (Pacman.getY() == Clyde.getY())){
+    } else if (((Pacman.getX() == Clyde.getX()) && (Pacman.getY() == Clyde.getY())) || ((Pacman.getLastX() == Clyde.getX() && Pacman.getLastY() == Clyde.getY()) 
+    && (Pacman.getX() == Clyde.getLastX() && Pacman.getY() == Clyde.getLastY()))){
         return 4;
     } else {
         return 0;

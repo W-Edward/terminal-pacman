@@ -5,6 +5,7 @@ ENGG1340 Final Group Project - Group 68
 
 ![alt text](https://m.media-amazon.com/images/S/aplus-media-library-service-media/aab7335f-9acf-46b6-bd3b-ee09c407e7ca.__CR0,0,970,300_PT0_SX970_V1___.jpg)
 
+
 ***Table of Contents***
 
 - [Pac-Man: Alpha Edition](#pac-man-alpha-edition)
@@ -33,6 +34,8 @@ ENGG1340 Final Group Project - Group 68
 |  **Widjaja Edward Aryaguna**  |  3036029703  | W-Edward
 |  **Wong Hoi Lei**  |  3036063917  | ginngerine
 
+<a href="#top">Back to top</a>
+
 <br>
 
 ##  About the Game
@@ -50,6 +53,8 @@ Pac-Man is a video game back in the 1980s which was once extremely popular acros
 3. Pacman may collect a powerup pill which allows it to eat the ghosts and return the ghosts to their spawning points. Ghosts are allowed to be smashed by pacman only when they have frightened mode trigerred.
 
 4. Once pacman received 3 damages from the ghosts, the game will be concluded.
+
+<a href="#top">Back to top</a>
 
 <br>
 
@@ -148,11 +153,15 @@ Our project consists of three c++ source code files (StartnEndSequence.cpp, main
 
 `StartnEndSequence.h` is a header file stating the starting screen and ending screen functions involved in StartnEndSequence.cpp file which is used when compiling the game program by Makefile.
 
+<a href="#top">Back to top</a>
+
 <br>
 
 ## Non-Standard Libraries Used
 
 ### Ncurses
+
+<a href="#top">Back to top</a>
 
 <br>
 
@@ -170,3 +179,5 @@ Pac-Man moves automatically based on your previously pressed key.
 Press "W" once for turning upwards, or "A" for turning left, or "S" for turning downward, or "D" for turning right.
 
 To exit the game while playing, simply hit "q" on the keyboard. The ending screen will then displayed and program will exit afterwards.
+
+<a href="#top">Back to top</a>

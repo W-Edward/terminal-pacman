@@ -55,15 +55,34 @@ Pac-Man is a video game back in the 1980s which was once extremely popular acros
 
 ##  Features Implemented
 
--Variable ghost behaviour
+- Variable ghost behaviour
+  
   The four ghosts in our game are not necessarily chasing Pac-man all the time. Occasionally, ghosts will be in a "scatter" mode where they target their corner tiles instead of pac-man.  On the other hand, when ghosts engaged their "chase" mode, the program will check pac-man's positions and assign ghosts to chase after it.
 
 ### Generation of random game sets or events
  Pacman's fruits will appear in random positions of the map in random times. This helps increases the game score.
 
 ### Data structures for storing game status
- Objects' positions and direction (Pacman, ghosts) are stored in sets of integers. (two variables namely x,y representing coordinates)
- Game score will be stored as an integer.
+ Three different class (`pacman`, `ghost` and `fruit`) are setup to store the current game status with regards to the posistion, current state, special effect etc. of the pacman, the four different ghost and the fruit.
+
+ ```c++
+ class Pacman
+{
+    public:
+        Pacman(int posX, int posY);
+        int getFaceDirection();
+        int getX();
+        int getY();
+        int getLastX();
+        int getLastY();
+        void updatePosition(int posX, int posY);
+        void toggleFaceDirection(); // chances faceDirection
+    private:
+        int x, y, last_x, last_y, faceDirection; // faceDirection is the direction the face of pacman is facing (i.e. 0 for left, 1 for right)
+};
+ ```
+> A small snippet of the code to showcase the data structure we have created.
+
 
 ### Dynamic memory management
 The game map will be stored in vector form.
@@ -75,15 +94,15 @@ The Player's profile including name and highest score can be imported or exporte
 
 Our project consists of three c++ source code files (StartnEndSequence.cpp, main.cpp and ghost.cpp.
 
-StartnEndSequence.cpp stores the startup game menu and ending screen, which will be used at the beginning of execution and when the user exits the game.
+`StartnEndSequence.cpp` stores the startup game menu and ending screen, which will be used at the beginning of execution and when the user exits the game.
 
-main.cpp stores the source code for the pacman game, which includes details for controlling the colors & manners of screen display, call relevant ghost behaviour functions from the ghost.cpp file and the 2D game map.
+`main.cpp` stores the source code for the pacman game, which includes details for controlling the colors & manners of screen display, call relevant ghost behaviour functions from the ghost.cpp file and the 2D game map.
 
-ghost.cpp stores the source code for all 4 ghosts' behaviours. Since the ghost behaviour are relatively complicated which requires a higher source code line count, we have decided to separate it to another source code file for easier management.
+`ghost.cpp` stores the source code for all 4 ghosts' behaviours. Since the ghost behaviour are relatively complicated which requires a higher source code line count, we have decided to separate it to another source code file for easier management.
 
-entities.h is a header file which stores a c++ class named ghost, containing its various statuses like positions, true/false status for situations such as whether ghost is eaten, frightened, chasing pacman or escaping from pacman.
+`entities.h` is a header file which stores a c++ class named ghost, containing its various statuses like positions, true/false status for situations such as whether ghost is eaten, frightened, chasing pacman or escaping from pacman.
 
-StartnEndSequence.h is a header file stating the starting screen and ending screen functions involved in StartnEndSequence.cpp file which is used when compiling the game program by Makefile.
+`StartnEndSequence.h` is a header file stating the starting screen and ending screen functions involved in StartnEndSequence.cpp file which is used when compiling the game program by Makefile.
 
 <br>
 
@@ -95,6 +114,7 @@ StartnEndSequence.h is a header file stating the starting screen and ending scre
 
 ## Compilation and Execution Instructions
 In order to compile the game, you may choose to execute `make pacman`.
+
 If you wish to not have .o files remaining in the folder after compiling, you may remove them by `make clean`
 
 After that, you may start the game program by executing `./pacman`

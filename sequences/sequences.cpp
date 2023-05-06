@@ -225,7 +225,7 @@ int GameOver(int score){
     attron(COLOR_PAIR(1));
 
 	PrintASCII printer;
-	printer.txtprint(20,12,"gameover.txt");
+	printer.txtprint(30,12,"gameover.txt");
 
     for (int i = 0; i<4; i++) {
         move((yMax/2) + i - 5,(xMax/2) - FinishScreen[i].length()/2);

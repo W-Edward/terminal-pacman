@@ -423,7 +423,7 @@ int gameplay(){
             Clyde.toggleCurrentDirection();
             Clyde.setPotentialState(2);
             ++powerPelletTime;
-        } else if (powerPelletTime > 1 && powerPelletTime < 20){ // stage 2 and up of power pellet
+        } else if (powerPelletTime > 1 && powerPelletTime < 30){ // stage 2 and up of power pellet
             powerPelletTime++;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eatens
                 Blinky.setPotentialState(2);
@@ -453,7 +453,7 @@ int gameplay(){
             {
                 Clyde.setPotentialState(0);
             }
-        } else if (powerPelletTime >= 20){
+        } else if (powerPelletTime >= 30){
             powerPelletTime = 0;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eaten
                 Blinky.setPotentialState(0);

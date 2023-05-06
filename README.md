@@ -90,6 +90,50 @@ The game map will be stored in vector form.
 ### File input/output
 The Player's profile including name and highest score can be imported or exported from a text file into the game.
 
+```c++
+void loadprofile(int &highscore, string &name){
+	int yMax, xMax;
+	ifstream fin;
+	fin.open("Profile.txt");
+	string loadscreen[10]={
+	"           Import Player Profile          ",
+	"    ----------------------------------    ",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"    ----------------------------------    	",
+	};
+	if (fin.fail()){
+		loadscreen[2] ="";
+		loadscreen[3] = "     Failed to import from Profile.txt!   ";
+		loadscreen[4] ="";
+		loadscreen[5] = "  Please put Profile.txt into the folder! ";
+		loadscreen[6] ="";
+		loadscreen[7] = " Example Profile.txt content: Andrew 3000 ";}
+	else{
+		fin >> name;
+		fin >> highscore;
+		loadscreen[2] = "  Successfully imported from Profile.txt! ";
+		loadscreen[3] ="";
+		loadscreen[4] = "               Player Name:               ";
+		loadscreen[5] ="";
+		loadscreen[6] = "           Highest Score Record:          ";
+		loadscreen[7] ="";
+		int n = (42-name.size())/2; // number of blank spaces needed on either side of the name
+		string spacing(n, ' ');
+		loadscreen[5] = spacing + name + spacing;
+		n = (42-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
+		spacing.assign(n, ' ');
+		loadscreen[7] = spacing + to_string(highscore) + spacing;}
+	fin.close();
+}
+  ```
+  >sippet of the section of code responsible for the handling of importing user data ustilizing file IO 
+
 ### Program codes in multiple files
 
 Our project consists of three c++ source code files (StartnEndSequence.cpp, main.cpp and ghost.cpp.

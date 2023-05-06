@@ -228,12 +228,13 @@ bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghos
     }
 }
 
-bool uponCollision(Ghost &Ghost){ // handles actions upon collision; returns "quit" value
+bool uponCollision(Ghost &Ghost, int &score){ // handles actions upon collision; returns "quit" value
     if (Ghost.getCurrentState() == 0 || Ghost.getCurrentState() == 1){ // Normal/Scatter mode
         // game over screen (+ score if applicable)
         return true;
     } else if (Ghost.getCurrentState() == 2) { // Frightened mode
         Ghost.setPotentialState(3); // sets ghost to eaten mode
+        score += 300;
     }
     // Eaten mode is ignored because there is no effect
     return false;
@@ -316,12 +317,10 @@ int gameplay(){
 						vector<string>(begin(map[18]), end(map[18]))};
     bool quit = false;
     int eatenghosts = 0, powerPelletTime = 0, internalTimer = 0, scatterTimer = 0, roll = 0, score = 0;
-    bool powerPelletConsumed = 0;
     // powerPelletTime is the timer for power pellets to control how long they last for
     // internalTimer is the timer for how long the game has been running for
     // scatterTimer is the timer to track how long scatter state is
     // roll is for random roll for scatter() implementation
-    // powerPelletConsumed is the boolean to track whether pac man has consumed the powerpellet in the last 30 seconds
     
     // Character Startup
     int x = 2, y = 13; // initial pos of pacman; keeps track of pacman's x and y
@@ -378,16 +377,16 @@ int gameplay(){
         collisionStatus = haveCollided(Pacman, Blinky, Pinky, Inky, Clyde);
         switch (collisionStatus){
             case 1: // Collision with Blinky
-                quit = uponCollision(Blinky);
+                quit = uponCollision(Blinky, score);
                 break;
             case 2: // Collision with Pinky
-                quit = uponCollision(Pinky);
+                quit = uponCollision(Pinky, score);
                 break;
             case 3: // Collision with Inky
-                quit = uponCollision(Inky);
+                quit = uponCollision(Inky, score);
                 break;
             case 4: // Collision with Clyde
-                quit = uponCollision(Clyde);
+                quit = uponCollision(Clyde, score);
                 break;
         }
         if (quit) {
@@ -411,7 +410,7 @@ int gameplay(){
             Pinky.emptyMap(Pacman.getX(), Pacman.getY());
             Inky.emptyMap(Pacman.getX(), Pacman.getY());
             Clyde.emptyMap(Pacman.getX(), Pacman.getY());
-            powerPelletConsumed = 1;
+            powerPelletTime++;
             score += 100;
         }
 
@@ -451,10 +450,6 @@ int gameplay(){
             }
         }
         scatterTimer++;
-        // some sort of condition to make powerPelletTime++
-        if (powerPelletConsumed){
-            powerPelletTime++;
-        }
 
         // handle if power pellet consumed (handle entering and staying in frightened mode)
         if (powerPelletTime == 1){ // stage 1 of power pellet
@@ -474,8 +469,6 @@ int gameplay(){
             else if (Blinky.getPotentialState() == 0)
             {
                 Blinky.setPotentialState(0);
-                powerPelletTime = 0;
-                powerPelletConsumed = 0;
             }
             if (Pinky.getPotentialState() == 2){
                 Pinky.setPotentialState(2);
@@ -483,8 +476,6 @@ int gameplay(){
             else if (Pinky.getPotentialState() == 0)
             {
                 Pinky.setPotentialState(0);
-                powerPelletTime = 0;
-                powerPelletConsumed = 0;
             }
             if (Inky.getPotentialState() == 2){
                 Inky.setPotentialState(2);
@@ -492,8 +483,6 @@ int gameplay(){
             else if (Inky.getPotentialState() == 0)
             {
                 Inky.setPotentialState(0);
-                powerPelletTime = 0;
-                powerPelletConsumed = 0;
             }
             if (Clyde.getPotentialState() == 2){
                 Clyde.setPotentialState(2);
@@ -501,12 +490,9 @@ int gameplay(){
             else if (Clyde.getPotentialState() == 0)
             {
                 Clyde.setPotentialState(0);
-                powerPelletTime = 0;
-                powerPelletConsumed = 0;
             }
         } else if (powerPelletTime >= 30){
             powerPelletTime = 0;
-            powerPelletConsumed = 0;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eaten
                 Blinky.setPotentialState(0);
             }
@@ -534,7 +520,6 @@ int gameplay(){
                 break;
             case 3: // Eaten mode
                 Blinky.eaten();
-                score += 300;
                 break;
         }
         switch(Pinky.getPotentialState()){
@@ -549,7 +534,6 @@ int gameplay(){
                 break;
             case 3: // Eaten mode
                 Pinky.eaten();
-                score += 300;
                 break;
         }
         switch(Inky.getPotentialState()){
@@ -564,7 +548,6 @@ int gameplay(){
                 break;
             case 3: // Eaten mode
                 Inky.eaten();
-                score += 300;
                 break;
         }
         switch(Clyde.getPotentialState()){
@@ -579,7 +562,6 @@ int gameplay(){
                 break;
             case 3: // Eaten mode
                 Clyde.eaten();
-                score += 300;
                 break;
         }
 

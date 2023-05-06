@@ -6,6 +6,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 #include "entities.h"
 #include "StartnEndSequence.h"
 using namespace std;
@@ -294,6 +295,25 @@ int gameplay(){
         {"##","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","''","##"},
         {"##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##","##"}
     };
+    vector<vector<string>>vecmap = {vector<string>(begin(map[0]), end(map[0])), //2D vectir conversion of the 2D string map
+						vector<string>(begin(map[1]), end(map[1])),
+						vector<string>(begin(map[2]), end(map[2])),
+						vector<string>(begin(map[3]), end(map[3])),
+						vector<string>(begin(map[4]), end(map[4])),
+						vector<string>(begin(map[5]), end(map[5])),
+						vector<string>(begin(map[6]), end(map[6])),
+						vector<string>(begin(map[7]), end(map[7])),
+						vector<string>(begin(map[8]), end(map[8])),
+						vector<string>(begin(map[9]), end(map[9])),
+						vector<string>(begin(map[10]), end(map[10])),
+						vector<string>(begin(map[11]), end(map[11])),
+						vector<string>(begin(map[12]), end(map[12])),
+						vector<string>(begin(map[13]), end(map[13])),
+						vector<string>(begin(map[14]), end(map[14])),
+						vector<string>(begin(map[15]), end(map[15])),
+						vector<string>(begin(map[16]), end(map[16])),
+						vector<string>(begin(map[17]), end(map[17])),
+						vector<string>(begin(map[18]), end(map[18]))};
     bool quit = false;
     int eatenghosts = 0, powerPelletTime = 0, internalTimer = 0, scatterTimer = 0, roll = 0, score = 0;
     bool powerPelletConsumed = 0;

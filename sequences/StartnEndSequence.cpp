@@ -242,18 +242,138 @@ int GameOver(int score){
 	return 0;
 }
 
-void loadStatistics(int score){
+void loadStatistics(int score, string name, int highscore){
 	int yMax, xMax;
-	string stats[10] = {
-		"                 Statistics                 ",
-		"    ------------------------------------    ",
+	string stat[10] = {
+		"                 Statistics                ",
+		"    ----------------------------------     ",
 		"",
-		"                Player Name:                "
+		"                Player Name:               ",
+		"",
+		"            Highest Score Record:          ",
+		"",
+		"           Score of previous game:         ",
+		"",
+		"    ----------------------------------     ",
+		};
+	
+	int n = (44-name.size())/2; // number of blank spaces needed on either side of the name
+	string spacing(n, ' ');
+	stat[4] = spacing + name + spacing;
+	
+	int n = (44-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
+	string spacing(n, ' ');
+	stat[4] = spacing + to_string(highscore) + spacing;
+	
+	int n = (44-to_string(score).size())/2; // number of blank spaces needed on either side of the score
+	string spacing(n, ' ');
+	stat[4] = spacing + to_string(score) + spacing;
+	
+    getmaxyx(stdscr,yMax,xMax);
+    attron(COLOR_PAIR(1));
+    for (int i = 0; i<10; i++) {
+        move((yMax/2) - stat->length()/2 + i,(xMax/2) - stat[i].length()/2);
+        addstr(stat[i].c_str());
+    }
+    attroff(COLOR_PAIR(1));
+    refresh();
+    usleep(5000000);
+}
+
+void CheckScore(int score, int highscore){
+	if (score>highscore)
+		highscore=score;
+}
+	
+void loadprofile(int highscore, string name){
+	int yMax, xMax;
+	ifstream fin;
+	fin.open("Profile.txt");
+	string loadscreen[10]={
+	"           Import Player Profile          ",
+	"    ----------------------------------    ",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"    ----------------------------------    	",
 	};
+	if (fin.fail()){
+		loadscreen[3] = "     Failed to import from Profile.txt!   ";
+		loadscreen[5] = "  Please put Profile.txt into the folder! ";
+		loadscreen[7] = " Example Profile.txt content: Andrew 3000 ";}
+	else{
+		fin >> name;
+		fin >> highscore;
+		loadscreen[2] = "  Successfully imported from Profile.txt! ";
+		loadscreen[4] = "               Player Name:               ";
+		loadscreen[6] = "           Highest Score Record:          ";}
+	fin.close();
+		
+	int n = (42-name.size())/2; // number of blank spaces needed on either side of the name
+	string spacing(n, ' ');
+	loadscreen[5] = spacing + name + spacing;
+	
+	int n = (42-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
+	string spacing(n, ' ');
+	loadscreen[7] = spacing + to_string(highscore) + spacing;
+
+	getmaxyx(stdscr,yMax,xMax);
+    	attron(COLOR_PAIR(1));
+    for (int i = 0; i<10; i++) {
+        move((yMax/2) - loadscreen->length()/2 + i,(xMax/2) - loadscreen[i].length()/2);
+        addstr(loadscreen[i].c_str());
+    }
+    attroff(COLOR_PAIR(1));
+    refresh();
+    usleep(5000000);
 }
 
-void loadprofile(){
-}
+void exportprofile(int highscore, string name){
+	int yMax, xMax;
+	ofstream fout;
+	fout.open("Profile.txt");
+	string exportscreen[10]={
+	"           Import Player Profile          ",
+	"    ----------------------------------    ",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"    ----------------------------------    	",
+	};
+	if (fout.fail()){
+		loadscreen[3] = "      Failed to export to Profile.txt!    ";
+		loadscreen[5] = "  Try creating Profile.txt in the folder! ";}
+	else{
+		fout << name << endl;
+		fout << highscore << endl;
+		loadscreen[2] = "   Successfully exported to Profile.txt!  ";
+		loadscreen[4] = "               Player Name:               ";
+		loadscreen[6] = "           Highest Score Record:          ";}
+	fout.close();
+		
+	int n = (42-name.size())/2; // number of blank spaces needed on either side of the name
+	string spacing(n, ' ');
+	exportscreen[5] = spacing + name + spacing;
+	
+	int n = (42-to_string(highscore).size())/2; // number of blank spaces needed on either side of the highscore
+	string spacing(n, ' ');
+	exportscreen[7] = spacing + to_string(highscore) + spacing;
 
-void exportprofile(){
+	getmaxyx(stdscr,yMax,xMax);
+    	attron(COLOR_PAIR(1));
+    for (int i = 0; i<10; i++) {
+        move((yMax/2) - exportscreen->length()/2 + i,(xMax/2) - exportscreen[i].length()/2);
+        addstr(exportscreen[i].c_str());
+    }
+    attroff(COLOR_PAIR(1));
+    refresh();
+    usleep(5000000);
 }

@@ -66,10 +66,10 @@ Pac-Man is a video game back in the 1980s which was once extremely popular acros
  Game score will be stored as an integer.
 
 ### Dynamic memory management
-
+The game map will be stored in vector form.
 
 ### File input/output
-
+The Player's profile including name and highest score can be imported or exported from a text file into the game.
 
 ### Program codes in multiple files
 
@@ -90,7 +90,6 @@ StartnEndSequence.h is a header file stating the starting screen and ending scre
 ## Non-Standard Libraries Used
 
 ### Ncurses
-
 
 <br>
 

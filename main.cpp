@@ -212,7 +212,7 @@ void input(int& direction){ // wasdq = 12345
     }
 }
 
-bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Clyde){
+int haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghost &Clyde){
 /*  Checks if pacman has collided with either of the ghosts; the return value depends on what Pacman has collided with.
     0: No collision, 1: Blinky, 2: Pinky, 3: Inky, 4: Clyde */
     if (((Pacman.getX() == Blinky.getX()) && (Pacman.getY() == Blinky.getY())) || ((Pacman.getLastX() == Blinky.getX() && Pacman.getLastY() == Blinky.getY()) 
@@ -232,12 +232,12 @@ bool haveCollided(Pacman &Pacman, Ghost &Blinky, Ghost &Pinky, Ghost &Inky, Ghos
     }
 }
 
-bool uponCollision(Ghost &Ghost, int &score){ // handles actions upon collision; returns "quit" value
-    if (Ghost.getCurrentState() == 0 || Ghost.getCurrentState() == 1){ // Normal/Scatter mode
+bool uponCollision(Ghost &lost, int &score){ // handles actions upon collision; returns "quit" value
+    if (lost.getCurrentState() == 0 || lost.getCurrentState() == 1){ // Normal/Scatter mode
         // game over screen (+ score if applicable)
         return true;
-    } else if (Ghost.getCurrentState() == 2) { // Frightened mode
-        Ghost.setPotentialState(3); // sets ghost to eaten mode
+    } else if (lost.getCurrentState() == 2) { // Frightened mode
+        lost.setPotentialState(3); // sets ghost to eaten mode
         score += 300;
     }
     // Eaten mode is ignored because there is no effect
@@ -336,7 +336,7 @@ int gameplay(){
     int direction = 4, collisionStatus = 0;
 
     display(Pacman, Blinky, Pinky, Inky, Clyde, map);
-    // getch() || usleep()
+    // getch() || Usleep()
     while (!quit) {
         input(direction);
         
@@ -382,6 +382,7 @@ int gameplay(){
         switch (collisionStatus){
             case 1: // Collision with Blinky
                 quit = uponCollision(Blinky, score);
+                map[0][0] = to_string(Blinky.getPotentialState()) + "0";
                 break;
             case 2: // Collision with Pinky
                 quit = uponCollision(Pinky, score);
@@ -465,7 +466,8 @@ int gameplay(){
             Inky.setPotentialState(2);
             Clyde.toggleCurrentDirection();
             Clyde.setPotentialState(2);
-        } else if (powerPelletTime >= 1 && powerPelletTime < 30){ // stage 2 and up of power pellet
+            ++powerPelletTime;
+        } else if (powerPelletTime > 1 && powerPelletTime < 15){ // stage 2 and up of power pellet
             powerPelletTime++;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eatens
                 Blinky.setPotentialState(2);
@@ -495,7 +497,7 @@ int gameplay(){
             {
                 Clyde.setPotentialState(0);
             }
-        } else if (powerPelletTime >= 30){
+        } else if (powerPelletTime >= 15){
             powerPelletTime = 0;
             if (Blinky.getPotentialState() == 2){ // getPotentialState instead cause could be alr eaten
                 Blinky.setPotentialState(0);
@@ -510,7 +512,7 @@ int gameplay(){
                 Clyde.setPotentialState(0);
             }
         }
-
+        
         // update position of ghost
         switch(Blinky.getPotentialState()){
             case 0: // Normal/Chase mode
